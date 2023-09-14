@@ -1,0 +1,11 @@
+### CHANGELOG ###
+
+All notable changes to this project will be documented in this file, including fixes, additions, changes, and removals.
+
+## [0.0.1] - 2023-09-14
+
+### Added
+
+- Created the Unity Project for Getting Ahead
+- Added Lucas's "Kickstarter Package" with many different built-in systems
+- Added Unity Input System Package
