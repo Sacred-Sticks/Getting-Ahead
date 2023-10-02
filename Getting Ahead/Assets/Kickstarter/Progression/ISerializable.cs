@@ -1,5 +1,8 @@
-public interface ISerializable
+namespace Kickstarter.Progression
 {
-    public string Serialize();
-    public bool Deserialize(string serializedData);
+    public interface ISerializable
+    {
+        public string Serialize();
+        public bool Deserialize(string serializedData);
+    }
 }
