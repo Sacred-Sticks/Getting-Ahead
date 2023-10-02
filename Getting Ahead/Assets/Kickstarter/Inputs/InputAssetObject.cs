@@ -159,6 +159,11 @@ namespace Kickstarter.Inputs
                     return positive;
                 }
             }
+
+            public override string ToString()
+            {
+                return name;
+            }
         }
     }
 }

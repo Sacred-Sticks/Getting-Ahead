@@ -8,7 +8,7 @@ namespace Kickstarter.Inputs
     public class InputManager : ScriptableObject
     {
         [Range(1, 4)]
-        [SerializeField] private int maxPlayerCount;
+        [SerializeField] private int maxPlayerCount = 1;
         [Space(20)]
         [SerializeField] private InputAssetObject[] inputObjects;
 
