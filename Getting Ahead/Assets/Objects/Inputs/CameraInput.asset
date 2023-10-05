@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9757701d48367974193359b6398c112d, type: 3}
-  m_Name: Inputs
+  m_Script: {fileID: 11500000, guid: 61d094339e318db498ea5f52b5cfe7e0, type: 3}
+  m_Name: CameraInput
   m_EditorClassIdentifier: 
-  maxPlayerCount: 4
-  inputObjects:
-  - {fileID: 11400000, guid: 9d3a0b5b9ca59ff47866b40cefe13050, type: 2}
-  - {fileID: 11400000, guid: 2339a43412d78224b88a74d5b4429470, type: 2}
+  bindings: []
+  compositeBindings:
+  - name: CameraSwap
+    negative: <Keyboard>/2
+    positive: <Keyboard>/1
