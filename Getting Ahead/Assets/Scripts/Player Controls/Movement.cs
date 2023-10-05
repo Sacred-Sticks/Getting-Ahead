@@ -29,7 +29,6 @@ public class Movement : MonoBehaviour
     {
         var movementDirection = new Vector3(rawDirection.x, 0f, rawDirection.y);
         rb.velocity = movementDirection * moveSpeed;
-        Debug.Log(rb.velocity.magnitude);
     }
 
     private void RecieveInput(Vector2 input)
