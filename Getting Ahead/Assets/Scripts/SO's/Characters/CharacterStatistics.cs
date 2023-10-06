@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class Head : ScriptableObject
+[CreateAssetMenu(fileName = "Character Stats", menuName = "Getting Ahead/Character Stats")]
+public class CharacterStatistics : ScriptableObject
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackRate;
