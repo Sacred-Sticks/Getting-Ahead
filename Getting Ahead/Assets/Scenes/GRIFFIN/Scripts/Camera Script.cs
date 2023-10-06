@@ -12,23 +12,23 @@ public class CameraScript : MonoBehaviour
     [SerializeField] FloatInput CameraInput;
     void Start()
     {
-        CameraInput.SubscribeToInputAction(RecieveInput, Player.PlayerIdentifier.KeyboardAndMouse);
-        vcam2.m_Priority = 2;
-        vcam1.m_Priority = 1;
+        CameraInput.SubscribeToInputAction(ReceiveInput, Player.PlayerIdentifier.KeyboardAndMouse);
+        vcam2.m_Priority = 1;
+        vcam1.m_Priority = 2;
     }
 
-    void RecieveInput(float input)
+    void ReceiveInput(float input)
     {
-        Debug.Log("INPUT!");
-        if (input == 1)
-        { 
-            vcam2.m_Priority = 0;
-            vcam1.m_Priority = 9;
-        }
-        else if (input == -1)
+        switch (input)
         {
-            vcam1.m_Priority = 0;
-            vcam2.m_Priority = 9;
+            case 1:
+                vcam2.m_Priority = 0;
+                vcam1.m_Priority = 9;
+                break;
+            case -1:
+                vcam1.m_Priority = 0;
+                vcam2.m_Priority = 9;
+                break;
         }
     }
 }
