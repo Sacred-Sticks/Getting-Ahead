@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int intialHealth;
     [Header("Outgoing Services")]
     [SerializeField] private Service onDeath;
 
+    private float maxHealth;
+    public float MaxHealth
+    {
+        set
+        {
+            maxHealth = value;
+            currentHealth = maxHealth;
+        }
+    }
+    
     private float currentHealth;
     public float CurrentHealth
     {

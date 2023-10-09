@@ -6,7 +6,7 @@ public class CharacterStatistics : ScriptableObject
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackRate;
     [SerializeField] private float attackDamage;
-    [SerializeField] private float health;
+    [SerializeField] private float maxHealth;
     [SerializeField] private float defense;
     [SerializeField] private float iframes;
 
@@ -31,11 +31,11 @@ public class CharacterStatistics : ScriptableObject
             return attackDamage;
         }
     }
-    public float Health
+    public float MaxHealth
     {
         get
         {
-            return health;
+            return maxHealth;
         }
     }
     public float Defense
