@@ -2,7 +2,7 @@ using System;
 
 namespace Kickstarter.Events
 {
-    public interface IServiceLocator
+    public interface IServiceProvider
     {
         public void ImplementService(EventArgs args);
     }
