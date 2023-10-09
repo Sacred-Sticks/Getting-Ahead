@@ -7,9 +7,10 @@ using Kickstarter.Inputs;
 public class Movement : MonoBehaviour, IInputReceiver<Vector2>
 {
     [SerializeField]
-    private float moveSpeed;
-    [SerializeField]
     private Vector2Input movementInput;
+    [SerializeField]
+    private float moveSpeed;
+    
     private Vector2 rawInput;
     private Player player;
     private Rigidbody rb;

@@ -51,8 +51,6 @@ public class Rotation : MonoBehaviour, IInputReceiver
 
     private void RecieveInput(Vector2 input)
     {
-        if (input.sqrMagnitude == 0)
-            return;
         if (input.sqrMagnitude < deadzone * deadzone) // Squared for performance sake
             return;
         float angleA = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
