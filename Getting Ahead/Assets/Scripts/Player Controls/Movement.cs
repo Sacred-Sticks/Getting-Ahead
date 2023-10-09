@@ -8,8 +8,8 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
 {
     [SerializeField]
     private Vector2Input movementInput;
-    [SerializeField]
-    private float moveSpeed;
+    
+    public float MoveSpeed { private get; set; }
     
     private Vector2 rawInput;
     private Player player;
@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
     private void FixedUpdate()
     {
         var movementDirection = new Vector3(rawInput.x, 0f, rawInput.y);
-        rb.velocity = movementDirection * moveSpeed;
+        rb.velocity = movementDirection * MoveSpeed;
     }
 
     public void ReceiveInput(Vector2 input)
