@@ -1,4 +1,3 @@
-using System;
 using Kickstarter.Identification;
 
 public interface IInputReceiver<in T> : IInputReceiver
@@ -8,9 +7,9 @@ public interface IInputReceiver<in T> : IInputReceiver
 
 public interface IInputReceiver
 {
-    public void ResetInputs(Player.PlayerIdentifier oldInput, Player.PlayerIdentifier newInput);
+    public void ResetInputs(Player oldPlayer, Player newPlayer);
 
-    public void SubscribeToInputs();
+    public void SubscribeToInputs(Player player);
 
-    public void UnsubscribeToInputs();
+    public void UnsubscribeToInputs(Player player);
 }
