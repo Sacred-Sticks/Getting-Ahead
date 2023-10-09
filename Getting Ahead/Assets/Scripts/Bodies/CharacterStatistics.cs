@@ -2,9 +2,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Health))]
-public class Head : MonoBehaviour
+public class CharacterStatistics : MonoBehaviour
 {
-    [SerializeField] private CharacterStatistics characterStatistics;
+    [SerializeField] private HeadStatistics headStatistics;
 
     private Movement movement;
     private Health health;
@@ -17,7 +17,7 @@ public class Head : MonoBehaviour
 
     private void Start()
     {
-        movement.MoveSpeed = characterStatistics.MoveSpeed;
-        health.MaxHealth = characterStatistics.MaxHealth;
+        movement.MoveSpeed = headStatistics.MoveSpeed;
+        health.MaxHealth = headStatistics.MaxHealth;
     }
 }

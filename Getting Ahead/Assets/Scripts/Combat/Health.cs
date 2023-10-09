@@ -18,9 +18,9 @@ public class Health : MonoBehaviour
     }
     
     private float currentHealth;
-    public float CurrentHealth
+    private float CurrentHealth
     {
-        private get
+        get
         {
             return currentHealth;
         }
@@ -32,6 +32,11 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float damage)
+    {
+        CurrentHealth -= damage;
+    }
+    
     public class OnDeathArgs : EventArgs
     {
         public OnDeathArgs(GameObject dyingPlayerGameObject)
