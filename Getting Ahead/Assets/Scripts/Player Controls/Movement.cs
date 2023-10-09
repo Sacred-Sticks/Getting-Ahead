@@ -4,13 +4,13 @@ using Kickstarter.Inputs;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody))]
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviour, IInputReceiver<Vector2>
 {
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private Vector2Input movementInput;
-    private Vector2 rawDirection;
+    private Vector2 rawInput;
     private Player player;
     private Rigidbody rb;
 
@@ -20,19 +20,45 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        SubscribeToInputs(player);
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeToInputs(player);
+    }
+
     private void Start()
     {
-        movementInput.SubscribeToInputAction(RecieveInput, player.PlayerID);
+        SubscribeToInputs(player);
     }
 
     private void FixedUpdate()
     {
-        var movementDirection = new Vector3(rawDirection.x, 0f, rawDirection.y);
+        var movementDirection = new Vector3(rawInput.x, 0f, rawInput.y);
         rb.velocity = movementDirection * moveSpeed;
     }
 
-    private void RecieveInput(Vector2 input)
+    public void ReceiveInput(Vector2 input)
     {
-        rawDirection = input;
+        rawInput = input;
+    }
+
+    public void ResetInputs(Player oldPlayer, Player newPlayer)
+    {
+        UnsubscribeToInputs(oldPlayer);
+        SubscribeToInputs(newPlayer);
+    }
+
+    public void SubscribeToInputs(Player player)
+    {
+        movementInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+    }
+
+    public void UnsubscribeToInputs(Player player)
+    {
+        movementInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
     }
 }
