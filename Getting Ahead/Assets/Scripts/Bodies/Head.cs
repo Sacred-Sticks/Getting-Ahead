@@ -14,6 +14,6 @@ public class Head : MonoBehaviour
 
     private void Start()
     {
-        
+        movement.MoveSpeed = characterStatistics.MoveSpeed;
     }
 }
