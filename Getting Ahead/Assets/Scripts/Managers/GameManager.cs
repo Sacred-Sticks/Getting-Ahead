@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
         gameStateController = new GameStateController(initialGameState);
 
-        inputManager.Initialize();
+        inputManager.Initialize(out int numPlayers);
     }
 
     private void InitializeSingleton()
