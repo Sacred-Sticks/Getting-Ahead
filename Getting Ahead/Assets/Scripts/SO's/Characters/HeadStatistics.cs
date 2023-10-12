@@ -1,55 +1,39 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Character Stats", menuName = "Getting Ahead/Character Stats")]
+[CreateAssetMenu(fileName = "Stat Multipliers", menuName = "Getting Ahead/Character Stat Multipliers")]
 public class HeadStatistics : ScriptableObject
 {
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float attackRate;
-    [SerializeField] private float attackDamage;
-    [SerializeField] private float maxHealth;
-    [SerializeField] private float defense;
-    [SerializeField] private float iframes;
+    [SerializeField] private float moveSpeedMultiplier;
+    [SerializeField] private float attackRateMultiplier;
+    [SerializeField] private float maxHealthMultiplier;
+    [SerializeField] private float iframesMultiplier;
 
-    public float MoveSpeed
+    public float MoveSpeedMultiplier
     {
         get
         {
-            return moveSpeed;
+            return moveSpeedMultiplier;
         }
     }
-    public float AttackRate
+    public float AttackRateMultiplier
     {
         get
         {
-            return attackRate;
+            return attackRateMultiplier;
         }
     }
-    public float AttackDamage
+    public float MaxHealthMultiplier
     {
         get
         {
-            return attackDamage;
+            return maxHealthMultiplier;
         }
     }
-    public float MaxHealth
+    public float IframesMultiplier
     {
         get
         {
-            return maxHealth;
-        }
-    }
-    public float Defense
-    {
-        get
-        {
-            return defense;
-        }
-    }
-    public float Iframes
-    {
-        get
-        {
-            return iframes;
+            return iframesMultiplier;
         }
     }
 }
