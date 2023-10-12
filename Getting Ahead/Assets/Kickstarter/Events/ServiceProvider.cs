@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Kickstarter.Events
 {
-    [RequireComponent(typeof(IServiceLocator))]
+    [RequireComponent(typeof(IServiceProvider))]
     public class ServiceProvider : MonoBehaviour
     {
         [SerializeField] private Service service;

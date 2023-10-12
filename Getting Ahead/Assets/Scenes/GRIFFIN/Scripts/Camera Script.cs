@@ -7,18 +7,30 @@ using Kickstarter.Identification;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
+using Kickstarter.Events;
+using System;
 
-public class CameraScript : MonoBehaviour
+public class CameraScript : MonoBehaviour, Kickstarter.Events.IServiceProvider
 {
-    [SerializeField] FloatInput CameraInput;
+    [SerializeField] Service onRoomChange;
     private CinemachineVirtualCamera[] CameraObjects;
     private readonly Dictionary<Vector3, CinemachineVirtualCamera> virtualCameras = new Dictionary<Vector3, CinemachineVirtualCamera>();
     [SerializeField] private CinemachineVirtualCamera currentCamera;
-    void Start()
+
+
+    private void OnEnable()
     {
-        CameraInput.SubscribeToInputAction(ReceiveInput, Player.PlayerIdentifier.KeyboardAndMouse);
+        onRoomChange.Event += ImplementService;
+    }
+
+    private void OnDisable()
+    {
+        onRoomChange.Event -= ImplementService;
+    }
+    public void SetupCameraDictionary()
+    {
         CameraObjects = GameObject.FindObjectsOfType<CinemachineVirtualCamera>();
-        foreach(var obj in CameraObjects)
+        foreach (var obj in CameraObjects)
         {
             virtualCameras.Add(obj.gameObject.transform.position, obj);
         }
@@ -28,49 +40,66 @@ public class CameraScript : MonoBehaviour
         }
         currentCamera.m_Priority = 9;
     }
-
-    void swapCamera(CinemachineVirtualCamera newCam)
+    void SwapCamera(CinemachineVirtualCamera newCam)
     {
         currentCamera.m_Priority = 0;
         newCam.m_Priority = 9;
         currentCamera = newCam;
     }
-    void ReceiveInput(float input)
+    void MoveCamera(Vector2 input)
     {
-        float mindist = Mathf.Infinity;
-        CinemachineVirtualCamera minCamera = null;
-        Vector3 directionMove = Vector3.zero;
-        switch (input)
+        Vector3 tempVector3 = currentCamera.transform.position;
+        switch (input.x)
         {
-            case 1: // User moves to left
-                directionMove = Vector3.left;                
-                break;
-            case -1:// User moves to right
-                directionMove = Vector3.right;
-                break;
-        }
-
-        foreach (var dictCamera in virtualCameras)
-        {
-            if (dictCamera.Value.Equals(currentCamera)) continue; // skip currentcamera
-
-            float directionDifference = Vector3.Dot(directionMove, dictCamera.Key - currentCamera.transform.position);//Get distance between camera being checked and current camera in a single direction
-
-            if (directionDifference > 0)
-            {
-                Debug.Log("Found a camera!");
-                float distance = Vector3.Distance(dictCamera.Key, currentCamera.transform.position);
-                if (distance < mindist) //If camera being checked is closer than the one which is the closest so far
-                {
-                    Debug.Log("Found a closer camera! " + dictCamera.Value.name);
-                    minCamera = dictCamera.Value; //Set a new minimum distance camera to check against
-                    mindist = distance; //Set a new minimum distance to check
+            case 1:
+                { // go left
+                    tempVector3.x += 15;
+                    break;
                 }
-            }
-
+            case -1: // go right
+                {
+                    tempVector3.x -= 15;
+                    break;
+                }
         }
-        if (minCamera != null) swapCamera(minCamera);
+        switch (input.y)
+        {
+            case 1:
+                { // go up
+                    tempVector3.z += 15;
+                    break;
+                }
+            case -1: // go down
+                {
+                    tempVector3.z -= 15;
+                    break;
+                }
+        }
+        if (virtualCameras.ContainsKey(tempVector3))
+        {
+            SwapCamera(virtualCameras[tempVector3]);
+        };
+    }
 
+    public void ImplementService(EventArgs args)
+    {
+        switch (args)
+        {
+            case RoomChangeArgs roomChangeArgs:
+                MoveCamera(roomChangeArgs.RoomPosition);
+                break;
+            default: throw new ArgumentOutOfRangeException();
+        }
+        
+    }
+    public class RoomChangeArgs: EventArgs
+    {
+        public Vector2 RoomPosition { get; }
+        public RoomChangeArgs(Vector2 roomPosition)
+        {
+            RoomPosition = roomPosition;
+        }
     }
 }
+
 
