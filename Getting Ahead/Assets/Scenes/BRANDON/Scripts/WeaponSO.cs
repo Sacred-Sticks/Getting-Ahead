@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Weapon SO", order = 1)]
 public class WeaponSO : ScriptableObject
 {
-    public string weaponName;
-    public float fireRate;
-    public float reloadTime;
-    public GameObject projectilePrefab;
-    public int ammoMax;
-    public int ammoCurrent;
+    [SerializeField] private string weaponName;
+    [SerializeField] private float fireRate;
+    [SerializeField] private float reloadTime;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private int ammoMax;
+    [SerializeField] private int ammoCurrent;
 
     public int AmmoCurrent
     {
@@ -27,5 +27,40 @@ public class WeaponSO : ScriptableObject
             }
         }
     }
-    
+
+    public string WeaponName
+    {
+        get
+        {
+            return weaponName;
+        }
+    }
+    public float FireRate
+    {
+        get
+        {
+            return fireRate;
+        }
+    }
+    public float ReloadTime
+    {
+        get
+        {
+            return reloadTime;
+        }
+    }
+    public GameObject ProjectilePrefab
+    {
+        get
+        {
+            return projectilePrefab;
+        }
+    }
+    public int AmmoMax
+    {
+        get
+        {
+            return ammoMax;
+        }
+    }
 }
