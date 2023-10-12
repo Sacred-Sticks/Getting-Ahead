@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   weaponName: Sword
-  fireRate: 1
-  reloadTime: 2
+  fireRate: 0.8
+  reloadTime: 0
   projectilePrefab: {fileID: 4153409400988235659, guid: 1e4883660d33956429834e34c67c651f, type: 3}
   ammoMax: 1
   ammoCurrent: 0

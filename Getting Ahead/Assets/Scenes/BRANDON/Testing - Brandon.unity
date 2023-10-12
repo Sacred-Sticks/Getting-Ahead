@@ -128,7 +128,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6450535625709415249, guid: 8d4d0d978d6a23a4dbe27ecc02e10847, type: 3}
   m_PrefabInstance: {fileID: 816950184}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6404540
+--- !u!4 &6404547 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7931122494616070082, guid: 8d4d0d978d6a23a4dbe27ecc02e10847, type: 3}
+  m_PrefabInstance: {fileID: 816950184}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6404554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,16 +142,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6404539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6cbe2a0b68eb24383d6a7a539e3598, type: 3}
+  m_Script: {fileID: 11500000, guid: 157d56adbb30a17428037fe5b7d1ca48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 5245bc0600828eb499648abebe0eeb4a, type: 2}
   attackPoint: {fileID: 1356392255}
---- !u!4 &6404547 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7931122494616070082, guid: 8d4d0d978d6a23a4dbe27ecc02e10847, type: 3}
-  m_PrefabInstance: {fileID: 816950184}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &585124752
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +480,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6450535625709415249, guid: 8d4d0d978d6a23a4dbe27ecc02e10847, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6404540}
+      addedObject: {fileID: 6404554}
   m_SourcePrefab: {fileID: 100100000, guid: 8d4d0d978d6a23a4dbe27ecc02e10847, type: 3}
 --- !u!1 &1054015598
 GameObject:
@@ -613,7 +613,7 @@ Transform:
   m_GameObject: {fileID: 1356392255}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 3}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

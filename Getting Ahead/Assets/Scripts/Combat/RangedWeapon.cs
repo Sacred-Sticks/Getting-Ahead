@@ -12,6 +12,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon, IReloadable
     [SerializeField]
     private GameObject attackPoint;
     private bool isReloading = false;
+    private float nextTimeToFire = 0f;
 
     void FixedUpdate()
     {
@@ -22,9 +23,12 @@ public class RangedWeapon : MonoBehaviour, IWeapon, IReloadable
     {
         if(weapon.AmmoCurrent > 0 && !isReloading)
         {
-            //Need to parent the instance if it is melee (or not?)
-            Instantiate(weapon.ProjectilePrefab, attackPoint.transform.position, attackPoint.transform.rotation);
-            weapon.AmmoCurrent--;
+            if(CheckFireRate())
+            {
+                //Need to parent the instance if it is melee (or not?)
+                Instantiate(weapon.ProjectilePrefab, attackPoint.transform.position, attackPoint.transform.rotation);
+                weapon.AmmoCurrent--;
+            }
         }
         else
         {
@@ -48,6 +52,16 @@ public class RangedWeapon : MonoBehaviour, IWeapon, IReloadable
         yield return new WaitForSeconds(weapon.ReloadTime);
         weapon.AmmoCurrent = weapon.AmmoMax;
         isReloading = false;
+    }
+
+    private bool CheckFireRate()
+    {
+        if(Time.time >= nextTimeToFire)
+        {
+            nextTimeToFire = Time.time + (1f / weapon.FireRate);
+            return true;
+        }
+        return false;
     }
 
 
