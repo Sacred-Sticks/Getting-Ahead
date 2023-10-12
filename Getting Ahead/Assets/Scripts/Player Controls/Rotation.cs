@@ -1,24 +1,21 @@
-using UnityEngine;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
+using UnityEngine;
 
 [RequireComponent(typeof(Player))]
-[RequireComponent(typeof(Rigidbody))]
-public class Movement : MonoBehaviour, IInputReceiver<Vector2>
+public class Rotation : MonoBehaviour, IInputReceiver
 {
     [SerializeField]
-    private Vector2Input movementInput;
+    private Vector2Input rotationInput;
+    [SerializeField]
+    [Range(0, 1)]
+    private float deadzone;
     
-    public float MoveSpeed { private get; set; }
-    
-    private Vector2 rawInput;
     private Player player;
-    private Rigidbody rb;
 
     private void Awake()
     {
         player = GetComponent<Player>();
-        rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
@@ -36,17 +33,6 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
         SubscribeToInputs(player);
     }
 
-    private void FixedUpdate()
-    {
-        var movementDirection = new Vector3(rawInput.x, 0f, rawInput.y);
-        rb.velocity = movementDirection * MoveSpeed;
-    }
-
-    public void ReceiveInput(Vector2 input)
-    {
-        rawInput = input;
-    }
-
     public void ResetInputs(Player oldPlayer, Player newPlayer)
     {
         UnsubscribeToInputs(oldPlayer);
@@ -55,11 +41,19 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
 
     public void SubscribeToInputs(Player player)
     {
-        movementInput.SubscribeToInputAction(ReceiveInput, player.PlayerID);
+        rotationInput.SubscribeToInputAction(RecieveInput, player.PlayerID);
     }
 
     public void UnsubscribeToInputs(Player player)
     {
-        movementInput.UnsubscribeToInputAction(ReceiveInput, player.PlayerID);
+        rotationInput.UnsubscribeToInputAction(RecieveInput, player.PlayerID);
+    }
+
+    private void RecieveInput(Vector2 input)
+    {
+        if (input.sqrMagnitude < deadzone * deadzone) // Squared for performance sake
+            return;
+        float angleA = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, angleA, 0f);
     }
 }
