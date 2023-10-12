@@ -17,7 +17,7 @@ public class CharacterStatistics : MonoBehaviour
 
     private void Start()
     {
-        movement.MoveSpeed = headStatistics.MoveSpeed;
-        health.MaxHealth = headStatistics.MaxHealth;
+        movement.MoveSpeed = headStatistics.MoveSpeedMultiplier;
+        health.MaxHealth = headStatistics.MaxHealthMultiplier;
     }
 }
