@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LayOutRooms : MonoBehaviour
 {
@@ -25,6 +27,14 @@ public class LayOutRooms : MonoBehaviour
 
     private GameObject roomParent;
     private GameObject wallsParent;
+
+    private enum Direction
+    {
+        North,
+        South,
+        East,
+        West,
+    }
 
     private void Start()
     {
@@ -108,56 +118,33 @@ public class LayOutRooms : MonoBehaviour
     private void PlaceWalls(int xIndex, int zIndex)
     {
         (bool north, bool south, bool east, bool west) directions = (false, false, false, false);
-
-        if (zIndex < numRoomsPerDirection.y - 1)
-            directions.north = roomLayout[xIndex, zIndex + 1];
-        if (zIndex > 0)
-            directions.south = roomLayout[xIndex, zIndex - 1];
-        if (xIndex < numRoomsPerDirection.x - 1)
-            directions.east = roomLayout[xIndex + 1, zIndex];
-        if (xIndex > 0)
-            directions.west = roomLayout[xIndex - 1, zIndex];
-
-        int roomIndex = roomIndices[rooms[(xIndex, zIndex)]];
         (int north, int south, int east, int west) indices;
-        indices.north = rooms.ContainsKey((xIndex, zIndex + 1)) ? roomIndices[rooms[(xIndex, zIndex + 1)]] : -1;
-        indices.south = rooms.ContainsKey((xIndex, zIndex - 1)) ? roomIndices[rooms[(xIndex, zIndex - 1)]] : -1;
-        indices.east = rooms.ContainsKey((xIndex + 1, zIndex)) ? roomIndices[rooms[(xIndex + 1, zIndex)]] : -1;
-        indices.west = rooms.ContainsKey((xIndex - 1, zIndex)) ? roomIndices[rooms[(xIndex - 1, zIndex)]] : -1;
-
-        ReduceToHamiltonianPath(ref directions.north, roomIndex, indices.north);
-        ReduceToHamiltonianPath(ref directions.south, roomIndex, indices.south);
-        ReduceToHamiltonianPath(ref directions.east, roomIndex, indices.east);
-        ReduceToHamiltonianPath(ref directions.west, roomIndex, indices.west);
-
+        int roomIndex = roomIndices[rooms[(xIndex, zIndex)]];
         (float x, float z) coordinates = (xIndex * roomSizes.x, zIndex * roomSizes.y);
         var offsets = new Vector3(roomSizes.x / 2, wallHeightOffset, roomSizes.y / 2);
 
-        var northWallPosition = new Vector3(coordinates.x, 0, coordinates.z + offsets.z);
-        var southWallPosition = new Vector3(coordinates.x, 0, coordinates.z - offsets.z);
-        var eastWallPosition = new Vector3(coordinates.x + offsets.x, 0, coordinates.z);
-        var westWallPosition = new Vector3(coordinates.x - offsets.x, 0, coordinates.z);
+        BuildWall(() => zIndex < numRoomsPerDirection.y - 1, (() => xIndex, () => zIndex + 1), roomIndex,
+            (xIndex, zIndex + 1), new Vector3(coordinates.x, 0, coordinates.z + offsets.z), Quaternion.Euler(0, 180, 0));
+        BuildWall(() => zIndex > 0, (() => xIndex, () => zIndex - 1), roomIndex, 
+            (xIndex, zIndex - 1), new Vector3(coordinates.x, 0, coordinates.z - offsets.z), Quaternion.Euler(0, 0, 0));
+        BuildWall(() => xIndex < numRoomsPerDirection.x - 1, (() => xIndex + 1, () => zIndex), roomIndex,
+            (xIndex + 1, zIndex), new Vector3(coordinates.x + offsets.x, 0, coordinates.z), Quaternion.Euler(0, 270, 0));
+        BuildWall(() => xIndex > 0, (() => xIndex - 1, () => zIndex), roomIndex, 
+            (xIndex - 1, zIndex), new Vector3(coordinates.x - offsets.x, 0, coordinates.z), Quaternion.Euler(0, 90, 0));
+    }
 
-        if (!usedWallPositions.Contains(northWallPosition))
-        {
-            Instantiate(directions.north ? doorwayPrefab : wallPrefab, northWallPosition, Quaternion.Euler(0, 0, 0), wallsParent.transform);
-            usedWallPositions.Add(northWallPosition);
-        }
-        if (!usedWallPositions.Contains(southWallPosition))
-        {
-            Instantiate(directions.south ? doorwayPrefab : wallPrefab, southWallPosition, Quaternion.Euler(0, 180, 0), wallsParent.transform);
-            usedWallPositions.Add(southWallPosition);
-        }
-        if (!usedWallPositions.Contains(eastWallPosition))
-        {
-            Instantiate(directions.east ? doorwayPrefab : wallPrefab, eastWallPosition, Quaternion.Euler(0, 90, 0), wallsParent.transform);
-            usedWallPositions.Add(eastWallPosition);
-        }
-        if (!usedWallPositions.Contains(westWallPosition))
-        {
-            Instantiate(directions.west ? doorwayPrefab : wallPrefab, westWallPosition, Quaternion.Euler(0, 90, 0), wallsParent.transform);
-            usedWallPositions.Add(westWallPosition);
-        }
+    private void BuildWall(Func<bool> isRoomOnEdge, (Func<int> xIndex, Func<int> zIndex) pathway,
+        int roomIndex, (int, int) roomsIndex, Vector3 wallPosition, Quaternion wallRotation)
+    {
+        if (usedWallPositions.Contains(wallPosition))
+            return;
+        bool buildPathway = false;
+        if (isRoomOnEdge())
+            buildPathway = roomLayout[pathway.xIndex(), pathway.zIndex()];
+        int index = rooms.ContainsKey(roomsIndex) ? roomIndices[rooms[roomsIndex]] : -1;
+        ReduceToHamiltonianPath(ref buildPathway, roomIndex, index);
+        Instantiate(buildPathway ? doorwayPrefab : wallPrefab, wallPosition, wallRotation, wallsParent.transform);
+        usedWallPositions.Add(wallPosition);
     }
 
     private void ReduceToHamiltonianPath(ref bool direction, int roomIndex, int neighborIndex)

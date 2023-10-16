@@ -327,9 +327,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefabs:
-  - {fileID: 919132149155446097, guid: bcce83e08a9145e458abe92b56fe2b77, type: 3}
-  wallPrefab: {fileID: 359771157809892741, guid: e0706a5302c80e24c99b038ff66350a2, type: 3}
-  doorwayPrefab: {fileID: 3620112476403729642, guid: 041912a803714ce4d93ac87b6313d48c, type: 3}
+  - {fileID: 7106814349433870644, guid: 401391929d289c8489758905f1244729, type: 3}
+  - {fileID: 8272731980691248981, guid: 9cb0fa423c957a84eab4f87831583b16, type: 3}
+  - {fileID: 5889993225629968102, guid: 3221e454c2c3f6041b1e5e4f903eec79, type: 3}
+  wallPrefab: {fileID: 1538077013162540110, guid: 2efcccda28eebce4e9fcc141b64001f0, type: 3}
+  doorwayPrefab: {fileID: 7049027673090946145, guid: a8228e03816fef8409fca32b9cd8d87f, type: 3}
   wallHeightOffset: 0.5
   numRoomsOnFloor: 10
   numRoomsPerDirection: {x: 4, y: 4}
