@@ -117,8 +117,6 @@ public class LayOutRooms : MonoBehaviour
 
     private void PlaceWalls(int xIndex, int zIndex)
     {
-        (bool north, bool south, bool east, bool west) directions = (false, false, false, false);
-        (int north, int south, int east, int west) indices;
         int roomIndex = roomIndices[rooms[(xIndex, zIndex)]];
         (float x, float z) coordinates = (xIndex * roomSizes.x, zIndex * roomSizes.y);
         var offsets = new Vector3(roomSizes.x / 2, wallHeightOffset, roomSizes.y / 2);
