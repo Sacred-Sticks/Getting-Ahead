@@ -10,34 +10,6 @@ public class Rotation : MonoBehaviour, IInputReceiver
     [SerializeField]
     [Range(0, 1)]
     private float deadzone;
-    
-    private Player player;
-
-    private void Awake()
-    {
-        player = GetComponent<Player>();
-    }
-
-    private void OnEnable()
-    {
-        SubscribeToInputs(player);
-    }
-
-    private void OnDisable()
-    {
-        UnsubscribeToInputs(player);
-    }
-
-    private void Start()
-    {
-        SubscribeToInputs(player);
-    }
-
-    public void ResetInputs(Player oldPlayer, Player newPlayer)
-    {
-        UnsubscribeToInputs(oldPlayer);
-        SubscribeToInputs(newPlayer);
-    }
 
     public void SubscribeToInputs(Player player)
     {

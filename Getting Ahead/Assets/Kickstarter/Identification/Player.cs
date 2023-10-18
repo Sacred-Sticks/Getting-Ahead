@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Kickstarter.Identification
@@ -37,6 +36,30 @@ namespace Kickstarter.Identification
         private void Awake()
         {
             inputReceivers = GetComponents<IInputReceiver>();
+        }
+
+        private void Start()
+        {
+            foreach (var inputReceiver in inputReceivers)
+            {
+                inputReceiver.SubscribeToInputs(this);
+            }
+        }
+
+        private void OnEnable()
+        {
+            foreach (var inputReceiver in inputReceivers)
+            {
+                inputReceiver.SubscribeToInputs(this);
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (var inputReceiver in inputReceivers)
+            {
+                inputReceiver.UnsubscribeToInputs(this);
+            }
         }
     }
 }
