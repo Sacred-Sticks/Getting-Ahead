@@ -13,22 +13,49 @@ public class Transitioner : MonoBehaviour
     [SerializeField] Service onRoomChange;
     [SerializeField] CategoryType playerType;
     Vector2 moveDirection;
+    Vector2 positionOffset;
+    [SerializeField] float offsetAmount = 1;
 
-    // Start is called before the first frame update
     void Start()
     {
         switch (direction)
         {
-            case Direction.LEFT: moveDirection = Vector2.left; break;
-            case Direction.RIGHT: moveDirection = Vector2.right; break;
-            case Direction.UP: moveDirection = Vector2.up; break;
-            case Direction.DOWN: moveDirection = Vector2.down; break;
+            case Direction.LEFT: 
+                moveDirection = Vector2.left;
+                break;
+            case Direction.RIGHT: 
+                moveDirection = Vector2.right;
+                break;
+            case Direction.UP: 
+                moveDirection = Vector2.up; 
+                break;
+            case Direction.DOWN: 
+                moveDirection = Vector2.down; 
+                break;
         }
+        positionOffset = moveDirection * offsetAmount;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerExit(Collider collide)
     {
-        var cat = collision.gameObject.GetComponent<ObjectCategories>();
+        switch (direction)
+        {
+            case Direction.LEFT:
+                if (collide.gameObject.transform.position.x > transform.position.x + positionOffset.x) return;
+                break;
+            case Direction.RIGHT:
+                if (collide.gameObject.transform.position.x < transform.position.x + positionOffset.x) return;
+                break;
+            case Direction.UP:
+                if (collide.gameObject.transform.position.z < transform.position.z + positionOffset.y) return;
+                break;
+            case Direction.DOWN:
+                if (collide.gameObject.transform.position.z > transform.position.z + positionOffset.y) return;
+                break;
+
+        }
+        var cat = collide.gameObject.GetComponent<ObjectCategories>();
+        
         if (cat.Categories.Contains(playerType)){
             Debug.Log("TRANSITIONING!");
             onRoomChange.Trigger(new CameraScript.RoomChangeArgs(moveDirection));
