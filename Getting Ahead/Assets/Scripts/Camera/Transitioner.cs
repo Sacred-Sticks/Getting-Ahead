@@ -55,9 +55,8 @@ public class Transitioner : MonoBehaviour
 
         }
         var cat = collide.gameObject.GetComponent<ObjectCategories>();
-        
+        if (cat == null) return;
         if (cat.Categories.Contains(playerType)){
-            Debug.Log("TRANSITIONING!");
             onRoomChange.Trigger(new CameraManager.RoomChangeArgs(moveDirection));
         }
     }
