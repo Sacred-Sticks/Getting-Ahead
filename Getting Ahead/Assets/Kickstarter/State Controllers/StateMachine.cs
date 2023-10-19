@@ -1,76 +1,79 @@
 using System;
 using System.Collections.Generic;
 
-public class StateMachine<TState> where TState : Enum
+namespace Kickstarter.State_Controllers
 {
-    public StateMachine(TState initialState)
+    public class StateMachine<TState> where TState : Enum
     {
-        var allStates = Enum.GetValues(typeof(TState));
-        foreach (TState potentialState in allStates)
+        public StateMachine(TState initialState)
         {
-            stateTransitions.Add(potentialState, new List<TState>());
-            onStateBegin.Add(potentialState, null);
-            onStateEnd.Add(potentialState, null);
+            var allStates = Enum.GetValues(typeof(TState));
+            foreach (TState potentialState in allStates)
+            {
+                stateTransitions.Add(potentialState, new List<TState>());
+                onStateBegin.Add(potentialState, null);
+                onStateEnd.Add(potentialState, null);
+            }
+
+            State = initialState;
         }
 
-        State = initialState;
-    }
-
-    public enum StateChange
-    {
-        Begin,
-        End,
-    }
-
-    private TState state;
-    public TState State
-    {
-        get
+        public enum StateChange
         {
-            return state;
+            Begin,
+            End,
         }
-        set
+
+        private TState state;
+        public TState State
         {
-            if (!stateTransitions[State].Contains(value))
-                return;
-            onStateEnd[state]();
-            state = value;
-            onStateBegin[state]();
+            get
+            {
+                return state;
+            }
+            set
+            {
+                if (!stateTransitions[State].Contains(value))
+                    return;
+                onStateEnd[state]();
+                state = value;
+                onStateBegin[state]();
+            }
         }
-    }
 
-    private Dictionary<TState, List<TState>> stateTransitions;
-    private Dictionary<TState, Action> onStateBegin;
-    private Dictionary<TState, Action> onStateEnd;
+        private Dictionary<TState, List<TState>> stateTransitions;
+        private Dictionary<TState, Action> onStateBegin;
+        private Dictionary<TState, Action> onStateEnd;
 
-    public void AddTransition(TState baseState, TState newState)
-    {
-        stateTransitions[baseState].Add(newState);
-    }
-
-    public void SubscribeToStateChange(StateChange changeType, TState state, Action subscription)
-    {
-        switch (changeType)
+        public void AddTransition(TState baseState, TState newState)
         {
-            case StateChange.Begin:
-                onStateBegin[state] += subscription;
-                break;
-            case StateChange.End:
-                onStateEnd[state] += subscription;
-                break;
+            stateTransitions[baseState].Add(newState);
         }
-    }
 
-    public void UnsubscribeToStateChange(StateChange changeType, TState state, Action subscription)
-    {
-        switch (changeType)
+        public void SubscribeToStateChange(StateChange changeType, TState state, Action subscription)
         {
-            case StateChange.Begin:
-                onStateBegin[state] -= subscription;
-                break;
-            case StateChange.End:
-                onStateEnd[state] -= subscription;
-                break;
+            switch (changeType)
+            {
+                case StateChange.Begin:
+                    onStateBegin[state] += subscription;
+                    break;
+                case StateChange.End:
+                    onStateEnd[state] += subscription;
+                    break;
+            }
+        }
+
+        public void UnsubscribeToStateChange(StateChange changeType, TState state, Action subscription)
+        {
+            switch (changeType)
+            {
+                case StateChange.Begin:
+                    onStateBegin[state] -= subscription;
+                    break;
+                case StateChange.End:
+                    onStateEnd[state] -= subscription;
+                    break;
+            }
         }
     }
 }
