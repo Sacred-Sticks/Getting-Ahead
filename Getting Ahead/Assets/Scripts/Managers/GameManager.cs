@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameStateController.GameState initialGameState;
 
     [SerializeField] private InputManager inputManager;
+    
+    private CameraScript cameraManager;
 
     public static GameManager instance;
 
@@ -22,8 +24,14 @@ public class GameManager : MonoBehaviour
         gameStateController = new GameStateController(initialGameState);
 
         inputManager.Initialize(out int numPlayers);
+
+        cameraManager = GetComponent<CameraScript>();
     }
 
+    private void Start()
+    {
+        cameraManager.SetupCameraDictionary();
+    }
     private void InitializeSingleton()
     {
         if (instance != null)

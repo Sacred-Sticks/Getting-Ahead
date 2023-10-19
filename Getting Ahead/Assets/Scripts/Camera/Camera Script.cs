@@ -48,6 +48,7 @@ public class CameraScript : MonoBehaviour, Kickstarter.Events.IServiceProvider
     }
     void MoveCamera(Vector2 input)
     {
+        Debug.Log("TRIGGERING!");
         Vector3 tempVector3 = currentCamera.transform.position;
         switch (input.x)
         {
