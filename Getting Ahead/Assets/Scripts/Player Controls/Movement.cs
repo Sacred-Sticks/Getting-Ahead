@@ -4,7 +4,7 @@ using Kickstarter.Inputs;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody))]
-public class Movement : MonoBehaviour, IInputReceiver<Vector2>
+public class Movement : MonoBehaviour, IInputReceiver
 {
     [SerializeField]
     private Vector2Input movementInput;
@@ -12,28 +12,11 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
     public float MoveSpeed { private get; set; }
     
     private Vector2 rawInput;
-    private Player player;
     private Rigidbody rb;
 
     private void Awake()
     {
-        player = GetComponent<Player>();
         rb = GetComponent<Rigidbody>();
-    }
-
-    private void OnEnable()
-    {
-        SubscribeToInputs(player);
-    }
-
-    private void OnDisable()
-    {
-        UnsubscribeToInputs(player);
-    }
-
-    private void Start()
-    {
-        SubscribeToInputs(player);
     }
 
     private void FixedUpdate()
@@ -45,12 +28,7 @@ public class Movement : MonoBehaviour, IInputReceiver<Vector2>
     public void ReceiveInput(Vector2 input)
     {
         rawInput = input;
-    }
-
-    public void ResetInputs(Player oldPlayer, Player newPlayer)
-    {
-        UnsubscribeToInputs(oldPlayer);
-        SubscribeToInputs(newPlayer);
+        Debug.Log($"Raw Input set to {rawInput}");
     }
 
     public void SubscribeToInputs(Player player)
