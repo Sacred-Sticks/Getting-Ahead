@@ -58,7 +58,7 @@ public class Transitioner : MonoBehaviour
         
         if (cat.Categories.Contains(playerType)){
             Debug.Log("TRANSITIONING!");
-            onRoomChange.Trigger(new CameraScript.RoomChangeArgs(moveDirection));
+            onRoomChange.Trigger(new CameraManager.RoomChangeArgs(moveDirection));
         }
     }
 }

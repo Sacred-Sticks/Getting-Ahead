@@ -1,16 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using Kickstarter.Inputs;
 using UnityEngine;
-using Kickstarter.Identification;
-using System.Linq;
-using UnityEditor.Experimental.GraphView;
-using Unity.VisualScripting;
 using Kickstarter.Events;
 using System;
 
-public class CameraScript : MonoBehaviour, Kickstarter.Events.IServiceProvider
+public class CameraManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
 {
     [SerializeField] Service onRoomChange;
     private CinemachineVirtualCamera[] CameraObjects;
@@ -87,7 +81,7 @@ public class CameraScript : MonoBehaviour, Kickstarter.Events.IServiceProvider
         switch (args)
         {
             case RoomChangeArgs roomChangeArgs:
-                MoveCamera(roomChangeArgs.RoomPosition);
+                MoveCamera(roomChangeArgs.RoomDirection);
                 break;
             default: throw new ArgumentOutOfRangeException();
         }
@@ -95,10 +89,10 @@ public class CameraScript : MonoBehaviour, Kickstarter.Events.IServiceProvider
     }
     public class RoomChangeArgs: EventArgs
     {
-        public Vector2 RoomPosition { get; }
+        public Vector2 RoomDirection { get; }
         public RoomChangeArgs(Vector2 roomPosition)
         {
-            RoomPosition = roomPosition;
+            RoomDirection = roomPosition;
         }
     }
 }

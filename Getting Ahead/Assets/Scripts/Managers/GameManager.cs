@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kickstarter.Events;
 using Kickstarter.Inputs;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
 {
     [Tooltip("Purely for testing, the Game Manager is a singleton so don't worry, you don't need to remove your Game Manager"
            + "just set it appropriately to whichever game state you are testing.")]
@@ -11,11 +13,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private InputManager inputManager;
     
-    private CameraScript cameraManager;
+    private CameraManager cameraManager;
 
     public static GameManager instance;
 
     private GameStateController gameStateController;
+
+    private Vector2 roomIndex;
 
     private void Awake()
     {
@@ -25,7 +29,7 @@ public class GameManager : MonoBehaviour
 
         inputManager.Initialize(out int numPlayers);
 
-        cameraManager = GetComponent<CameraScript>();
+        cameraManager = GetComponent<CameraManager>();
     }
 
     private void Start()
@@ -38,6 +42,19 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         instance = this;
         DontDestroyOnLoad(this);
+    }
+
+    public void ImplementService(System.EventArgs args)
+    {
+        switch (args)
+        {
+            case CameraManager.RoomChangeArgs roomChangeArgs:
+                roomIndex += roomChangeArgs.RoomDirection;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
     }
 
     private class GameStateController
