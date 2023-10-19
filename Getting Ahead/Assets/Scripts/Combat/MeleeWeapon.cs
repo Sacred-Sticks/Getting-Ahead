@@ -18,7 +18,7 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
     {
         if(CheckFireRate())
         {
-            Instantiate(weapon.ProjectilePrefab, new Vector3(attackPoint.transform.position.x, attackPoint.transform.position.y, attackPoint.transform.position.z - 1), attackPoint.transform.rotation);
+            Instantiate(weapon.ProjectilePrefab, new Vector3(attackPoint.transform.position.x, attackPoint.transform.position.y, attackPoint.transform.position.z), attackPoint.transform.rotation);
         }
     }
 
