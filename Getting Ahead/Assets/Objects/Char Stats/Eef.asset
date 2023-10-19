@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 811e4a4026e1b0b45bb88b7547a558d5, type: 3}
   m_Name: Eef
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  attackRate: 5
-  attackDamage: 3
-  health: 10
-  defense: 2
-  iframes: 0.5
+  moveSpeedMultiplier: 5
+  attackRateMultiplier: 0
+  maxHealthMultiplier: 0
+  iframesMultiplier: 0
