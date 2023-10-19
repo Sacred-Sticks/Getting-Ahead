@@ -26,7 +26,12 @@ public class AudioManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     }
     public class AudioArgs : EventArgs
     {
-        public GameObject target;
-        public string audioName;
+        public readonly GameObject target;
+        public readonly string audioName;
+        public AudioArgs(GameObject target, string audioName)
+        {
+            this.target = target;
+            this.audioName = audioName;
+        }
     }
 }
