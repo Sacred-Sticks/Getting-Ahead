@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689b911fa4d44b04aa394faa92c0c9ca, type: 3}
   m_Name: BurstFire
   m_EditorClassIdentifier: 
-  fireRate: 0.5
+  attackRate: 0.5
   burstAmount: 3
   burstFireRate: 3
   bulletPrefab: {fileID: 2658952792605532179, guid: 9032a7e27e734b24c9d911ea99676a92, type: 3}

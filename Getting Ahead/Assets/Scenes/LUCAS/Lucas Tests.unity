@@ -255,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 4749695182384498620, guid: 8d4d0d978d6a23a4dbe27ecc02e10847, type: 3}
       propertyPath: onDeath
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 575476aad6b7a1641aa11adc3442bb21, type: 2}
     - target: {fileID: 6450535625709415249, guid: 8d4d0d978d6a23a4dbe27ecc02e10847, type: 3}
       propertyPath: m_Name
       value: Player (1)
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackInput: {fileID: 11400000, guid: 1d20284bb0a1b2a4e93e936b066f001b, type: 2}
   inputTolerance: 0.5
-  weapon: {fileID: 11400000, guid: aa0b93a2729929b4aa05d5b7f0967d4f, type: 2}
+  weapon: {fileID: 0}
   targetCategory: {fileID: 0}
 --- !u!114 &1181659800
 MonoBehaviour:

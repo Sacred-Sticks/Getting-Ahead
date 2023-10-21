@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
         }
     }
     
-    [SerializeField] private float currentHealth;
+    private float currentHealth;
     private float CurrentHealth
     {
         get
