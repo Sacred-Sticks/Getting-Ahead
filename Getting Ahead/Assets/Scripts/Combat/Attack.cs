@@ -1,11 +1,8 @@
 using System.Collections;
-using Kickstarter.Identification;
-using Kickstarter.Inputs;
 using UnityEngine;
 
-public abstract class Attack : MonoBehaviour, IInputReceiver
+public abstract class Attack : MonoBehaviour
 {
-    [SerializeField] private FloatInput attackInput;
     [Range(0, 1)]
     [SerializeField] private float inputTolerance;
 
@@ -15,17 +12,7 @@ public abstract class Attack : MonoBehaviour, IInputReceiver
     private float rawInput;
     private bool canAttack = true;
 
-    public void SubscribeToInputs(Player player)
-    {
-        attackInput.SubscribeToInputAction(OnAttackInputChange, player.PlayerID);
-    }
-
-    public void UnsubscribeToInputs(Player player)
-    {
-        attackInput.UnsubscribeToInputAction(OnAttackInputChange, player.PlayerID);
-    }
-
-    private void OnAttackInputChange(float input)
+    public void SetAttackingInput(float input)
     {
         rawInput = input;
         if (input < inputTolerance && isAttacking)
@@ -69,7 +56,7 @@ public abstract class Attack : MonoBehaviour, IInputReceiver
         firingRoutine = null;
         yield return new WaitForSeconds(1 / weapon.AttackRate);
         canAttack = true;
-        OnAttackInputChange(rawInput);
+        SetAttackingInput(rawInput);
     }
 
     protected abstract IEnumerator FireBurst();

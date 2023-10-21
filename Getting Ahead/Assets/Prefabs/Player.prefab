@@ -233,8 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c37f97d867ba349bc5043997636f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDeath: {fileID: 0}
-  currentHealth: 0
+  onDeath: {fileID: 11400000, guid: e00a285c416844e498fc372e3b916711, type: 2}
 --- !u!114 &8445100907131280387
 MonoBehaviour:
   m_ObjectHideFlags: 0
