@@ -28,7 +28,6 @@ public class Movement : MonoBehaviour, IInputReceiver
     public void ReceiveInput(Vector2 input)
     {
         rawInput = input;
-        Debug.Log($"Raw Input set to {rawInput}");
     }
 
     public void SubscribeToInputs(Player player)
