@@ -39,11 +39,11 @@ public class Health : MonoBehaviour
     
     public class DeathArgs : EventArgs
     {
-        public DeathArgs(GameObject dyingPlayerGameObject)
+        public DeathArgs(GameObject dyingCharacterGameObject)
         {
-            DyingPlayerGameObject = dyingPlayerGameObject;
+            DyingCharacterGameObject = dyingCharacterGameObject;
         }
         
-        public GameObject DyingPlayerGameObject { get; }
+        public GameObject DyingCharacterGameObject { get; }
     }
 }

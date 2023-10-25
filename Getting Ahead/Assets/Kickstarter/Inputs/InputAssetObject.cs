@@ -96,8 +96,10 @@ namespace Kickstarter.Inputs
         {
             if (!actionsRegistered)
                 return;
+            const int noInputs = -1;
             int playerIndex = playerRegister switch
             {
+                Player.PlayerIdentifier.None => noInputs,
                 Player.PlayerIdentifier.KeyboardAndMouse => 0,
                 Player.PlayerIdentifier.ControllerOne => 1,
                 Player.PlayerIdentifier.ControllerTwo => 2,
@@ -105,6 +107,8 @@ namespace Kickstarter.Inputs
                 Player.PlayerIdentifier.ControllerFour => 4,
                 _ => throw new ArgumentOutOfRangeException(nameof(playerRegister), playerRegister, null),
             };
+            if (playerIndex == noInputs)
+                return;
             if (playerIndex > devices.Length - 1)
                 return;
             if (devices[playerIndex] != null)
@@ -115,8 +119,10 @@ namespace Kickstarter.Inputs
         {
             if (!actionsRegistered)
                 return;
+            const int noInputs = -1;
             int playerIndex = playerRegister switch
             {
+                Player.PlayerIdentifier.None => noInputs,
                 Player.PlayerIdentifier.KeyboardAndMouse => 0,
                 Player.PlayerIdentifier.ControllerOne => 1,
                 Player.PlayerIdentifier.ControllerTwo => 2,
@@ -124,6 +130,8 @@ namespace Kickstarter.Inputs
                 Player.PlayerIdentifier.ControllerFour => 4,
                 _ => throw new ArgumentOutOfRangeException(nameof(playerRegister), playerRegister, null),
             };
+            if (playerIndex == noInputs)
+                return;
             if (playerIndex > devices.Length - 1)
                 return;
             if (devices[playerIndex] != null)

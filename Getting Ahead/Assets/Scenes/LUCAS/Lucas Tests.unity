@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!137 &15202852 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8683386349253970710, guid: cf0fa5d875faf1247a4253fadea5ea12, type: 3}
+  m_PrefabInstance: {fileID: 1212032099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &455645963 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6450535625709415249, guid: 8d4d0d978d6a23a4dbe27ecc02e10847, type: 3}
@@ -378,7 +383,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c9eb9f8542ebf06429c94e3a8948c6d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2137504216}
   m_SourcePrefab: {fileID: 100100000, guid: c9eb9f8542ebf06429c94e3a8948c6d7, type: 3}
 --- !u!1 &1181659791 stripped
 GameObject:
@@ -592,6 +600,33 @@ MonoBehaviour:
   numRoomsOnFloor: 10
   numRoomsPerDirection: {x: 4, y: 4}
   roomSizes: {x: 15, y: 15}
+--- !u!137 &1622881154 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6340419561796399314, guid: c9eb9f8542ebf06429c94e3a8948c6d7, type: 3}
+  m_PrefabInstance: {fileID: 1075807546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2137504215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9eb9f8542ebf06429c94e3a8948c6d7, type: 3}
+  m_PrefabInstance: {fileID: 1075807546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2137504216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137504215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5370beb39cd1e964088b16c5e6e00347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDecapitation: {fileID: 11400000, guid: e00a285c416844e498fc372e3b916711, type: 2}
+  onRecapitation: {fileID: 0}
+  initialBody: {fileID: 15202852}
+  meshes:
+  - {fileID: 1622881154}
 --- !u!1001 &421611388510228101
 PrefabInstance:
   m_ObjectHideFlags: 0
