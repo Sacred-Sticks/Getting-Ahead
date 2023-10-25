@@ -3,17 +3,28 @@ using Kickstarter.Events;
 using Kickstarter.Identification;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Player))]
+[RequireComponent(typeof(Movement))]
+[RequireComponent(typeof(Rigidbody))]
 public class SkeletonController : MonoBehaviour, IServiceProvider
 {
     [SerializeField] private Service onDecapitation;
     [SerializeField] private Service onRecapitation;
     [Space]
+    [SerializeField] private HeadStatistics headStatistics;
+    [SerializeField] private float headSpeed;
+    [Space]
     [SerializeField] private GameObject initialBody;
     [SerializeField] private SkinnedMeshRenderer[] meshes;
 
+    private Player player;
+    private Player.PlayerIdentifier playerID;
     private Transform[] initialBones;
+    private Rigidbody body;
+    private GameObject activeBodyRoot;
     private GameObject skeletonRoot;
     private SkinnedMeshRenderer Skeleton
     {
@@ -36,9 +47,6 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
                 mesh.bones = activeBones;
         }
     }
-    private Player player;
-    private Player.PlayerIdentifier playerID;
-    private GameObject activeBodyRoot;
 
     private void OnEnable()
     {
@@ -55,19 +63,21 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
     private void Awake()
     {
         player = GetComponent<Player>();
+        body = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
+        GetComponent<Movement>().MoveSpeed = headSpeed;
         initialBones = meshes[0].bones;
-        Recapitate(initialBody);
-        
+
         var activeRootTransform = initialBody.transform;
         while (activeRootTransform.parent)
             activeRootTransform = activeRootTransform.parent;
         activeBodyRoot = activeRootTransform.gameObject;
-        
-        playerID = activeBodyRoot.GetComponent<Player>().PlayerID;
+
+        playerID = player.PlayerID;
+        Recapitate(initialBody);
     }
 
     public void ImplementService(EventArgs args)
@@ -89,27 +99,47 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
     {
         if (dyingBody != activeBodyRoot)
             return;
+        body.useGravity = true;
         Skeleton = null;
-        // Inputs currently assume it to be a player that died, this will throw errors on AI
         dyingBody.GetComponent<Player>().PlayerID = Player.PlayerIdentifier.None;
         player.PlayerID = playerID;
+        // does not yet disable any AI on enemies
+        
+        switch (playerID)
+        {
+            case Player.PlayerIdentifier.None:
+                WitherBody(dyingBody, 1);
+                break;
+            default:
+                WitherBody(dyingBody, 0.75f);
+                break;
+        }
     }
 
     private void Recapitate(GameObject chosenBody)
     {
+        body.useGravity = false;
         Skeleton = chosenBody.GetComponentInChildren<SkinnedMeshRenderer>();
-        // Inputs currently assume it to be a player that died, this will throw errors on AI
+        chosenBody.TryGetComponent(out CharacterStatistics characterStatistics);
+        characterStatistics.ApplyValues(headStatistics);
         chosenBody.GetComponent<Player>().PlayerID = playerID;
         player.PlayerID = Player.PlayerIdentifier.None;
     }
-    
+
+    private void WitherBody(Object body, float percentage)
+    {
+        // Rewrite this later to use some visual effect instead of just destroying it
+        if (Random.Range(0, 1f) <= percentage)
+            Destroy(body);
+    }
+
     public class RecapitationArgs : EventArgs
     {
         public RecapitationArgs(GameObject chosenBody)
         {
             ChosenBody = chosenBody;
         }
-        
+
         public GameObject ChosenBody { get; }
     }
 }
