@@ -7,6 +7,7 @@ namespace Kickstarter.Identification
     {
         public enum PlayerIdentifier
         {
+            None,
             KeyboardAndMouse,
             ControllerOne,
             ControllerTwo,

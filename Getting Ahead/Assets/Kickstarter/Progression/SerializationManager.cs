@@ -98,7 +98,8 @@ namespace Kickstarter.Progression
         {
             allData.ForEach(d =>
             {
-                LoadData(d.FileLocation, out TType output);
+                if (!LoadData(d.FileLocation, out TType output))
+                    return;
                 var datapoint = (Datapoint<TType>)d;
                 datapoint.LoadData(output);
             });
