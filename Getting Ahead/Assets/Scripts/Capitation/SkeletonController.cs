@@ -67,7 +67,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
         body = GetComponent<Rigidbody>();
     }
 
-    private IEnumerator Start()
+    private void Start()
     {
         GetComponent<Movement>().MoveSpeed = headSpeed;
         initialBones = meshes[0].bones;
@@ -79,10 +79,6 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
 
         playerID = player.PlayerID;
         Recapitate(initialBody);
-
-        yield return new WaitForSeconds(5);
-        
-        Decapitate(initialBody);
     }
 
     public void ImplementService(EventArgs args)
