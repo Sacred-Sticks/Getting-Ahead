@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using UnityEngine;
@@ -66,7 +67,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
         body = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
         GetComponent<Movement>().MoveSpeed = headSpeed;
         initialBones = meshes[0].bones;
@@ -78,6 +79,10 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
 
         playerID = player.PlayerID;
         Recapitate(initialBody);
+
+        yield return new WaitForSeconds(5);
+        
+        Decapitate(initialBody);
     }
 
     public void ImplementService(EventArgs args)

@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
 
     private void Start()
     {
-        //cameraManager.SetupCameraDictionary();
+        cameraManager.SetupCameraDictionary();
     }
     private void InitializeSingleton()
     {
