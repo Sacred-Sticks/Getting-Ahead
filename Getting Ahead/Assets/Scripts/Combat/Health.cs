@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
         {
             currentHealth = value;
             if (currentHealth <= 0)
-                onDeath.Trigger(new OnDeathArgs(gameObject));
+                onDeath.Trigger(new DeathArgs(gameObject));
         }
     }
 
@@ -37,13 +37,13 @@ public class Health : MonoBehaviour
         CurrentHealth -= damage;
     }
     
-    public class OnDeathArgs : EventArgs
+    public class DeathArgs : EventArgs
     {
-        public OnDeathArgs(GameObject dyingPlayerGameObject)
+        public DeathArgs(GameObject dyingCharacterGameObject)
         {
-            DyingPlayerGameObject = dyingPlayerGameObject;
+            DyingCharacterGameObject = dyingCharacterGameObject;
         }
         
-        public GameObject DyingPlayerGameObject { get; }
+        public GameObject DyingCharacterGameObject { get; }
     }
 }
