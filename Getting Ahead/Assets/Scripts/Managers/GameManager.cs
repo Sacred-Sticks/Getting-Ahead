@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     [SerializeField] private GameStateController.GameState initialGameState;
 
     [SerializeField] private InputManager inputManager;
-    
+
+    private LayOutRooms roomLayoutGenerator;
     private CameraManager cameraManager;
 
     public static GameManager instance;
@@ -29,11 +30,13 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
 
         inputManager.Initialize(out int numPlayers);
 
+        roomLayoutGenerator = GetComponent<LayOutRooms>();
         cameraManager = GetComponent<CameraManager>();
     }
 
     private void Start()
     {
+        roomLayoutGenerator.InitializeLayout();
         cameraManager.SetupCameraDictionary();
     }
     private void InitializeSingleton()

@@ -36,11 +36,6 @@ public class LayOutRooms : MonoBehaviour
         West,
     }
 
-    private void Start()
-    {
-        InitializeLayout();
-    }
-
     public void InitializeLayout()
     {
         CreateRoomPlacements();
