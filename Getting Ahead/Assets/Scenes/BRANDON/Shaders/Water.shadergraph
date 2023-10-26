@@ -1840,7 +1840,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Scale",
     "m_StageCapability": 3,
-    "m_Value": 5.0,
+    "m_Value": 1.9299999475479127,
     "m_DefaultValue": 10.0,
     "m_Labels": []
 }
@@ -2000,7 +2000,7 @@
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
-    "m_Precision": 0,
+    "m_Precision": 2,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
@@ -2117,7 +2117,7 @@
         }
     ],
     "synonyms": [],
-    "m_Precision": 0,
+    "m_Precision": 2,
     "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
@@ -3756,7 +3756,7 @@
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
-    "m_Precision": 0,
+    "m_Precision": 2,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
@@ -3993,7 +3993,7 @@
         }
     ],
     "synonyms": [],
-    "m_Precision": 0,
+    "m_Precision": 2,
     "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
