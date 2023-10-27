@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         } // Main Menu Scene
         for (int i = gameplayStartIndex; i < gameplayEndIndex + 1; i++)
         {
+            if (scene != SceneManager.GetSceneByBuildIndex(i))
+                continue;
             InitializeLevel();
             SpawnPlayers(players);
             return;
