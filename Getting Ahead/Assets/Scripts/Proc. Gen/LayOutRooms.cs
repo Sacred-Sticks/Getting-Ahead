@@ -35,7 +35,7 @@ public class LayOutRooms : MonoBehaviour
     {
         CreateRoomPlacements();
         roomParent = new GameObject("Rooms");
-        wallsParent = new GameObject("Wall");
+        wallsParent = new GameObject("Walls");
         unionFind = new UnionFind(numRoomsOnFloor);
 
         for (int i = 0; i < roomLayout.GetLength(0); i++)
