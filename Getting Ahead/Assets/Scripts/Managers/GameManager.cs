@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
 
     private void Start()
     {
-        roomLayoutGenerator.InitializeLayout();
-        cameraManager.SetupCameraDictionary();
+        var initialRoom = roomLayoutGenerator.InitializeLayout();
+        cameraManager.SetupCameraDictionary(initialRoom);
     }
     private void InitializeSingleton()
     {

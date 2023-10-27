@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     [SerializeField] Service onRoomChange;
     private CinemachineVirtualCamera[] CameraObjects;
     private readonly Dictionary<Vector3, CinemachineVirtualCamera> virtualCameras = new Dictionary<Vector3, CinemachineVirtualCamera>();
-    [SerializeField] private CinemachineVirtualCamera currentCamera;
+    private CinemachineVirtualCamera currentCamera;
 
 
     private void OnEnable()
@@ -21,9 +21,12 @@ public class CameraManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     {
         onRoomChange.Event -= ImplementService;
     }
-    public void SetupCameraDictionary()
+    
+    public void SetupCameraDictionary(GameObject initialRoom)
     {
-        CameraObjects = GameObject.FindObjectsOfType<CinemachineVirtualCamera>();
+        currentCamera = initialRoom.GetComponentInChildren<CinemachineVirtualCamera>();
+        
+        CameraObjects = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var obj in CameraObjects)
         {
             virtualCameras.Add(obj.gameObject.transform.position, obj);
@@ -34,13 +37,15 @@ public class CameraManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         }
         currentCamera.m_Priority = 9;
     }
-    void SwapCamera(CinemachineVirtualCamera newCam)
+    
+    private void SwapCamera(CinemachineVirtualCamera newCam)
     {
         currentCamera.m_Priority = 0;
         newCam.m_Priority = 9;
         currentCamera = newCam;
     }
-    void MoveCamera(Vector2 input)
+    
+    private void MoveCamera(Vector2 input)
     {
         Debug.Log("TRIGGERING!");
         Vector3 tempVector3 = currentCamera.transform.position;
