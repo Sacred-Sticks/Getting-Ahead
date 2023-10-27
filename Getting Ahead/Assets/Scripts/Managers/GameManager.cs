@@ -1,32 +1,78 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Inputs;
+using Kickstarter.State_Controllers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
 {
     [Tooltip("Purely for testing, the Game Manager is a singleton so don't worry, you don't need to remove your Game Manager"
            + "just set it appropriately to whichever game state you are testing.")]
-    [SerializeField] private GameStateController.GameState initialGameState;
-
+    [SerializeField] private GameState initialGameState;
+    [Space]
     [SerializeField] private InputManager inputManager;
+    [Space]
+    [SerializeField] private int mainMenuIndex;
+    [SerializeField] private int gameplayStartIndex;
+    [SerializeField] private int gameplayEndIndex;
+    [SerializeField] private int endGameIndex;
+    [Space]
+    [SerializeField] private Service onRoomChange;
+    
+    private StateMachine<GameState> state;
 
     private LayOutRooms roomLayoutGenerator;
     private CameraManager cameraManager;
 
     public static GameManager instance;
 
-    private GameStateController gameStateController;
-
     private Vector2 roomIndex;
+
+    public enum GameState
+    {
+        MainMenu,
+        Playing,
+        Paused,
+        GameWin,
+        GameLose,
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        onRoomChange.Event += ImplementService;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        onRoomChange.Event -= ImplementService;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        if (scene == SceneManager.GetSceneByBuildIndex(mainMenuIndex))
+        {
+            return;
+        } // Main Menu Scene
+        for (int i = gameplayStartIndex; i < gameplayEndIndex + 1; i++)
+        {
+            var initialRoom = roomLayoutGenerator.InitializeLayout();
+            cameraManager.SetupCameraDictionary(initialRoom);
+            return;
+        } // Level Scenes
+        if (scene == SceneManager.GetSceneByBuildIndex(endGameIndex))
+        {
+            return;
+        } // Game End Scene
+    }
 
     private void Awake()
     {
         InitializeSingleton();
 
-        gameStateController = new GameStateController(initialGameState);
+        state = new StateMachine<GameState>(initialGameState);
 
         inputManager.Initialize(out int numPlayers);
 
@@ -34,11 +80,6 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         cameraManager = GetComponent<CameraManager>();
     }
 
-    private void Start()
-    {
-        var initialRoom = roomLayoutGenerator.InitializeLayout();
-        cameraManager.SetupCameraDictionary(initialRoom);
-    }
     private void InitializeSingleton()
     {
         if (instance != null)
@@ -47,98 +88,20 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         DontDestroyOnLoad(this);
     }
 
-    public void ImplementService(System.EventArgs args)
+    public void ImplementService(EventArgs args)
     {
         switch (args)
         {
             case CameraManager.RoomChangeArgs roomChangeArgs:
-                roomIndex += roomChangeArgs.RoomDirection;
+                UpdateRoomIndex(roomChangeArgs.RoomDirection);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
     }
 
-    private class GameStateController
+    private void UpdateRoomIndex(Vector2 roomDirection)
     {
-        public GameStateController(GameState initialGameState)
-        {
-            state = initialGameState;
-
-            InitializeStateTransitions();
-        }
-
-        private Dictionary<GameState, GameState[]> StateTransitions;
-
-        private GameState state;
-
-        public GameState State
-        {
-            get
-            {
-                return state;
-            }
-            set
-            {
-                if (StateTransitions[State].Contains(value))
-                    state = value;
-            }
-        }
-
-        public enum GameState
-        {
-            MainMenu,
-            Playing,
-            Paused,
-            GameWon,
-            GameLost,
-        }
-
-        private void InitializeStateTransitions()
-        {
-            StateTransitions = new Dictionary<GameState, GameState[]>()
-            {
-                {
-                    GameState.MainMenu,
-                    new GameState[]
-                    {
-                        GameState.Playing,
-                    }
-                },
-                {
-                    GameState.Playing,
-                    new GameState[]
-                    {
-                        GameState.Paused,
-                        GameState.GameLost,
-                        GameState.GameWon,
-                        GameState.MainMenu,
-                    }
-                },
-                {
-                    GameState.Paused,
-                    new GameState[]
-                    {
-                        GameState.Playing,
-                        GameState.MainMenu,
-                    }
-                },
-                {
-                    GameState.GameLost,
-                    new GameState[]
-                    {
-                        GameState.MainMenu,
-                    }
-                },
-                {
-                    GameState.GameWon,
-                    new GameState[]
-                    {
-                        GameState.MainMenu,
-                    }
-                },
-            };
-        }
+        roomIndex += roomDirection;
     }
 }
