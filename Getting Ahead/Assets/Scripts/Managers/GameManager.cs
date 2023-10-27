@@ -1,7 +1,9 @@
 using System;
 using Kickstarter.Events;
+using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using Kickstarter.State_Controllers;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,15 +21,24 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     [SerializeField] private int endGameIndex;
     [Space]
     [SerializeField] private Service onRoomChange;
-    
-    private StateMachine<GameState> state;
+    [Space]
+    [SerializeField] private PlayerCharacterPairing[] players;
 
+    public PlayerCharacterPairing[] Players
+    {
+        get
+        {
+            return players;
+        }
+    }
+
+    private StateMachine<GameState> state;
     private LayOutRooms roomLayoutGenerator;
     private CameraManager cameraManager;
 
     public static GameManager instance;
 
-    private Vector2 roomIndex;
+    private (int x, int y) roomIndex;
 
     public enum GameState
     {
@@ -50,24 +61,6 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         onRoomChange.Event -= ImplementService;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
-    {
-        if (scene == SceneManager.GetSceneByBuildIndex(mainMenuIndex))
-        {
-            return;
-        } // Main Menu Scene
-        for (int i = gameplayStartIndex; i < gameplayEndIndex + 1; i++)
-        {
-            var initialRoom = roomLayoutGenerator.InitializeLayout();
-            cameraManager.SetupCameraDictionary(initialRoom);
-            return;
-        } // Level Scenes
-        if (scene == SceneManager.GetSceneByBuildIndex(endGameIndex))
-        {
-            return;
-        } // Game End Scene
-    }
-
     private void Awake()
     {
         InitializeSingleton();
@@ -87,6 +80,52 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         instance = this;
         DontDestroyOnLoad(this);
     }
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        if (scene == SceneManager.GetSceneByBuildIndex(mainMenuIndex))
+        {
+            return;
+        } // Main Menu Scene
+        for (int i = gameplayStartIndex; i < gameplayEndIndex + 1; i++)
+        {
+            InitializeLevel();
+            SpawnPlayers(players);
+            return;
+        } // Gameplay Scenes
+        if (scene == SceneManager.GetSceneByBuildIndex(endGameIndex))
+        {
+            return;
+        } // Game End Scene
+    }
+
+    private void InitializeLevel()
+    {
+        var initialRoom = roomLayoutGenerator.InitializeLayout(out var initialRoomIndex);
+        cameraManager.SetupCameraDictionary(initialRoom);
+        roomIndex = initialRoomIndex;
+    }
+
+    private void SpawnPlayers(PlayerCharacterPairing[] playerCharacters)
+    {
+        for (int index = 0; index < playerCharacters.Length; index++)
+        {
+            var playerCharacter = playerCharacters[index];
+            if (!playerCharacter.Body || !playerCharacter.Head)
+                return;
+            var spawnOrigin = new Vector3(roomIndex.x * 15, 0, roomIndex.y * 15);
+            var body = Instantiate(playerCharacter.Body, spawnOrigin, quaternion.identity);
+            body.name = $"b.{index + 1}";
+            var head = Instantiate(playerCharacter.Head, spawnOrigin, quaternion.identity);
+            head.name = $"h.{index + 1}";
+            head.TryGetComponent(out Player headPlayer);
+            head.TryGetComponent(out SkeletonController skeletonController);
+            if (!headPlayer || !skeletonController)
+                return;
+            headPlayer.PlayerID = playerCharacter.PlayerID;
+            skeletonController.Recapitate(body);
+        }
+    }
 
     public void ImplementService(EventArgs args)
     {
@@ -102,6 +141,44 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
 
     private void UpdateRoomIndex(Vector2 roomDirection)
     {
-        roomIndex += roomDirection;
+        roomIndex = (roomIndex.x + (int)roomDirection.x, roomIndex.y + (int)roomDirection.y);
+    }
+
+    [Serializable]
+    public class PlayerCharacterPairing
+    {
+        [SerializeField] private GameObject body;
+        [SerializeField] private GameObject head;
+        [SerializeField] private Player.PlayerIdentifier playerID;
+
+        public GameObject Body
+        {
+            get
+            {
+                return body;
+            }
+            set
+            {
+                body = value;
+            }
+        }
+        public GameObject Head
+        {
+            get
+            {
+                return head;
+            }
+            set
+            {
+                head = value;
+            }
+        }
+        public Player.PlayerIdentifier PlayerID
+        {
+            get
+            {
+                return playerID;
+            }
+        }
     }
 }

@@ -18,7 +18,6 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
     [SerializeField] private HeadStatistics headStatistics;
     [SerializeField] private float headSpeed;
     [Space]
-    [SerializeField] private GameObject initialBody;
     [SerializeField] private SkinnedMeshRenderer[] meshes;
 
     private Player player;
@@ -27,10 +26,12 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
     private Rigidbody body;
     private GameObject activeBodyRoot;
     private GameObject skeletonRoot;
-    private SkinnedMeshRenderer Skeleton
+    private SkinnedMeshRenderer skeleton;
+    public SkinnedMeshRenderer Skeleton
     {
-        set
+        private set
         {
+            skeleton = value;
             var activeBones = initialBones;
             switch (value)
             {
@@ -41,11 +42,20 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
                 default:
                     activeBones = value.bones;
                     skeletonRoot = value.gameObject;
+                    
+                    var root = value.transform;
+                    while (root.parent)
+                        root = root.parent;
+                    activeBodyRoot = root.gameObject;
                     break;
             }
 
             foreach (var mesh in meshes)
                 mesh.bones = activeBones;
+        }
+        get
+        {
+            return skeleton;
         }
     }
 
@@ -71,14 +81,6 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
     {
         GetComponent<Movement>().MoveSpeed = headSpeed;
         initialBones = meshes[0].bones;
-
-        var activeRootTransform = initialBody.transform;
-        while (activeRootTransform.parent)
-            activeRootTransform = activeRootTransform.parent;
-        activeBodyRoot = activeRootTransform.gameObject;
-
-        playerID = player.PlayerID;
-        Recapitate(initialBody);
     }
 
     public void ImplementService(EventArgs args)
@@ -96,14 +98,15 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
         }
     }
 
-    private void Decapitate(GameObject dyingBody)
+    public void Decapitate(GameObject dyingBody)
     {
-        if (dyingBody != activeBodyRoot)
+        if (dyingBody.name != activeBodyRoot.name)
             return;
         body.useGravity = true;
         Skeleton = null;
-        dyingBody.GetComponent<Player>().PlayerID = Player.PlayerIdentifier.None;
-        player.PlayerID = playerID;
+        var dyingPlayer = dyingBody.GetComponent<Player>();
+        player.PlayerID = dyingPlayer.PlayerID;
+        dyingPlayer.PlayerID = Player.PlayerIdentifier.None;
         // does not yet disable any AI on enemies
         
         switch (playerID)
@@ -117,13 +120,13 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
         }
     }
 
-    private void Recapitate(GameObject chosenBody)
+    public void Recapitate(GameObject chosenBody)
     {
         body.useGravity = false;
         Skeleton = chosenBody.GetComponentInChildren<SkinnedMeshRenderer>();
         chosenBody.TryGetComponent(out CharacterStatistics characterStatistics);
         characterStatistics.ApplyValues(headStatistics);
-        chosenBody.GetComponent<Player>().PlayerID = playerID;
+        chosenBody.GetComponent<Player>().PlayerID = player.PlayerID;
         player.PlayerID = Player.PlayerIdentifier.None;
     }
 

@@ -28,7 +28,7 @@ public class LayOutRooms : MonoBehaviour
     private GameObject roomParent;
     private GameObject wallsParent;
 
-    public GameObject InitializeLayout()
+    public GameObject InitializeLayout(out (int, int) initialRoomIndex)
     {
         CreateRoomPlacements();
         roomParent = new GameObject("Rooms");
@@ -45,7 +45,7 @@ public class LayOutRooms : MonoBehaviour
             }
         }
 
-        (int x, int y) initialRoomIndex = (0, 0);
+        initialRoomIndex = (0, 0);
         
         for (int i = roomLayout.GetLength(0) - 1; i >= 0; i--)
         {

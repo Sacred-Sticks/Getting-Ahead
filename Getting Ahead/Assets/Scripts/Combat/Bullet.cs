@@ -1,13 +1,13 @@
-using System;
 using System.Linq;
 using Kickstarter.Categorization;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float damage;
+    [Space]
+    [SerializeField] private CategoryType head;
 
     private Rigidbody body;
 
@@ -40,8 +40,11 @@ public class Bullet : MonoBehaviour
         if (!objectCategories.Categories.Contains(TargetCategory))
             return;
         collidedObject.TryGetComponent(out Health health);
-        if (health == null)
-            return;
+        if (objectCategories.Categories.Contains(head))
+        {
+            var skeleton = collidedObject.GetComponent<SkeletonController>().Skeleton;
+            health = skeleton.transform.parent.GetComponent<Health>();
+        }
         health.TakeDamage(damage);
     }
 }
