@@ -40,6 +40,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
                     transform.rotation = skeletonRoot.transform.parent.rotation;
                     break;
                 default:
+                    value.transform.parent.GetComponent<HeadPair>().Head = gameObject;
                     activeBones = value.bones;
                     skeletonRoot = value.gameObject;
                     

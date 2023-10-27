@@ -307,7 +307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: wallsVerticalOffset
-      value: -1.55
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: roomPrefabs.Array.data[0]
