@@ -2,6 +2,7 @@ using System.Collections;
 using Kickstarter.Categorization;
 using UnityEngine;
 
+[RequireComponent(typeof(HeadPair))]
 public class RangedAttack : Attack
 {
     [SerializeField] private CategoryType targetCategory;
@@ -20,7 +21,8 @@ public class RangedAttack : Attack
             var offset = transform.right * rangedWeapon.BulletOffset.x + Vector3.up * rangedWeapon.BulletOffset.y + transform.forward * rangedWeapon.BulletOffset.z;
             var bulletObject = Instantiate(rangedWeapon.BulletPrefab, transform.position + offset, transform.rotation);
             bulletObject.TryGetComponent(out Bullet bullet);
-            bullet.Source = gameObject;
+            bullet.SourceBody = gameObject;
+            bullet.SourceHead = gameObject.GetComponent<HeadPair>().Head;
             bullet.TargetCategory = targetCategory;
             yield return new WaitForSeconds(1 / rangedWeapon.BurstFireRate);
         }

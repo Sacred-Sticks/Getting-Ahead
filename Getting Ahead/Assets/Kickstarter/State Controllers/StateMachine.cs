@@ -41,9 +41,9 @@ namespace Kickstarter.State_Controllers
             }
         }
 
-        private Dictionary<TState, List<TState>> stateTransitions;
-        private Dictionary<TState, Action> onStateBegin;
-        private Dictionary<TState, Action> onStateEnd;
+        private readonly Dictionary<TState, List<TState>> stateTransitions = new Dictionary<TState, List<TState>>();
+        private readonly Dictionary<TState, Action> onStateBegin = new Dictionary<TState, Action>();
+        private readonly Dictionary<TState, Action> onStateEnd = new Dictionary<TState, Action>();
 
         public void AddTransition(TState baseState, TState newState)
         {

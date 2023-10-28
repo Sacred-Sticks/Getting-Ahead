@@ -8,31 +8,34 @@ using System;
 
 public class Transitioner : MonoBehaviour
 {
-    enum Direction { LEFT, RIGHT, UP, DOWN };
-    [SerializeField] Direction direction;
-    [SerializeField] Service onRoomChange;
-    [SerializeField] CategoryType playerType;
-    Vector2 moveDirection;
-    Vector2 positionOffset;
-    [SerializeField] float offsetAmount = 1;
+    [SerializeField] private Service onRoomChange;
+    [SerializeField] private CategoryType playerType;
+    [SerializeField] private float offsetAmount = 1;
 
-    void Start()
+
+    public enum Direction
     {
-        switch (direction)
+        Up,
+        Down,
+        Left,
+        Right,
+    }
+    
+    private Vector2 moveDirection;
+    private Vector2 positionOffset;
+    private Direction direction;
+
+    public void Initialize(Direction direction)
+    {
+        this.direction = direction;
+        moveDirection = direction switch
         {
-            case Direction.LEFT: 
-                moveDirection = Vector2.left;
-                break;
-            case Direction.RIGHT: 
-                moveDirection = Vector2.right;
-                break;
-            case Direction.UP: 
-                moveDirection = Vector2.up; 
-                break;
-            case Direction.DOWN: 
-                moveDirection = Vector2.down; 
-                break;
-        }
+            Direction.Up => Vector2.up,
+            Direction.Down => Vector2.down,
+            Direction.Left => Vector2.left,
+            Direction.Right => Vector2.right,
+            _ => moveDirection,
+        };
         positionOffset = moveDirection * offsetAmount;
     }
 
@@ -40,19 +43,18 @@ public class Transitioner : MonoBehaviour
     {
         switch (direction)
         {
-            case Direction.LEFT:
-                if (collide.gameObject.transform.position.x > transform.position.x + positionOffset.x) return;
-                break;
-            case Direction.RIGHT:
-                if (collide.gameObject.transform.position.x < transform.position.x + positionOffset.x) return;
-                break;
-            case Direction.UP:
+            case Direction.Up:
                 if (collide.gameObject.transform.position.z < transform.position.z + positionOffset.y) return;
                 break;
-            case Direction.DOWN:
+            case Direction.Down:
                 if (collide.gameObject.transform.position.z > transform.position.z + positionOffset.y) return;
                 break;
-
+            case Direction.Left:
+                if (collide.gameObject.transform.position.x > transform.position.x + positionOffset.x) return;
+                break;
+            case Direction.Right:
+                if (collide.gameObject.transform.position.x < transform.position.x + positionOffset.x) return;
+                break;
         }
         var cat = collide.gameObject.GetComponent<ObjectCategories>();
         if (cat == null) return;
