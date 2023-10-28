@@ -17,15 +17,15 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
     [Space]
     [SerializeField] private HeadStatistics headStatistics;
     [SerializeField] private float headSpeed;
-    [Space]
-    [SerializeField] private SkinnedMeshRenderer[] meshes;
 
     private Player player;
     private Player.PlayerIdentifier playerID;
+    private SkinnedMeshRenderer[] meshes;
     private Transform[] initialBones;
     private Rigidbody body;
     private GameObject activeBodyRoot;
     private GameObject skeletonRoot;
+    private Coroutine copyPositionRoutine;
     private SkinnedMeshRenderer skeleton;
     public SkinnedMeshRenderer Skeleton
     {
@@ -36,18 +36,21 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
             switch (value)
             {
                 case null:
-                    transform.position = skeletonRoot.transform.parent.position;
-                    transform.rotation = skeletonRoot.transform.parent.rotation;
+                    if (copyPositionRoutine == null)
+                        break;
+                    StopCoroutine(copyPositionRoutine);
+                    copyPositionRoutine = null;
                     break;
                 default:
-                    value.transform.parent.GetComponent<HeadPair>().Head = gameObject;
+                    value.transform.parent.parent.GetComponent<HeadPair>().Head = gameObject;
                     activeBones = value.bones;
                     skeletonRoot = value.gameObject;
-                    
+
                     var root = value.transform;
                     while (root.parent)
                         root = root.parent;
                     activeBodyRoot = root.gameObject;
+                    StartCoroutine(CopyPosition());
                     break;
             }
 
@@ -76,6 +79,8 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
     {
         player = GetComponent<Player>();
         body = GetComponent<Rigidbody>();
+
+        meshes = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     private void Start()
@@ -109,7 +114,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
         player.PlayerID = dyingPlayer.PlayerID;
         dyingPlayer.PlayerID = Player.PlayerIdentifier.None;
         // does not yet disable any AI on enemies
-        
+
         switch (playerID)
         {
             case Player.PlayerIdentifier.None:
@@ -136,6 +141,16 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
         // Rewrite this later to use some visual effect instead of just destroying it
         if (Random.Range(0, 1f) <= percentage)
             Destroy(body);
+    }
+
+    private IEnumerator CopyPosition()
+    {
+        while (true)
+        {
+            transform.position = skeletonRoot.transform.parent.parent.position;
+            transform.rotation = skeletonRoot.transform.parent.parent.rotation;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public class RecapitationArgs : EventArgs
