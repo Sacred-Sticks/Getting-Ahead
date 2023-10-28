@@ -10,8 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3960124833596460365, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
       propertyPath: m_Name
-      value: Body Variant
+      value: Goblin Body
       objectReference: {fileID: 0}
+    - target: {fileID: 5027742623919100629, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: headRoot
+      value: 
+      objectReference: {fileID: 78591174179317507}
     - target: {fileID: 8959319596414733721, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -122,6 +126,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5987a654ce8ca0f41bff08f4e728acb3, type: 3}
+--- !u!4 &78591174179317507 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8926689055682890399, guid: 5987a654ce8ca0f41bff08f4e728acb3, type: 3}
+  m_PrefabInstance: {fileID: 8860495984386960796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9042233381853956727 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5987a654ce8ca0f41bff08f4e728acb3, type: 3}

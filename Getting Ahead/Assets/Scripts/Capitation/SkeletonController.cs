@@ -50,6 +50,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
                     while (root.parent)
                         root = root.parent;
                     activeBodyRoot = root.gameObject;
+                    transform.GetChild(0).position = value.transform.parent.parent.GetComponent<HeadPair>().HeadRoot.position;
                     StartCoroutine(CopyPosition());
                     break;
             }

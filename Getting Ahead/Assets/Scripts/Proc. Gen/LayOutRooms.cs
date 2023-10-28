@@ -154,7 +154,6 @@ public class LayOutRooms : MonoBehaviour
                 transitioners[1].Initialize(Transitioner.Direction.Right);
                 break;
         }
-        Debug.Log(transitioners.Length);
     }
 
     private void ReduceToHamiltonianPath(ref bool direction, int roomIndex, int neighborIndex)

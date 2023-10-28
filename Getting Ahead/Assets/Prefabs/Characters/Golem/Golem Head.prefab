@@ -116,11 +116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8002726418284986624, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
       propertyPath: m_Center.y
-      value: 1.71
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8002726418284986624, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
       propertyPath: m_Center.z
-      value: 0.0125
+      value: 0.012
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

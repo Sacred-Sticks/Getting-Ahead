@@ -62,6 +62,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4dc266a2cbceb4b4da5131c0fb51664d, type: 3}
   m_PrefabInstance: {fileID: 2555906535709220367}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5446351982168400673 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1662616379218952914, guid: 4dc266a2cbceb4b4da5131c0fb51664d, type: 3}
+  m_PrefabInstance: {fileID: 2555906535709220367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7618297633971141353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72,8 +77,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3960124833596460365, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
       propertyPath: m_Name
-      value: Golem Body Variant
+      value: Golem Body
       objectReference: {fileID: 0}
+    - target: {fileID: 5027742623919100629, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: headRoot
+      value: 
+      objectReference: {fileID: 5446351982168400673}
     - target: {fileID: 8959319596414733721, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
