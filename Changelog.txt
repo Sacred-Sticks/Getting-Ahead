@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file, including fixes, additions, changes, and removals.
 
+## [0.2.0] - 2023-10-26
+
+### Added
+- Audio Manager and Audio Systems
+- Room/Level Generation
+- VFX for water, lava, and Shader for hidden objects
+- Character Statistics
+- Capitation Systems
+- New combat systems (Uses burst attack)
+
+### Changed
+- Adjusted camera systems
+- Adjusted Room/Level Generation
+- Kickstarter Package updates
+
+### Removed
+- Former combat system
+
+## [0.1.0] - 2023-10-12
+
+### Added
+- Movement systems
+- Created Melee and Ranged Weapon Systems
+- Added Camera Systems to transition between rooms
+
 ## [0.0.1] - 2023-09-14
 
 ### Added
