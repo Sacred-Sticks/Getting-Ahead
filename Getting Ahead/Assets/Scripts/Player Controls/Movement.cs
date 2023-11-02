@@ -25,14 +25,14 @@ public class Movement : MonoBehaviour, IInputReceiver
 
     private void FixedUpdate()
     {
-        var movementDirection = new Vector3(rawInput.x, 0f, rawInput.y);
-        rb.velocity = movementDirection * MoveSpeed;
+        Vector3 movementDirection = new Vector3(rawInput.x, rb.velocity.y, rawInput.y);
+        rb.velocity = movementDirection;
         onAudioTrigger.Trigger(new AudioManager.AudioArgs(gameObject, movementSound));
     }
 
     public void ReceiveInput(Vector2 input)
     {
-        rawInput = input;
+        rawInput = input * MoveSpeed;
     }
 
     public void SubscribeToInputs(Player player)
