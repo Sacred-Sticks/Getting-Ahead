@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour, IInputReceiver
 
     private void FixedUpdate()
     {
-        Vector3 movementDirection = new Vector3(rawInput.x, Physics.gravity.y, rawInput.y);
+        Vector3 movementDirection = new Vector3(rawInput.x, rb.velocity.y, rawInput.y);
         rb.velocity = movementDirection;
         onAudioTrigger.Trigger(new AudioManager.AudioArgs(gameObject, movementSound));
     }
