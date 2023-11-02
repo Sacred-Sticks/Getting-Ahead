@@ -40,13 +40,13 @@ namespace Kickstarter.Identification
             inputReceivers = GetComponents<IInputReceiver>();
         }
 
-        private void Start()
-        {
-            foreach (var inputReceiver in inputReceivers)
-            {
-                inputReceiver.SubscribeToInputs(this);
-            }
-        }
+        // private void Start()
+        // {
+        //     foreach (var inputReceiver in inputReceivers)
+        //     {
+        //         inputReceiver.SubscribeToInputs(this);
+        //     }
+        // }
 
         private void OnEnable()
         {
@@ -57,6 +57,14 @@ namespace Kickstarter.Identification
         }
 
         private void OnDisable()
+        {
+            foreach (var inputReceiver in inputReceivers)
+            {
+                inputReceiver.UnsubscribeToInputs(this);
+            }
+        }
+
+        private void OnDestroy()
         {
             foreach (var inputReceiver in inputReceivers)
             {

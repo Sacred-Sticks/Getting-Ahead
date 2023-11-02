@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Identification;
+using Kickstarter.Inputs;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 using Object = UnityEngine.Object;
@@ -10,14 +12,19 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Rigidbody))]
-public class SkeletonController : MonoBehaviour, IServiceProvider
+public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceiver
 {
+    [SerializeField] private FloatInput recapitateInput;
+    [SerializeField] private FloatInput decapitateInput;
+    [Space]
     [SerializeField] private Service onDecapitation;
     [SerializeField] private Service onRecapitation;
     [Space]
     [SerializeField] private HeadStatistics headStatistics;
     [SerializeField] private float headSpeed;
 
+    private const float recapitationRange = 1;
+    
     private Player player;
     private Player.PlayerIdentifier playerID;
     private SkinnedMeshRenderer[] meshes;
@@ -148,6 +155,8 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
     {
         while (true)
         {
+            if (skeletonRoot == null)
+                yield break;
             transform.position = skeletonRoot.transform.parent.parent.position;
             transform.rotation = skeletonRoot.transform.parent.parent.rotation;
             yield return new WaitForEndOfFrame();
@@ -162,5 +171,27 @@ public class SkeletonController : MonoBehaviour, IServiceProvider
         }
 
         public GameObject ChosenBody { get; }
+    }
+
+    private void OnRecapitateInputChange(float input)
+    {
+        if (input == 0)
+            return;
+        var overlappingObjects = Physics.OverlapSphere(transform.position, recapitationRange);
+        var selectedBody = overlappingObjects
+            .Where(o => o.GetComponentInChildren<HeadPair>())
+            .Select(o => o.gameObject)
+            .First();
+        Recapitate(selectedBody);
+    }
+    
+    public void SubscribeToInputs(Player player)
+    {
+        recapitateInput.SubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
+    }
+
+    public void UnsubscribeToInputs(Player player)
+    {
+        recapitateInput.UnsubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
     }
 }
