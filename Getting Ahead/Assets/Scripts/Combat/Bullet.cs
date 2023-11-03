@@ -48,6 +48,8 @@ public class Bullet : MonoBehaviour
                 return;
             health = skeleton.transform.parent.GetComponent<Health>();
         }
+        if (health == null)
+            return;
         health.TakeDamage(damage);
     }
 }

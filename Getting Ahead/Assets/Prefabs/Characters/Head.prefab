@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5370beb39cd1e964088b16c5e6e00347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recapitateInput: {fileID: 11400000, guid: 1fe76e247003f1443ae8bc3755b9ae81, type: 2}
+  decapitateInput: {fileID: 11400000, guid: a243949b83cfdfc4baf595ec4c74db81, type: 2}
   onDecapitation: {fileID: 11400000, guid: e00a285c416844e498fc372e3b916711, type: 2}
   onRecapitation: {fileID: 11400000, guid: 17b16a65ed1449940a6a7ee675f93c56, type: 2}
   headStatistics: {fileID: 11400000, guid: 691d038454da1a042bc6ea33a8d16551, type: 2}
