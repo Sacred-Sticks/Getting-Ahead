@@ -229,6 +229,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d30c5f2432f4444f9cf4bae6c5874dc, type: 3}
+--- !u!4 &125199773453343083 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5010393680962262042, guid: 0d30c5f2432f4444f9cf4bae6c5874dc, type: 3}
+  m_PrefabInstance: {fileID: 4914748833889209713}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4881351669470079642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0d30c5f2432f4444f9cf4bae6c5874dc, type: 3}
@@ -242,6 +247,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2458625669661655712, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+      propertyPath: playerID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5250049454975734718, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
       propertyPath: m_Name
       value: Goblin Head
@@ -254,6 +263,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7539153299205033098, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+      propertyPath: headBone
+      value: 
+      objectReference: {fileID: 125199773453343083}
+    - target: {fileID: 7539153299205033098, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+      propertyPath: colliderTransform
+      value: 
+      objectReference: {fileID: 127526650418050494}
     - target: {fileID: 7942116938635802638, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -302,6 +319,11 @@ PrefabInstance:
       addedObject: {fileID: 4881351669470079642}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+--- !u!4 &127526650418050494 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5385684208514285861, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+  m_PrefabInstance: {fileID: 5438337965086274715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2684368398829423765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7942116938635802638, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}

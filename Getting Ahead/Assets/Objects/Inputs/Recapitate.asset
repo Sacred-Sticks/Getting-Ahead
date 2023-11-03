@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Recapitate
   m_EditorClassIdentifier: 
   bindings:
-  - <Gamepad>/westButton
+  - <Gamepad>/buttonWest
   - <Keyboard>/e
   compositeBindings: []

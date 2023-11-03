@@ -22,6 +22,9 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
     [Space]
     [SerializeField] private HeadStatistics headStatistics;
     [SerializeField] private float headSpeed;
+    [Space]
+    [SerializeField] private Transform headBone;
+    [SerializeField] private Transform colliderTransform;
 
     private const float recapitationRange = 1;
     
@@ -45,8 +48,10 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
                 case null:
                     if (copyPositionRoutine == null)
                         break;
+                    colliderTransform.position = activeBodyRoot.GetComponent<HeadPair>().HeadRoot.position;
                     StopCoroutine(copyPositionRoutine);
                     copyPositionRoutine = null;
+                    activeBodyRoot = null;
                     break;
                 default:
                     value.transform.parent.parent.GetComponent<HeadPair>().Head = gameObject;
@@ -57,8 +62,8 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
                     while (root.parent)
                         root = root.parent;
                     activeBodyRoot = root.gameObject;
-                    transform.GetChild(0).position = value.transform.parent.parent.GetComponent<HeadPair>().HeadRoot.position;
-                    StartCoroutine(CopyPosition());
+                    transform.GetChild(0).position = activeBodyRoot.GetComponent<HeadPair>().HeadRoot.position;
+                    copyPositionRoutine = StartCoroutine(CopyPosition());
                     break;
             }
 
@@ -114,6 +119,8 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
 
     public void Decapitate(GameObject dyingBody)
     {
+        if (!activeBodyRoot)
+            return;
         if (dyingBody.name != activeBodyRoot.name)
             return;
         body.useGravity = true;
@@ -177,21 +184,33 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
     {
         if (input == 0)
             return;
-        var overlappingObjects = Physics.OverlapSphere(transform.position, recapitationRange);
+        if (activeBodyRoot)
+            return;
+        var overlappingObjects = Physics.OverlapSphere(transform.position + Vector3.up * 2, recapitationRange);
         var selectedBody = overlappingObjects
             .Where(o => o.GetComponentInChildren<HeadPair>())
             .Select(o => o.gameObject)
-            .First();
-        Recapitate(selectedBody);
+            .FirstOrDefault();
+        if (selectedBody)
+            Recapitate(selectedBody);
+    }
+
+    private void OnDecapitateInputChange(float input)
+    {
+        if (input == 0)
+            return;
+        Decapitate(activeBodyRoot);
     }
     
     public void SubscribeToInputs(Player player)
     {
         recapitateInput.SubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
+        decapitateInput.SubscribeToInputAction(OnDecapitateInputChange, player.PlayerID);
     }
 
     public void UnsubscribeToInputs(Player player)
     {
         recapitateInput.UnsubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
+        decapitateInput.UnsubscribeToInputAction(OnDecapitateInputChange, player.PlayerID);
     }
 }

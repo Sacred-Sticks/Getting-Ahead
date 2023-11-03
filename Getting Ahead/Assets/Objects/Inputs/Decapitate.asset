@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Decapitate
   m_EditorClassIdentifier: 
   bindings:
-  - <Gamepad>/northButton
+  - <Gamepad>/buttonNorth
   - <Keyboard>/q
   compositeBindings: []
