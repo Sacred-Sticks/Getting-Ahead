@@ -3,76 +3,49 @@ using System.Collections.Generic;
 
 namespace Kickstarter.State_Controllers
 {
-    public class StateMachine<TState> where TState : Enum
+    public class StateMachine<TEnum> where TEnum : Enum
     {
-        public StateMachine(TState initialState)
+        public StateMachine()
         {
-            var allStates = Enum.GetValues(typeof(TState));
-            foreach (TState potentialState in allStates)
+            
+        }
+
+        private StateMachine(TEnum initialState, Dictionary<TEnum, List<TEnum>> transitions)
+        {
+            stateTransitions = transitions;
+            currentState = initialState;
+        }
+
+        private readonly Dictionary<TEnum, List<TEnum>> stateTransitions;
+        private TEnum currentState;
+
+        public class Builder
+        {
+            private TEnum initialState;
+            private readonly Dictionary<TEnum, List<TEnum>> transitions;
+
+            public Builder()
             {
-                stateTransitions.Add(potentialState, new List<TState>());
-                onStateBegin.Add(potentialState, null);
-                onStateEnd.Add(potentialState, null);
+                transitions = new Dictionary<TEnum, List<TEnum>>();
             }
 
-            State = initialState;
-        }
-
-        public enum StateChange
-        {
-            Begin,
-            End,
-        }
-
-        private TState state;
-        public TState State
-        {
-            get
+            public Builder WithInitialState(TEnum state)
             {
-                return state;
+                initialState = state;
+                return this;
             }
-            set
+
+            public Builder WithTransition(TEnum fromState, TEnum toState)
             {
-                if (!stateTransitions[State].Contains(value))
-                    return;
-                onStateEnd[state]();
-                state = value;
-                onStateBegin[state]();
+                if (!transitions.ContainsKey(fromState))
+                    transitions.Add(fromState, new List<TEnum>());
+                transitions[fromState].Add(toState);
+                return this;
             }
-        }
 
-        private readonly Dictionary<TState, List<TState>> stateTransitions = new Dictionary<TState, List<TState>>();
-        private readonly Dictionary<TState, Action> onStateBegin = new Dictionary<TState, Action>();
-        private readonly Dictionary<TState, Action> onStateEnd = new Dictionary<TState, Action>();
-
-        public void AddTransition(TState baseState, TState newState)
-        {
-            stateTransitions[baseState].Add(newState);
-        }
-
-        public void SubscribeToStateChange(StateChange changeType, TState state, Action subscription)
-        {
-            switch (changeType)
+            public StateMachine<TEnum> Build()
             {
-                case StateChange.Begin:
-                    onStateBegin[state] += subscription;
-                    break;
-                case StateChange.End:
-                    onStateEnd[state] += subscription;
-                    break;
-            }
-        }
-
-        public void UnsubscribeToStateChange(StateChange changeType, TState state, Action subscription)
-        {
-            switch (changeType)
-            {
-                case StateChange.Begin:
-                    onStateBegin[state] -= subscription;
-                    break;
-                case StateChange.End:
-                    onStateEnd[state] -= subscription;
-                    break;
+                return new StateMachine<TEnum>(initialState, transitions);
             }
         }
     }

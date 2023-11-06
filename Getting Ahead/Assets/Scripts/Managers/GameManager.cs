@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         }
     }
 
-    private StateMachine<GameState> state;
+    private StateMachine<GameState> stateMachine;
     private LayOutRooms roomLayoutGenerator;
     private CameraManager cameraManager;
 
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         GameLose,
     }
 
+    #region Unity Events
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -65,13 +66,23 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     {
         InitializeSingleton();
 
-        state = new StateMachine<GameState>(initialGameState);
+        stateMachine = new StateMachine<GameState>.Builder()
+            .WithInitialState(initialGameState)
+            .WithTransition(GameState.MainMenu, GameState.Playing)
+            .WithTransition(GameState.Playing, GameState.Paused)
+            .WithTransition(GameState.Playing, GameState.GameWin)
+            .WithTransition(GameState.Playing, GameState.GameLose)
+            .WithTransition(GameState.Paused, GameState.Playing)
+            .WithTransition(GameState.GameWin, GameState.MainMenu)
+            .WithTransition(GameState.GameLose, GameState.GameWin)
+            .Build();
 
         inputManager.Initialize(out int numPlayers);
 
         roomLayoutGenerator = GetComponent<LayOutRooms>();
         cameraManager = GetComponent<CameraManager>();
     }
+    #endregion
 
     private void InitializeSingleton()
     {
