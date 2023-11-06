@@ -1,9 +1,4 @@
-public interface IObserver<T> : IObserver
+public interface IObserver<in T>
 {
     public void OnNotify(T argument);
-}
-
-public interface IObserver
-{
-    
 }

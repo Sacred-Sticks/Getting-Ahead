@@ -4,9 +4,10 @@ using UnityEngine;
 using Kickstarter.Events;
 using System;
 
-public class CameraManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
+public class CameraManager : Observable, Kickstarter.Events.IServiceProvider
 {
-    [SerializeField] Service onRoomChange;
+    [SerializeField] private Service onRoomChange;
+    
     private CinemachineVirtualCamera[] CameraObjects;
     private readonly Dictionary<Vector3, CinemachineVirtualCamera> virtualCameras = new Dictionary<Vector3, CinemachineVirtualCamera>();
     private CinemachineVirtualCamera currentCamera;
@@ -43,12 +44,12 @@ public class CameraManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         currentCamera.m_Priority = 0;
         newCam.m_Priority = 9;
         currentCamera = newCam;
+        NotifyObservers(newCam);
     }
     
     private void MoveCamera(Vector2 input)
     {
-        Debug.Log("TRIGGERING!");
-        Vector3 tempVector3 = currentCamera.transform.position;
+        var tempVector3 = currentCamera.transform.position;
         switch (input.x)
         {
             case 1:
@@ -92,6 +93,7 @@ public class CameraManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         }
         
     }
+    
     public class RoomChangeArgs: EventArgs
     {
         public Vector2 RoomDirection { get; }
