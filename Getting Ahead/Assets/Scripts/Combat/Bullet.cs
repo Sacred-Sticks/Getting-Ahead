@@ -50,6 +50,6 @@ public class Bullet : MonoBehaviour
         }
         if (health == null)
             return;
-        health.TakeDamage(damage);
+        health.TakeDamage(damage, SourceBody);
     }
 }

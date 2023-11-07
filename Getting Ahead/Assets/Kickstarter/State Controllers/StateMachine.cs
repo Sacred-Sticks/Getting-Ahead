@@ -24,6 +24,10 @@ namespace Kickstarter.StateControllers
             get => currentState;
             set
             {
+                if (!stateTransitions.ContainsKey(currentState))
+                    return;
+                if (!stateTransitions[currentState].Contains(value))
+                    return;
                 if (exitListeners.ContainsKey(currentState))
                     exitListeners[currentState].ForEach(l => l.Invoke());
                 currentState = value;
