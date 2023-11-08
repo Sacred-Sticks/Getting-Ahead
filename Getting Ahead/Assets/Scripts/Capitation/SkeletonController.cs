@@ -149,6 +149,9 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
 
     public void Recapitate(GameObject chosenBody)
     {
+        var headPair = chosenBody.GetComponent<HeadPair>();
+        if (headPair.Head)
+            return;
         body.useGravity = false;
         Skeleton = chosenBody.GetComponentInChildren<SkinnedMeshRenderer>();
         chosenBody.TryGetComponent(out CharacterStatistics characterStatistics);
