@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
@@ -24,13 +25,7 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     [Space]
     [SerializeField] private PlayerCharacterPairing[] players;
 
-    public PlayerCharacterPairing[] Players
-    {
-        get
-        {
-            return players;
-        }
-    }
+    public PlayerCharacterPairing[] Players { get; private set; }
 
     private StateMachine<GameState> stateMachine;
     private LayOutRooms roomLayoutGenerator;
@@ -119,24 +114,26 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         roomIndex = initialRoomIndex;
     }
 
-    private void SpawnPlayers(PlayerCharacterPairing[] playerCharacters)
+    private void SpawnPlayers(IReadOnlyList<PlayerCharacterPairing> playerCharacters)
     {
-        for (int index = 0; index < playerCharacters.Length; index++)
+        Players = new PlayerCharacterPairing[playerCharacters.Count];
+        for (int i = 0; i < playerCharacters.Count; i++)
         {
-            var playerCharacter = playerCharacters[index];
+            var playerCharacter = playerCharacters[i];
             if (!playerCharacter.Body || !playerCharacter.Head)
                 return;
             var spawnOrigin = new Vector3(roomIndex.x * 15, 0, roomIndex.y * 15);
             var body = Instantiate(playerCharacter.Body, spawnOrigin, quaternion.identity);
-            body.name = $"b.{index + 1}";
+            body.name = $"b.{i + 1}";
             var head = Instantiate(playerCharacter.Head, spawnOrigin, quaternion.identity);
-            head.name = $"h.{index + 1}";
+            head.name = $"h.{i + 1}";
             head.TryGetComponent(out Player headPlayer);
             head.TryGetComponent(out SkeletonController skeletonController);
             if (!headPlayer || !skeletonController)
                 return;
             headPlayer.PlayerID = playerCharacter.PlayerID;
             skeletonController.Recapitate(body);
+            Players[i] = new PlayerCharacterPairing(head, body);
         }
     }
 
@@ -157,6 +154,17 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         roomIndex = (roomIndex.x + (int)roomDirection.x, roomIndex.y + (int)roomDirection.y);
     }
 
+    public void UpdatePlayerBody(GameObject old, GameObject @new)
+    {
+        foreach (var playerCharacterPairing in Players)
+        {
+            if (playerCharacterPairing.Body != old)
+                continue;
+            playerCharacterPairing.Body = @new;
+        }
+    }
+    
+    #region Sub Classes
     [Serializable]
     public class PlayerCharacterPairing
     {
@@ -164,34 +172,15 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
         [SerializeField] private GameObject head;
         [SerializeField] private Player.PlayerIdentifier playerID;
 
-        public GameObject Body
+        public PlayerCharacterPairing(GameObject head, GameObject body)
         {
-            get
-            {
-                return body;
-            }
-            set
-            {
-                body = value;
-            }
+            Head = head;
+            Body = body;
         }
-        public GameObject Head
-        {
-            get
-            {
-                return head;
-            }
-            set
-            {
-                head = value;
-            }
-        }
-        public Player.PlayerIdentifier PlayerID
-        {
-            get
-            {
-                return playerID;
-            }
-        }
+        
+        public GameObject Body { get => body; set => body = value; }
+        public GameObject Head { get => head; private set => head = value; }
+        public Player.PlayerIdentifier PlayerID => playerID;
     }
+    #endregion
 }

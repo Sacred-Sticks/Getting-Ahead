@@ -29,7 +29,8 @@ public abstract class Observable : MonoBehaviour
         if (!observerLists.ContainsKey(typeof(T)))
             return;
         var observers = GetObserverList<T>();
-        observers.ForEach(observer => observer.OnNotify(argument));
+        for (int i = observers.Count - 1; i >= 0; i--)
+            observers[i].OnNotify(argument);
     }
 
     private List<IObserver<T>> GetObserverList<T>() => (List<IObserver<T>>)observerLists[typeof(T)];

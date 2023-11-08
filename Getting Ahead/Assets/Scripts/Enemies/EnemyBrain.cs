@@ -3,10 +3,11 @@ using Kickstarter.StateControllers;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Health))]
-public class Enemy : MonoBehaviour, IObserver<Health.DamageTaken>
+public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
 {
+    [SerializeField] private float attackingRange;
+
     private enum EnemyStatus
     {
         Idle,
@@ -15,13 +16,14 @@ public class Enemy : MonoBehaviour, IObserver<Health.DamageTaken>
         Dead,
     }
 
-    private Transform target;
+    public Transform Target { private get; set; }
     private NavMeshAgent agent;
     private Health health;
     
     private StateMachine<EnemyStatus> stateMachine;
     private Coroutine movementRoutine;
     private Coroutine attackingRoutine;
+    private PlayerAttacker playerAttacker;
 
     #region Unity Events
     private void OnEnable()
@@ -37,11 +39,17 @@ public class Enemy : MonoBehaviour, IObserver<Health.DamageTaken>
 
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        TryGetComponent(out NavMeshAgent navAgent);
+        agent = navAgent;
+        if (agent == null)
+            agent = gameObject.AddComponent<NavMeshAgent>();
+        playerAttacker = GetComponent<PlayerAttacker>();
     }
 
     private void Start()
     {
+        playerAttacker.enabled = false;
+        
         stateMachine = new StateMachine<EnemyStatus>.Builder()
             .WithInitialState(EnemyStatus.Idle)
             .WithTransition(EnemyStatus.Idle, EnemyStatus.Chasing)
@@ -56,6 +64,15 @@ public class Enemy : MonoBehaviour, IObserver<Health.DamageTaken>
             .WithStateListener(EnemyStatus.Attacking, transitionType.End, StopAttacking)
             .WithStateListener(EnemyStatus.Dead, transitionType.Start, Die)
             .Build();
+    }
+
+    private void Update()
+    {
+        if (stateMachine.CurrentState != EnemyStatus.Attacking)
+            return;
+        float sqrDistance = Vector3.SqrMagnitude(transform.position - Target.position);
+        if (sqrDistance > attackingRange)
+            stateMachine.CurrentState = EnemyStatus.Chasing;
     }
     #endregion
 
@@ -75,15 +92,12 @@ public class Enemy : MonoBehaviour, IObserver<Health.DamageTaken>
 
     private void StartAttacking()
     {
-        attackingRoutine ??= StartCoroutine(AttackTarget());
+        NotifyObservers(new TriggerAttack(true));
     }
 
     private void StopAttacking()
     {
-        if (attackingRoutine == null)
-            return;
-        StopCoroutine(attackingRoutine);
-        attackingRoutine = null;
+        NotifyObservers(new TriggerAttack(false));
     }
 
     private void Die()
@@ -97,23 +111,40 @@ public class Enemy : MonoBehaviour, IObserver<Health.DamageTaken>
     {
         while (true)
         {
-            agent.SetDestination(target.position);
+            agent.SetDestination(Target.position);
+            if (Vector3.SqrMagnitude(transform.position - Target.position) < attackingRange * attackingRange)
+                stateMachine.CurrentState = EnemyStatus.Attacking;
             yield return new WaitForEndOfFrame();
         }
     }
 
-    private IEnumerator AttackTarget()
-    {
-        while (true)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-    }
-    
     public void OnNotify(Health.DamageTaken argument)
     {
-        Debug.Log("Health Changed");
-        if (argument.Health <= 0)
-            stateMachine.CurrentState = EnemyStatus.Dead;
+        Target = argument.Attacker.transform;
+        if (stateMachine.CurrentState == EnemyStatus.Idle)
+            stateMachine.CurrentState = EnemyStatus.Chasing;
+
+        if (!(argument.Health <= 0))
+            return;
+        GetComponent<PlayerAttacker>().enabled = true;
+        NotifyObservers(new TriggerDeath());
+        stateMachine.CurrentState = EnemyStatus.Dead;
     }
+
+    #region Sub Classes
+    public struct TriggerAttack
+    {
+        public TriggerAttack(bool attackActive)
+        {
+            AttackActive = attackActive;
+        }
+        
+        public bool AttackActive { get; }
+    }
+
+    public struct TriggerDeath
+    {
+        
+    }
+    #endregion
 }

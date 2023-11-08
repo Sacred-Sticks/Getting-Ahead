@@ -41,6 +41,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
     {
         private set
         {
+            
             skeleton = value;
             var activeBones = initialBones;
             switch (value)
@@ -76,6 +77,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
         }
     }
 
+    #region Unity Events
     private void OnEnable()
     {
         onDecapitation.Event += ImplementService;
@@ -101,6 +103,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
         GetComponent<Movement>().MoveSpeed = headSpeed;
         initialBones = meshes[0].bones;
     }
+    #endregion
 
     public void ImplementService(EventArgs args)
     {
@@ -121,7 +124,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
     {
         if (!activeBodyRoot)
             return;
-        if (dyingBody.name != activeBodyRoot.name)
+        if (dyingBody != activeBodyRoot)
             return;
         body.useGravity = true;
         Skeleton = null;
@@ -130,13 +133,16 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
         dyingPlayer.PlayerID = Player.PlayerIdentifier.None;
         // does not yet disable any AI on enemies
 
+        const float witherPlayer = 1;
+        const float witherEnemy = 0.75f;
+        
         switch (playerID)
         {
             case Player.PlayerIdentifier.None:
-                WitherBody(dyingBody, 1);
+                WitherBody(dyingBody, witherEnemy);
                 break;
             default:
-                WitherBody(dyingBody, 0.75f);
+                WitherBody(dyingBody, witherPlayer);
                 break;
         }
     }
@@ -170,16 +176,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
         }
     }
 
-    public class RecapitationArgs : EventArgs
-    {
-        public RecapitationArgs(GameObject chosenBody)
-        {
-            ChosenBody = chosenBody;
-        }
-
-        public GameObject ChosenBody { get; }
-    }
-
+    #region Inputs
     private void OnRecapitateInputChange(float input)
     {
         if (input == 0)
@@ -212,5 +209,16 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
     {
         recapitateInput.UnsubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
         decapitateInput.UnsubscribeToInputAction(OnDecapitateInputChange, player.PlayerID);
+    }
+    #endregion
+
+    public class RecapitationArgs : EventArgs
+    {
+        public RecapitationArgs(GameObject chosenBody)
+        {
+            ChosenBody = chosenBody;
+        }
+
+        public GameObject ChosenBody { get; }
     }
 }

@@ -34,6 +34,7 @@ public class Bullet : MonoBehaviour
         if (objectCategories != null)
             DealDamage(objectCategories, collidedObject);
         Destroy(gameObject);
+        
     }
 
     private void DealDamage(ObjectCategories objectCategories, GameObject collidedObject)

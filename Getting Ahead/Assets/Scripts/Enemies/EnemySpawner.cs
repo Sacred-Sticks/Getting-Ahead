@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System.Linq;
+using Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -44,11 +45,12 @@ public class EnemySpawner : MonoBehaviour, IObserver<CinemachineVirtualCamera>
         {
             if (enemyPoints <= 0)
                 break;
-            SpawnEnemy();
+            SpawnEnemy(out var head, out var body);
+            InitializeEnemy(head, body);
         }
     }
 
-    private void SpawnEnemy()
+    private void SpawnEnemy(out GameObject head, out GameObject body)
     {
         var enemyInfo = enemies[Random.Range(0, enemies.Length - 1)];
         enemyPoints -= enemyInfo.PointValue;
@@ -58,9 +60,16 @@ public class EnemySpawner : MonoBehaviour, IObserver<CinemachineVirtualCamera>
         float zOffset = Random.Range(-spawnSizeZ, spawnSizeZ);
         var offset = Vector3.forward * zOffset + Vector3.right * xOffset;
         var spawnPosition = spawnRange.transform.position + offset;
-        var body = Instantiate(enemyInfo.Body, spawnPosition, quaternion.identity);
-        var head = Instantiate(enemyInfo.Head, spawnPosition, quaternion.identity);
+        head = Instantiate(enemyInfo.Head, spawnPosition, quaternion.identity);
+        body = Instantiate(enemyInfo.Body, spawnPosition, quaternion.identity);
+    }
+
+    private void InitializeEnemy(GameObject head, GameObject body)
+    {
+        var players = GameManager.instance.Players;
+        players = players.Where(p => p.Body).ToArray();
         head.GetComponent<SkeletonController>().Recapitate(body);
+        body.GetComponent<EnemyBrain>().Target = players[Random.Range(0, players.Length)].Body.transform;
     }
 
     #region Sub-Classes
