@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
 {
     [SerializeField] private float attackingRange;
+    [SerializeField] private float angularSpeed;
 
     private enum EnemyStatus
     {
@@ -16,7 +17,8 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
         Dead,
     }
 
-    public Transform Target { private get; set; }
+    public Transform Target { get; set; }
+    public float AngularSpeed => angularSpeed;
     private NavMeshAgent agent;
     private Health health;
     
@@ -49,6 +51,8 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     private void Start()
     {
         playerAttacker.enabled = false;
+        agent.stoppingDistance = attackingRange;
+        agent.angularSpeed = angularSpeed;
         
         stateMachine = new StateMachine<EnemyStatus>.Builder()
             .WithInitialState(EnemyStatus.Idle)
@@ -56,8 +60,10 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
             .WithTransition(EnemyStatus.Idle, EnemyStatus.Dead)
             .WithTransition(EnemyStatus.Chasing, EnemyStatus.Attacking)
             .WithTransition(EnemyStatus.Chasing, EnemyStatus.Dead)
+            .WithTransition(EnemyStatus.Chasing, EnemyStatus.Idle)
             .WithTransition(EnemyStatus.Attacking, EnemyStatus.Chasing)
             .WithTransition(EnemyStatus.Attacking, EnemyStatus.Dead)
+            .WithTransition(EnemyStatus.Attacking, EnemyStatus.Idle)
             .WithStateListener(EnemyStatus.Chasing, transitionType.Start, StartChasing)
             .WithStateListener(EnemyStatus.Chasing, transitionType.End, StopChasing)
             .WithStateListener(EnemyStatus.Attacking, transitionType.Start, StartAttacking)
@@ -70,9 +76,18 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     {
         if (stateMachine.CurrentState != EnemyStatus.Attacking)
             return;
+        if (!Target)
+        {
+            stateMachine.CurrentState = EnemyStatus.Idle;
+            return;
+        }
         float sqrDistance = Vector3.SqrMagnitude(transform.position - Target.position);
-        if (sqrDistance > attackingRange)
+        if (sqrDistance > attackingRange * attackingRange)
+        {
             stateMachine.CurrentState = EnemyStatus.Chasing;
+            return;
+        }
+        NotifyObservers(new TriggerLookAtTarget());
     }
     #endregion
 
@@ -111,6 +126,11 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     {
         while (true)
         {
+            if (!Target)
+            {
+                stateMachine.CurrentState = EnemyStatus.Idle;
+                yield break;
+            }
             agent.SetDestination(Target.position);
             if (Vector3.SqrMagnitude(transform.position - Target.position) < attackingRange * attackingRange)
                 stateMachine.CurrentState = EnemyStatus.Attacking;
@@ -131,7 +151,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
         stateMachine.CurrentState = EnemyStatus.Dead;
     }
 
-    #region Sub Classes
+    #region Event Types
     public struct TriggerAttack
     {
         public TriggerAttack(bool attackActive)
@@ -143,6 +163,11 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     }
 
     public struct TriggerDeath
+    {
+        
+    }
+
+    public struct TriggerLookAtTarget
     {
         
     }
