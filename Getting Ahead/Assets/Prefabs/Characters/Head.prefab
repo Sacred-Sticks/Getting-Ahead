@@ -119,9 +119,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &2458625669661655712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +153,8 @@ MonoBehaviour:
   onRecapitation: {fileID: 11400000, guid: 17b16a65ed1449940a6a7ee675f93c56, type: 2}
   headStatistics: {fileID: 11400000, guid: 691d038454da1a042bc6ea33a8d16551, type: 2}
   headSpeed: 2
+  headBone: {fileID: 0}
+  colliderTransform: {fileID: 0}
 --- !u!114 &1641035561409442652
 MonoBehaviour:
   m_ObjectHideFlags: 0
