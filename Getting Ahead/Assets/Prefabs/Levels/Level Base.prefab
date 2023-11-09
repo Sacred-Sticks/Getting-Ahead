@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6051952166363717489}
   - component: {fileID: 7532688618743498580}
+  - component: {fileID: 3806992014020414079}
   m_Layer: 0
   m_Name: South Entry
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 1127264273034391919}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -6.25}
-  m_LocalScale: {x: 5, y: 1, z: 2.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: -5.875}
+  m_LocalScale: {x: 5, y: 1, z: 1.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5966298344769888971}
@@ -51,8 +52,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 7, z: 1}
+  m_Center: {x: 0, y: 3.5, z: 0}
+--- !u!114 &3806992014020414079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127264273034391919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde82b69d2b1d35459e6c077f413a532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
+  playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
+  roomCamera: {fileID: 4511809402014808839}
 --- !u!1 &1996343137042603267
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f18388a7e44947b41d016f3bb9c518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onRoomChange: {fileID: 11400000, guid: 575476aad6b7a1641aa11adc3442bb21, type: 2}
   enemies:
   - pointValue: 2
     body: {fileID: 5872326008469042166, guid: 679abbbffb6bcb9428e06447821c72ef, type: 3}
@@ -272,6 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1732358052986781316}
   - component: {fileID: 7062704711563724100}
+  - component: {fileID: 4016563498742294380}
   m_Layer: 0
   m_Name: North Entry
   m_TagString: Untagged
@@ -288,8 +306,8 @@ Transform:
   m_GameObject: {fileID: 4218623644156119358}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 6.25}
-  m_LocalScale: {x: 5, y: 1, z: 2.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: 5.875}
+  m_LocalScale: {x: 5, y: 1, z: 1.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5966298344769888971}
@@ -313,8 +331,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 7, z: 1}
+  m_Center: {x: 0, y: 3.5, z: 0}
+--- !u!114 &4016563498742294380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4218623644156119358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde82b69d2b1d35459e6c077f413a532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
+  playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
+  roomCamera: {fileID: 4511809402014808839}
 --- !u!1 &4859802877483697071
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1433662322237824356}
   - component: {fileID: 4868273147466473687}
+  - component: {fileID: 6047270813711676961}
   m_Layer: 0
   m_Name: East Entry
   m_TagString: Untagged
@@ -559,8 +593,8 @@ Transform:
   m_GameObject: {fileID: 8097175039399632643}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.25, y: 0.5, z: 0}
-  m_LocalScale: {x: 2.5, y: 1, z: 5}
+  m_LocalPosition: {x: 5.875, y: 0.5, z: 0}
+  m_LocalScale: {x: 1.75, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5966298344769888971}
@@ -584,8 +618,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 7, z: 1}
+  m_Center: {x: 0, y: 3.5, z: 0}
+--- !u!114 &6047270813711676961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097175039399632643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde82b69d2b1d35459e6c077f413a532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 3
+  playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
+  roomCamera: {fileID: 4511809402014808839}
 --- !u!1 &8628950303554075980
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3720689019778433293}
   - component: {fileID: 4117931571046343175}
+  - component: {fileID: 5890002175707236539}
   m_Layer: 0
   m_Name: West Entry
   m_TagString: Untagged
@@ -612,8 +662,8 @@ Transform:
   m_GameObject: {fileID: 8628950303554075980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.25, y: 0.5, z: 0}
-  m_LocalScale: {x: 2.5, y: 1, z: 5}
+  m_LocalPosition: {x: -5.875, y: 0.5, z: 0}
+  m_LocalScale: {x: 1.75, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5966298344769888971}
@@ -637,5 +687,20 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 7, z: 1}
+  m_Center: {x: 0, y: 3.5, z: 0}
+--- !u!114 &5890002175707236539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8628950303554075980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde82b69d2b1d35459e6c077f413a532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 2
+  playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
+  roomCamera: {fileID: 4511809402014808839}
