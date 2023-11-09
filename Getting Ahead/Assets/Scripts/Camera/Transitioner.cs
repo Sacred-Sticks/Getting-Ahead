@@ -44,7 +44,7 @@ public class Transitioner : MonoBehaviour
             currentPlayerNum++;
         }
         if (currentPlayerNum < playerCount) return;
-        NewMethod(collide);
+        CameraManager.MoveCamera(moveDirection, roomCamera);
     }
 
     private void OnTriggerExit(Collider collide)
@@ -55,35 +55,5 @@ public class Transitioner : MonoBehaviour
         {
             currentPlayerNum--;
         }
-    }
-
-    //private void OldMethod(Collider collide)
-    //{
-    //    switch (direction)
-    //    {
-    //        case Direction.Up:
-    //            if (collide.gameObject.transform.position.z < transform.position.z + positionOffset.y) return;
-    //            break;
-    //        case Direction.Down:
-    //            if (collide.gameObject.transform.position.z > transform.position.z + positionOffset.y) return;
-    //            break;
-    //        case Direction.Left:
-    //            if (collide.gameObject.transform.position.x > transform.position.x + positionOffset.x) return;
-    //            break;
-    //        case Direction.Right:
-    //            if (collide.gameObject.transform.position.x < transform.position.x + positionOffset.x) return;
-    //            break;
-    //    }
-    //    var cat = collide.gameObject.GetComponent<ObjectCategories>();
-    //    if (cat == null) return;
-    //    if (cat.Categories.Contains(playerType))
-    //    {
-    //        onRoomChange.Trigger(new CameraManager.RoomChangeArgs(moveDirection));
-    //    }
-    //}
-    private void NewMethod(Collider collide)
-    {
-
-        CameraManager.MoveCamera(moveDirection, roomCamera);
     }
 }
