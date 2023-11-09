@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using Cinemachine;
 using Kickstarter.Events;
-using Kickstarter.Observer;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Service onRoomChange;
+    public static Service OnRoomChange { private get; set; }
     private static CinemachineVirtualCamera[] CameraObjects;
     private static readonly Dictionary<Vector3, CinemachineVirtualCamera> virtualCameras = new Dictionary<Vector3, CinemachineVirtualCamera>();
     private static CinemachineVirtualCamera currentCamera;
@@ -32,6 +31,7 @@ public class CameraManager : MonoBehaviour
         currentCamera.m_Priority = 0;
         newCam.m_Priority = 1;
         currentCamera = newCam;
+        OnRoomChange.Trigger(new EnemySpawner.RoomChangeEvent(newCam));
     }
 
     public static void MoveCamera(Vector2 input, CinemachineVirtualCamera roomCamera)
@@ -69,7 +69,6 @@ public class CameraManager : MonoBehaviour
             SwapCamera(virtualCameras[tempVector3]);
         };
     }
-
 }
 
 

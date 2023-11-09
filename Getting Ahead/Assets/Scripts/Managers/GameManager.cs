@@ -77,6 +77,11 @@ public class GameManager : MonoBehaviour
         roomLayoutGenerator = GetComponent<LayOutRooms>();
         cameraManager = GetComponent<CameraManager>();
     }
+
+    private void Start()
+    {
+        CameraManager.OnRoomChange = onRoomChange;
+    }
     #endregion
 
     private void InitializeSingleton()

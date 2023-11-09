@@ -2,6 +2,7 @@
 using System.Linq;
 using Cinemachine;
 using Kickstarter.Events;
+using Kickstarter.Identification;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -71,6 +72,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void InitializeEnemy(GameObject head, GameObject body)
     {
+        head.GetComponent<Player>().PlayerID = Player.PlayerIdentifier.None;
         var players = GameManager.instance.Players;
         players = players.Where(p => p.Body).ToArray();
         head.GetComponent<SkeletonController>().Recapitate(body);
