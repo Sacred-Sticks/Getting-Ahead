@@ -8,7 +8,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
+public class GameManager : MonoBehaviour
 {
     [Tooltip("Purely for testing, the Game Manager is a singleton so don't worry, you don't need to remove your Game Manager"
            + "just set it appropriately to whichever game state you are testing.")]
@@ -49,13 +49,11 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        onRoomChange.Event += ImplementService;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        onRoomChange.Event -= ImplementService;
     }
 
     private void Awake()
@@ -112,7 +110,7 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     private void InitializeLevel()
     {
         var initialRoom = roomLayoutGenerator.InitializeLayout(out var initialRoomIndex);
-        cameraManager.SetupCameraDictionary(initialRoom);
+        CameraManager.SetupCameraDictionary(initialRoom);
         roomIndex = initialRoomIndex;
     }
 
@@ -137,23 +135,6 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
             skeletonController.Recapitate(body);
             Players[i] = new PlayerCharacterPairing(head, body);
         }
-    }
-
-    public void ImplementService(EventArgs args)
-    {
-        switch (args)
-        {
-            case CameraManager.RoomChangeArgs roomChangeArgs:
-                UpdateRoomIndex(roomChangeArgs.RoomDirection);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    private void UpdateRoomIndex(Vector2 roomDirection)
-    {
-        roomIndex = (roomIndex.x + (int)roomDirection.x, roomIndex.y + (int)roomDirection.y);
     }
 
     public void UpdatePlayerBody(GameObject old, GameObject @new)
