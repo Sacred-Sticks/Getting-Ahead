@@ -1,33 +1,19 @@
 using System.Collections.Generic;
 using Cinemachine;
-using UnityEngine;
 using Kickstarter.Events;
-using System;
-using Kickstarter.Observer;
+using UnityEngine;
 
-public class CameraManager : Observable, Kickstarter.Events.IServiceProvider
+public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Service onRoomChange;
-    
-    private CinemachineVirtualCamera[] CameraObjects;
-    private readonly Dictionary<Vector3, CinemachineVirtualCamera> virtualCameras = new Dictionary<Vector3, CinemachineVirtualCamera>();
-    private CinemachineVirtualCamera currentCamera;
+    public static Service OnRoomChange { private get; set; }
+    private static CinemachineVirtualCamera[] CameraObjects;
+    private static readonly Dictionary<Vector3, CinemachineVirtualCamera> virtualCameras = new Dictionary<Vector3, CinemachineVirtualCamera>();
+    private static CinemachineVirtualCamera currentCamera;
 
-
-    private void OnEnable()
-    {
-        onRoomChange.Event += ImplementService;
-    }
-
-    private void OnDisable()
-    {
-        onRoomChange.Event -= ImplementService;
-    }
-    
-    public void SetupCameraDictionary(GameObject initialRoom)
+    public static void SetupCameraDictionary(GameObject initialRoom)
     {
         currentCamera = initialRoom.GetComponentInChildren<CinemachineVirtualCamera>();
-        
+
         CameraObjects = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var obj in CameraObjects)
         {
@@ -39,28 +25,29 @@ public class CameraManager : Observable, Kickstarter.Events.IServiceProvider
         }
         currentCamera.m_Priority = 9;
     }
-    
-    private void SwapCamera(CinemachineVirtualCamera newCam)
+
+    private static void SwapCamera(CinemachineVirtualCamera newCam)
     {
         currentCamera.m_Priority = 0;
-        newCam.m_Priority = 9;
+        newCam.m_Priority = 1;
         currentCamera = newCam;
-        NotifyObservers(newCam);
+        OnRoomChange.Trigger(new EnemySpawner.RoomChangeEvent(newCam));
     }
-    
-    private void MoveCamera(Vector2 input)
+
+    public static void MoveCamera(Vector2 input, CinemachineVirtualCamera roomCamera)
     {
+        if (roomCamera == currentCamera) return;
         var tempVector3 = currentCamera.transform.position;
         switch (input.x)
         {
             case 1:
                 { // go left
-                    tempVector3.x += 15;
+                    tempVector3.x -= 15;
                     break;
                 }
             case -1: // go right
                 {
-                    tempVector3.x -= 15;
+                    tempVector3.x += 15;
                     break;
                 }
         }
@@ -68,12 +55,12 @@ public class CameraManager : Observable, Kickstarter.Events.IServiceProvider
         {
             case 1:
                 { // go up
-                    tempVector3.z += 15;
+                    tempVector3.z -= 15;
                     break;
                 }
             case -1: // go down
                 {
-                    tempVector3.z -= 15;
+                    tempVector3.z += 15;
                     break;
                 }
         }
@@ -81,27 +68,6 @@ public class CameraManager : Observable, Kickstarter.Events.IServiceProvider
         {
             SwapCamera(virtualCameras[tempVector3]);
         };
-    }
-
-    public void ImplementService(EventArgs args)
-    {
-        switch (args)
-        {
-            case RoomChangeArgs roomChangeArgs:
-                MoveCamera(roomChangeArgs.RoomDirection);
-                break;
-            default: throw new ArgumentOutOfRangeException();
-        }
-        
-    }
-    
-    public class RoomChangeArgs: EventArgs
-    {
-        public Vector2 RoomDirection { get; }
-        public RoomChangeArgs(Vector2 roomPosition)
-        {
-            RoomDirection = roomPosition;
-        }
     }
 }
 

@@ -139,21 +139,6 @@ public class LayOutRooms : MonoBehaviour
         ReduceToHamiltonianPath(ref buildPathway, roomIndex, index);
         var wall = Instantiate(buildPathway ? doorwayPrefab : wallPrefab, wallPosition, wallRotation, wallsParent.transform);
         usedWallPositions.Add(wallPosition);
-
-        var transitioners = wall.GetComponentsInChildren<Transitioner>();
-        if (transitioners.Length == 0)
-            return;
-        switch (wallKey)
-        {
-            case zWallKey:
-                transitioners[0].Initialize(Transitioner.Direction.Up);
-                transitioners[1].Initialize(Transitioner.Direction.Down);
-                break;
-            case xWallKey:
-                transitioners[0].Initialize(Transitioner.Direction.Left);
-                transitioners[1].Initialize(Transitioner.Direction.Right);
-                break;
-        }
     }
 
     private void ReduceToHamiltonianPath(ref bool direction, int roomIndex, int neighborIndex)

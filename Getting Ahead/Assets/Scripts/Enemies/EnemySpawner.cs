@@ -1,12 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Cinemachine;
+using Kickstarter.Events;
+using Kickstarter.Identification;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(CinemachineVirtualCamera))]
-public class EnemySpawner : MonoBehaviour, IObserver<CinemachineVirtualCamera>
+public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] Service onRoomChange;
     [SerializeField] private EnemyDetails[] enemies;
     [SerializeField] private BoxCollider spawnRange;
     [SerializeField] private int enemyPoints;
@@ -18,12 +22,12 @@ public class EnemySpawner : MonoBehaviour, IObserver<CinemachineVirtualCamera>
     private void OnEnable()
     {
         cameraManager = GameManager.instance.GetComponent<CameraManager>();
-        cameraManager.AddObserver(this);
+        onRoomChange.Event += QueueEnemySpawn;
     }
 
     private void OnDisable()
     {
-        cameraManager.RemoveObserver(this);
+        onRoomChange.Event -= QueueEnemySpawn;
     }
 
     private void Awake()
@@ -32,9 +36,11 @@ public class EnemySpawner : MonoBehaviour, IObserver<CinemachineVirtualCamera>
     }
     #endregion
 
-    public void OnNotify(CinemachineVirtualCamera activeCamera)
+    private void QueueEnemySpawn(EventArgs argument)
     {
-        if (activeCamera != virtualCamera)
+        if (argument is not RoomChangeEvent roomChangeEvent)
+            return;
+        if (roomChangeEvent.CurrentCamera != virtualCamera)
             return;
         SpawnEnemies();
     }
@@ -66,6 +72,7 @@ public class EnemySpawner : MonoBehaviour, IObserver<CinemachineVirtualCamera>
 
     private void InitializeEnemy(GameObject head, GameObject body)
     {
+        head.GetComponent<Player>().PlayerID = Player.PlayerIdentifier.None;
         var players = GameManager.instance.Players;
         players = players.Where(p => p.Body).ToArray();
         head.GetComponent<SkeletonController>().Recapitate(body);
@@ -83,6 +90,15 @@ public class EnemySpawner : MonoBehaviour, IObserver<CinemachineVirtualCamera>
         public int PointValue => pointValue;
         public GameObject Body => body;
         public GameObject Head => head;
+    }
+    public class RoomChangeEvent : EventArgs
+    {
+        public RoomChangeEvent(CinemachineVirtualCamera currentCamera)
+        {
+            CurrentCamera = currentCamera;
+        }
+
+        public CinemachineVirtualCamera CurrentCamera { get; }
     }
     #endregion
 }
