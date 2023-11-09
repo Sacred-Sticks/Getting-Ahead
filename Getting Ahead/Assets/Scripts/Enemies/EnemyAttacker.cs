@@ -14,15 +14,13 @@ public class EnemyAttacker : MonoBehaviour, IObserver<EnemyBrain.TriggerAttack>,
     private void OnEnable()
     {
         var brain = GetComponent<EnemyBrain>();
-        brain.AddObserver<EnemyBrain.TriggerAttack>(this);
-        brain.AddObserver<EnemyBrain.TriggerDeath>(this);
+        brain.AddObserver(this);
     }
 
     private void OnDisable()
     {
         var brain = GetComponent<EnemyBrain>();
-        brain.RemoveObserver<EnemyBrain.TriggerAttack>(this);
-        brain.RemoveObserver<EnemyBrain.TriggerDeath>(this);
+        brain.RemoveObserver(this);
     }
     #endregion
     
