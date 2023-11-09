@@ -42,12 +42,12 @@ public class CameraManager : MonoBehaviour
         {
             case 1:
                 { // go left
-                    tempVector3.x += 15;
+                    tempVector3.x -= 15;
                     break;
                 }
             case -1: // go right
                 {
-                    tempVector3.x -= 15;
+                    tempVector3.x += 15;
                     break;
                 }
         }
@@ -55,12 +55,12 @@ public class CameraManager : MonoBehaviour
         {
             case 1:
                 { // go up
-                    tempVector3.z += 15;
+                    tempVector3.z -= 15;
                     break;
                 }
             case -1: // go down
                 {
-                    tempVector3.z -= 15;
+                    tempVector3.z += 15;
                     break;
                 }
         }
