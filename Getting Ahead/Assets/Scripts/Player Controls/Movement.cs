@@ -2,10 +2,11 @@ using UnityEngine;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using Kickstarter.Events;
+using Kickstarter.Observer;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody))]
-public class Movement : MonoBehaviour, IInputReceiver
+public class Movement : Observable, IInputReceiver
 {
     [SerializeField]
     private Vector2Input movementInput;
@@ -28,7 +29,10 @@ public class Movement : MonoBehaviour, IInputReceiver
         var movementDirection = new Vector3(rawInput.x, 0, rawInput.y);
         var velocity = movementDirection * MoveSpeed + Vector3.up * rb.velocity.y;
         rb.velocity = velocity;
-        onAudioTrigger.Trigger(new AudioManager.AudioArgs(gameObject, movementSound));
+        if (movementDirection != Vector3.zero)
+            NotifyObservers(PlayerActions.Moving);
+        else
+            NotifyObservers(PlayerActions.STOP);
     }
 
     public void ReceiveInput(Vector2 input)
