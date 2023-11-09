@@ -9,14 +9,12 @@ public class LookAtTarget : MonoBehaviour, IObserver<EnemyBrain.TriggerLookAtTar
     private void OnEnable()
     {
         brain = GetComponent<EnemyBrain>();
-        brain.AddObserver<EnemyBrain.TriggerLookAtTarget>(this);
-        brain.AddObserver<EnemyBrain.TriggerDeath>(this);
+        brain.AddObserver(this);
     }
 
     private void OnDisable()
     {
-        brain.RemoveObserver<EnemyBrain.TriggerLookAtTarget>(this);
-        brain.RemoveObserver<EnemyBrain.TriggerDeath>(this);
+        brain.RemoveObserver(this);
     }
 
     private void Start()

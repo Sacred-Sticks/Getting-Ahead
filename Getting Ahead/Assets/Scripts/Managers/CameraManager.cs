@@ -3,6 +3,7 @@ using Cinemachine;
 using UnityEngine;
 using Kickstarter.Events;
 using System;
+using Kickstarter.Observer;
 
 public class CameraManager : Observable, Kickstarter.Events.IServiceProvider
 {

@@ -1,5 +1,6 @@
 using System;
 using Kickstarter.Events;
+using Kickstarter.Observer;
 using UnityEngine;
 
 public class Health : Observable
