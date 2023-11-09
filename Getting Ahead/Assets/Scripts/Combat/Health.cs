@@ -1,8 +1,9 @@
 using System;
 using Kickstarter.Events;
+using Kickstarter.Observer;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : Observable
 {
     [Header("Outgoing Services")]
     [SerializeField] private Service onDeath;
@@ -32,9 +33,10 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, GameObject attacker)
     {
         CurrentHealth -= damage;
+        NotifyObservers(new DamageTaken(CurrentHealth, attacker));
     }
     
     public class DeathArgs : EventArgs
@@ -45,5 +47,17 @@ public class Health : MonoBehaviour
         }
         
         public GameObject DyingCharacterGameObject { get; }
+    }
+
+    public class DamageTaken
+    {
+        public DamageTaken(float health, GameObject attacker)
+        {
+            Health = health;
+            Attacker = attacker;
+        }
+        
+        public float Health { get; }
+        public GameObject Attacker { get; }
     }
 }

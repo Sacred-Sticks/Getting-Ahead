@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
 using UnityEngine;
@@ -10,6 +12,11 @@ public class Rotation : MonoBehaviour, IInputReceiver
     [SerializeField]
     [Range(0, 1)]
     private float deadzone;
+
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(1);
+    }
 
     public void SubscribeToInputs(Player player)
     {

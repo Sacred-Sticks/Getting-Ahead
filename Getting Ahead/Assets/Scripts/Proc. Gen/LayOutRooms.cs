@@ -8,7 +8,7 @@ public class LayOutRooms : MonoBehaviour
     [SerializeField] private GameObject[] roomPrefabs;
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject doorwayPrefab;
-    [SerializeField] private float wallHeightOffset;
+    [SerializeField] private float wallsVerticalOffset;
     [Space]
     [Min(1)]
     [SerializeField] private int numRoomsOnFloor = 1;
@@ -28,24 +28,14 @@ public class LayOutRooms : MonoBehaviour
     private GameObject roomParent;
     private GameObject wallsParent;
 
-    private enum Direction
-    {
-        North,
-        South,
-        East,
-        West,
-    }
+    private const int zWallKey = 1;
+    private const int xWallKey = 2;
 
-    private void Start()
-    {
-        InitializeLayout();
-    }
-
-    public void InitializeLayout()
+    public GameObject InitializeLayout(out (int, int) initialRoomIndex)
     {
         CreateRoomPlacements();
         roomParent = new GameObject("Rooms");
-        wallsParent = new GameObject("Wall");
+        wallsParent = new GameObject("Walls");
         unionFind = new UnionFind(numRoomsOnFloor);
 
         for (int i = 0; i < roomLayout.GetLength(0); i++)
@@ -57,15 +47,21 @@ public class LayOutRooms : MonoBehaviour
                 PlaceRoom(i, j);
             }
         }
-        for (int i = 0; i < roomLayout.GetLength(0); i++)
+
+        initialRoomIndex = (0, 0);
+        
+        for (int i = roomLayout.GetLength(0) - 1; i >= 0; i--)
         {
-            for (int j = 0; j < roomLayout.GetLength(1); j++)
+            for (int j = roomLayout.GetLength(1) - 1; j >= 0; j--)
             {
                 if (!roomLayout[i, j])
                     continue;
                 PlaceWalls(i, j);
+                initialRoomIndex = (i, j);
             }
         }
+        wallsParent.transform.position += wallsVerticalOffset * Vector3.up;
+        return rooms[initialRoomIndex];
     }
 
     private void CreateRoomPlacements()
@@ -117,22 +113,22 @@ public class LayOutRooms : MonoBehaviour
 
     private void PlaceWalls(int xIndex, int zIndex)
     {
-        int roomIndex = roomIndices[rooms[(xIndex, zIndex)]];
+        int currentRoomIndex = roomIndices[rooms[(xIndex, zIndex)]];
         (float x, float z) coordinates = (xIndex * roomSizes.x, zIndex * roomSizes.y);
-        var offsets = new Vector3(roomSizes.x / 2, wallHeightOffset, roomSizes.y / 2);
+        var offsets = new Vector3(roomSizes.x / 2, 0, roomSizes.y / 2);
 
-        BuildWall(() => zIndex < numRoomsPerDirection.y - 1, (() => xIndex, () => zIndex + 1), roomIndex,
-            (xIndex, zIndex + 1), new Vector3(coordinates.x, 0, coordinates.z + offsets.z), Quaternion.Euler(0, 180, 0));
-        BuildWall(() => zIndex > 0, (() => xIndex, () => zIndex - 1), roomIndex, 
-            (xIndex, zIndex - 1), new Vector3(coordinates.x, 0, coordinates.z - offsets.z), Quaternion.Euler(0, 0, 0));
-        BuildWall(() => xIndex < numRoomsPerDirection.x - 1, (() => xIndex + 1, () => zIndex), roomIndex,
-            (xIndex + 1, zIndex), new Vector3(coordinates.x + offsets.x, 0, coordinates.z), Quaternion.Euler(0, 270, 0));
-        BuildWall(() => xIndex > 0, (() => xIndex - 1, () => zIndex), roomIndex, 
-            (xIndex - 1, zIndex), new Vector3(coordinates.x - offsets.x, 0, coordinates.z), Quaternion.Euler(0, 90, 0));
+        BuildWall(() => zIndex < numRoomsPerDirection.y - 1, (() => xIndex, () => zIndex + 1), currentRoomIndex,
+            (xIndex, zIndex + 1), new Vector3(coordinates.x, 0, coordinates.z + offsets.z), Quaternion.Euler(0, 180, 0), zWallKey);
+        BuildWall(() => zIndex > 0, (() => xIndex, () => zIndex - 1), currentRoomIndex, 
+            (xIndex, zIndex - 1), new Vector3(coordinates.x, 0, coordinates.z - offsets.z), Quaternion.Euler(0, 0, 0), zWallKey);
+        BuildWall(() => xIndex < numRoomsPerDirection.x - 1, (() => xIndex + 1, () => zIndex), currentRoomIndex,
+            (xIndex + 1, zIndex), new Vector3(coordinates.x + offsets.x, 0, coordinates.z), Quaternion.Euler(0, 270, 0), xWallKey);
+        BuildWall(() => xIndex > 0, (() => xIndex - 1, () => zIndex), currentRoomIndex, 
+            (xIndex - 1, zIndex), new Vector3(coordinates.x - offsets.x, 0, coordinates.z), Quaternion.Euler(0, 90, 0), xWallKey);
     }
 
     private void BuildWall(Func<bool> isRoomOnEdge, (Func<int> xIndex, Func<int> zIndex) pathway,
-        int roomIndex, (int, int) roomsIndex, Vector3 wallPosition, Quaternion wallRotation)
+        int roomIndex, (int, int) roomsIndex, Vector3 wallPosition, Quaternion wallRotation, int wallKey)
     {
         if (usedWallPositions.Contains(wallPosition))
             return;
@@ -141,8 +137,23 @@ public class LayOutRooms : MonoBehaviour
             buildPathway = roomLayout[pathway.xIndex(), pathway.zIndex()];
         int index = rooms.ContainsKey(roomsIndex) ? roomIndices[rooms[roomsIndex]] : -1;
         ReduceToHamiltonianPath(ref buildPathway, roomIndex, index);
-        Instantiate(buildPathway ? doorwayPrefab : wallPrefab, wallPosition, wallRotation, wallsParent.transform);
+        var wall = Instantiate(buildPathway ? doorwayPrefab : wallPrefab, wallPosition, wallRotation, wallsParent.transform);
         usedWallPositions.Add(wallPosition);
+
+        var transitioners = wall.GetComponentsInChildren<Transitioner>();
+        if (transitioners.Length == 0)
+            return;
+        switch (wallKey)
+        {
+            case zWallKey:
+                transitioners[0].Initialize(Transitioner.Direction.Up);
+                transitioners[1].Initialize(Transitioner.Direction.Down);
+                break;
+            case xWallKey:
+                transitioners[0].Initialize(Transitioner.Direction.Left);
+                transitioners[1].Initialize(Transitioner.Direction.Right);
+                break;
+        }
     }
 
     private void ReduceToHamiltonianPath(ref bool direction, int roomIndex, int neighborIndex)

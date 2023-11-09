@@ -21,7 +21,7 @@ public class MeleeAttack : Attack
             yield return new WaitForSeconds(1 / meleeWeapon.BurstFireRate);
             foreach (var enemyHealth in enemies)
             {
-                enemyHealth.TakeDamage(meleeWeapon.AttackDamage);
+                enemyHealth.TakeDamage(meleeWeapon.AttackDamage, gameObject);
             }
         }
     }

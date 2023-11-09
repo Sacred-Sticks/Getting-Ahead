@@ -1,17 +1,18 @@
-using System;
 using System.Linq;
 using Kickstarter.Categorization;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float damage;
+    [Space]
+    [SerializeField] private CategoryType head;
 
     private Rigidbody body;
 
-    public GameObject Source { private get; set; }
+    public GameObject SourceHead { private get; set; }
+    public GameObject SourceBody { private get; set; }
     public CategoryType TargetCategory { private get; set; }
 
     private void Awake()
@@ -27,12 +28,13 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         var collidedObject = collision.gameObject;
-        if (collidedObject == Source)
+        if (collidedObject == SourceBody || collidedObject == SourceHead)
             return;
         collidedObject.TryGetComponent(out ObjectCategories objectCategories);
         if (objectCategories != null)
             DealDamage(objectCategories, collidedObject);
         Destroy(gameObject);
+        
     }
 
     private void DealDamage(ObjectCategories objectCategories, GameObject collidedObject)
@@ -40,8 +42,15 @@ public class Bullet : MonoBehaviour
         if (!objectCategories.Categories.Contains(TargetCategory))
             return;
         collidedObject.TryGetComponent(out Health health);
+        if (objectCategories.Categories.Contains(head))
+        {
+            var skeleton = collidedObject.GetComponent<SkeletonController>().Skeleton;
+            if (!skeleton)
+                return;
+            health = skeleton.transform.parent.GetComponent<Health>();
+        }
         if (health == null)
             return;
-        health.TakeDamage(damage);
+        health.TakeDamage(damage, SourceBody);
     }
 }
