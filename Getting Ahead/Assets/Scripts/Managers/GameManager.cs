@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
     [SerializeField] private PlayerCharacterPairing[] players;
 
     public PlayerCharacterPairing[] Players { get; private set; }
-
+    public int PlayerCount { get; private set; }
+    
     private StateMachine<GameState> stateMachine;
     private LayOutRooms roomLayoutGenerator;
     private CameraManager cameraManager;
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour, Kickstarter.Events.IServiceProvider
             .Build();
 
         inputManager.Initialize(out int numPlayers);
+        PlayerCount = numPlayers;
 
         roomLayoutGenerator = GetComponent<LayOutRooms>();
         cameraManager = GetComponent<CameraManager>();
