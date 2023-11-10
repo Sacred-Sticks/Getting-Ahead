@@ -182,8 +182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0969f0d80f73ae648b2dbfbb9260cf4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementInput: {fileID: 11400000, guid: 9d3a0b5b9ca59ff47866b40cefe13050, type: 2}
   rotationInput: {fileID: 11400000, guid: ea2d4ab0af933ab46a211011e85a7fbb, type: 2}
   deadzone: 0.5
+  slerpRate: 0.5
 --- !u!114 &3458000375071261365
 MonoBehaviour:
   m_ObjectHideFlags: 0
