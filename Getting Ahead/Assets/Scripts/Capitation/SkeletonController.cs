@@ -193,7 +193,6 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
         chosenBody.TryGetComponent(out CharacterStatistics characterStatistics);
         characterStatistics.ApplyValues(headStatistics);
         chosenBody.GetComponent<Player>().PlayerID = player.PlayerID;
-        //player.PlayerID = Player.PlayerIdentifier.None;
     }
 
     private void WitherBody(Object body, float percentage)
