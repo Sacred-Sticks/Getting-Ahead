@@ -105,6 +105,42 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
     }
     #endregion
 
+    #region Inputs
+    public void SubscribeToInputs(Player player)
+    {
+        recapitateInput.SubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
+        decapitateInput.SubscribeToInputAction(OnDecapitateInputChange, player.PlayerID);
+    }
+
+    public void UnsubscribeToInputs(Player player)
+    {
+        recapitateInput.UnsubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
+        decapitateInput.UnsubscribeToInputAction(OnDecapitateInputChange, player.PlayerID);
+    }
+    
+    private void OnRecapitateInputChange(float input)
+    {
+        if (input == 0)
+            return;
+        if (activeBodyRoot)
+            return;
+        var overlappingObjects = Physics.OverlapSphere(transform.position + Vector3.up * 2, recapitationRange);
+        var selectedBody = overlappingObjects
+            .Where(o => o.GetComponentInChildren<HeadPair>())
+            .Select(o => o.gameObject)
+            .FirstOrDefault();
+        if (selectedBody)
+            Recapitate(selectedBody);
+    }
+
+    private void OnDecapitateInputChange(float input)
+    {
+        if (input == 0)
+            return;
+        Decapitate(activeBodyRoot);
+    }
+    #endregion
+
     public void ImplementService(EventArgs args)
     {
         switch (args)
@@ -157,7 +193,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
         chosenBody.TryGetComponent(out CharacterStatistics characterStatistics);
         characterStatistics.ApplyValues(headStatistics);
         chosenBody.GetComponent<Player>().PlayerID = player.PlayerID;
-        player.PlayerID = Player.PlayerIdentifier.None;
+        //player.PlayerID = Player.PlayerIdentifier.None;
     }
 
     private void WitherBody(Object body, float percentage)
@@ -178,42 +214,6 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
             yield return new WaitForEndOfFrame();
         }
     }
-
-    #region Inputs
-    private void OnRecapitateInputChange(float input)
-    {
-        if (input == 0)
-            return;
-        if (activeBodyRoot)
-            return;
-        var overlappingObjects = Physics.OverlapSphere(transform.position + Vector3.up * 2, recapitationRange);
-        var selectedBody = overlappingObjects
-            .Where(o => o.GetComponentInChildren<HeadPair>())
-            .Select(o => o.gameObject)
-            .FirstOrDefault();
-        if (selectedBody)
-            Recapitate(selectedBody);
-    }
-
-    private void OnDecapitateInputChange(float input)
-    {
-        if (input == 0)
-            return;
-        Decapitate(activeBodyRoot);
-    }
-    
-    public void SubscribeToInputs(Player player)
-    {
-        recapitateInput.SubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
-        decapitateInput.SubscribeToInputAction(OnDecapitateInputChange, player.PlayerID);
-    }
-
-    public void UnsubscribeToInputs(Player player)
-    {
-        recapitateInput.UnsubscribeToInputAction(OnRecapitateInputChange, player.PlayerID);
-        decapitateInput.UnsubscribeToInputAction(OnDecapitateInputChange, player.PlayerID);
-    }
-    #endregion
 
     public class RecapitationArgs : EventArgs
     {
