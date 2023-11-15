@@ -30,7 +30,10 @@ public class Movement : Observable, IInputReceiver
         var velocity = movementDirection * MoveSpeed + Vector3.up * rb.velocity.y;
         rb.velocity = velocity;
         if (movementDirection != Vector3.zero)
+        {
             NotifyObservers(PlayerActions.Moving);
+            NotifyObservers(rb.velocity);
+        }
         else
             NotifyObservers(PlayerActions.STOP);
     }
