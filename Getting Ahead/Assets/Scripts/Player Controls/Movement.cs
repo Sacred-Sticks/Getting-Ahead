@@ -26,6 +26,7 @@ public class Movement : Observable, IInputReceiver
 
     private void FixedUpdate()
     {
+        Debug.Log("Movement");
         var movementDirection = new Vector3(rawInput.x, 0, rawInput.y);
         var velocity = movementDirection * MoveSpeed + Vector3.up * rb.velocity.y;
         rb.velocity = velocity;
