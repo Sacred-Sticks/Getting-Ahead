@@ -264,7 +264,7 @@ PrefabInstance:
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: players.Array.data[0].head
       value: 
-      objectReference: {fileID: 262114471033644837, guid: c75b0fa19a1ac8e4588967f0f8061589, type: 3}
+      objectReference: {fileID: 376308217298724823, guid: 2eb51af361cd8c84fb83c836818a993d, type: 3}
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: players.Array.data[1].body
       value: 
@@ -272,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: players.Array.data[1].head
       value: 
-      objectReference: {fileID: 376308217298724823, guid: 2eb51af361cd8c84fb83c836818a993d, type: 3}
+      objectReference: {fileID: 262114471033644837, guid: c75b0fa19a1ac8e4588967f0f8061589, type: 3}
     - target: {fileID: 7977866858816158511, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
