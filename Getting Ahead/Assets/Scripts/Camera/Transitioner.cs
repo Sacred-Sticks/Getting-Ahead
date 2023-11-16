@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Kickstarter.Categorization;
 using UnityEngine;
 using System.Linq;
@@ -13,6 +14,7 @@ public class Transitioner : MonoBehaviour
     
     private int playerCount;
     private int currentPlayerNum = 0;
+    private List<GameObject> playerObjects = new List<GameObject>();
     public enum Direction
     {
         Up,
@@ -38,16 +40,17 @@ public class Transitioner : MonoBehaviour
 
     private void OnTriggerEnter(Collider collide)
     {
-        var category = collide.gameObject.GetComponent<ObjectCategories>();
-        if (category == null && collide.transform.parent)
-            category = collide.transform.parent.GetComponent<ObjectCategories>();
+        if (!collide.transform.parent)
+            return;
+        var category = collide.transform.parent.GetComponent<ObjectCategories>();
         if (category == null)
             return;
         if (category.Categories.Contains(playerType))
         {
-            currentPlayerNum++;
+            if (!playerObjects.Contains(collide.gameObject))
+                playerObjects.Add(collide.gameObject);
         }
-        if (currentPlayerNum < playerCount) return;
+        if (playerObjects.Count < playerCount) return;
         onRoomExit.Invoke();
     }
 
@@ -68,7 +71,8 @@ public class Transitioner : MonoBehaviour
         if (category == null) return;
         if (category.Categories.Contains(playerType))
         {
-            currentPlayerNum--;
+            if (playerObjects.Contains(collide.gameObject))
+                playerObjects.Remove(collide.gameObject);
         }
     }
 }
