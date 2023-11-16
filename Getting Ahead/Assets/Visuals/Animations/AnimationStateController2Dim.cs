@@ -16,9 +16,10 @@ public class AnimationStateController2Dim : MonoBehaviour, IObserver<Vector3>
     private Vector2 rawInput;
     private float velocityZ = 0.0f;
     private float velocityX = 0.0f;
-    void Start()
+    void Awake()
     {
         animator = gameObject.transform.GetChild(0).GetChild(1).GetComponent<Animator>();
+        _movementSubject = GetComponent<Movement>();
     }
 
     void Update()
