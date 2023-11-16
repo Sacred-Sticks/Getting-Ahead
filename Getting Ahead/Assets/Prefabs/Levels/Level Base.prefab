@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1127264273034391919}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -5.875}
+  m_LocalPosition: {x: 0, y: 0.05, z: -5.875}
   m_LocalScale: {x: 5, y: 1, z: 1.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69,6 +69,21 @@ MonoBehaviour:
   direction: 1
   playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   roomCamera: {fileID: 4511809402014808839}
+  onRoomExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3806992014020414079}
+        m_TargetAssemblyTypeName: Transitioner, Assembly-CSharp
+        m_MethodName: TransitionRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1996343137042603267
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +321,7 @@ Transform:
   m_GameObject: {fileID: 4218623644156119358}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 5.875}
+  m_LocalPosition: {x: 0, y: 0.05, z: 5.875}
   m_LocalScale: {x: 5, y: 1, z: 1.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -348,6 +363,21 @@ MonoBehaviour:
   direction: 0
   playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   roomCamera: {fileID: 4511809402014808839}
+  onRoomExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4016563498742294380}
+        m_TargetAssemblyTypeName: Transitioner, Assembly-CSharp
+        m_MethodName: TransitionRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4859802877483697071
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 5596623900825072715}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.55, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -593,7 +623,7 @@ Transform:
   m_GameObject: {fileID: 8097175039399632643}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.875, y: 0.5, z: 0}
+  m_LocalPosition: {x: 5.875, y: 0.05, z: 0}
   m_LocalScale: {x: 1.75, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -635,6 +665,21 @@ MonoBehaviour:
   direction: 3
   playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   roomCamera: {fileID: 4511809402014808839}
+  onRoomExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6047270813711676961}
+        m_TargetAssemblyTypeName: Transitioner, Assembly-CSharp
+        m_MethodName: TransitionRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8628950303554075980
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +707,7 @@ Transform:
   m_GameObject: {fileID: 8628950303554075980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.875, y: 0.5, z: 0}
+  m_LocalPosition: {x: -5.875, y: 0.05, z: 0}
   m_LocalScale: {x: 1.75, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -704,3 +749,18 @@ MonoBehaviour:
   direction: 2
   playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   roomCamera: {fileID: 4511809402014808839}
+  onRoomExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5890002175707236539}
+        m_TargetAssemblyTypeName: Transitioner, Assembly-CSharp
+        m_MethodName: TransitionRoom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
