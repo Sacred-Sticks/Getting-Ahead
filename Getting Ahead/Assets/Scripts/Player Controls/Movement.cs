@@ -13,6 +13,7 @@ public class Movement : Observable, IInputReceiver
 
     [SerializeField] private Service onAudioTrigger;
     [SerializeField] private string movementSound;
+    [SerializeField] [Range(0, 1)] private float deadzone;
     
     public float MoveSpeed { private get; set; }
     
@@ -28,11 +29,14 @@ public class Movement : Observable, IInputReceiver
     {
         var movementDirection = new Vector3(rawInput.x, 0, rawInput.y);
         var velocity = movementDirection * MoveSpeed + Vector3.up * rb.velocity.y;
-        rb.velocity = velocity;
-        if (movementDirection != Vector3.zero)
+        if (velocity.sqrMagnitude > deadzone * deadzone)
         {
-            NotifyObservers(PlayerActions.Moving);
-            NotifyObservers(rb.velocity);
+            rb.velocity = velocity;
+            if (movementDirection != Vector3.zero)
+            {
+                NotifyObservers(PlayerActions.Moving);
+                NotifyObservers(rb.velocity);
+            }
         }
         else
             NotifyObservers(PlayerActions.STOP);

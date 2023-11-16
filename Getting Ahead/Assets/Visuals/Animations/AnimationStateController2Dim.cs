@@ -18,7 +18,7 @@ public class AnimationStateController2Dim : MonoBehaviour, IObserver<Vector3>
     private float velocityX = 0.0f;
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = gameObject.transform.GetChild(0).GetChild(1).GetComponent<Animator>();
     }
 
     void Update()
@@ -29,6 +29,7 @@ public class AnimationStateController2Dim : MonoBehaviour, IObserver<Vector3>
 
     public void OnNotify(Vector3 velocity)
     {
+        velocity = transform.TransformDirection(velocity);
         velocityX = velocity.x;
         velocityZ = velocity.z;
     }
