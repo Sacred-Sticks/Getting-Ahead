@@ -154,7 +154,7 @@ MonoBehaviour:
   headStatistics: {fileID: 11400000, guid: 691d038454da1a042bc6ea33a8d16551, type: 2}
   headSpeed: 2
   headBone: {fileID: 0}
-  colliderTransform: {fileID: 0}
+  colliderTransform: {fileID: 5385684208514285861}
 --- !u!114 &1641035561409442652
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -152,7 +152,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.7075472, g: 0.6189003, b: 0.377136, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -273,6 +273,38 @@ PrefabInstance:
       propertyPath: players.Array.data[1].head
       value: 
       objectReference: {fileID: 262114471033644837, guid: c75b0fa19a1ac8e4588967f0f8061589, type: 3}
+    - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: exitPrefab
+      value: 
+      objectReference: {fileID: 4707257453984493034, guid: 557b912e57f890f438e40e69aa7375f2, type: 3}
+    - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: wallPrefab
+      value: 
+      objectReference: {fileID: 7238440170359015384, guid: 679278d1cd4136a43a462ee9a45530da, type: 3}
+    - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: doorwayPrefab
+      value: 
+      objectReference: {fileID: 606332616817608262, guid: 632ed59fad5d8ec4fac71e978cb78f24, type: 3}
+    - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: roomPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: roomPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 4382055962527720443, guid: 6fc91f64472d3be48a55c5543c762012, type: 3}
+    - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: roomPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2045723291975161969, guid: f62d84e2915abbf4b87be16ffc1a4cbb, type: 3}
+    - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: roomPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 5188859803752065562, guid: 65556dd3bb87fcb43b302f5b5fc42fa8, type: 3}
+    - target: {fileID: 2753124539130227817, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: roomPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 6585714524810725053, guid: 28d9ab31d33d20d4f988e359fdb3dbe2, type: 3}
     - target: {fileID: 7977866858816158511, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

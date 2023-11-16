@@ -8,6 +8,7 @@ public class LayOutRooms : MonoBehaviour
     [SerializeField] private GameObject[] roomPrefabs;
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject doorwayPrefab;
+    [SerializeField] private GameObject exitPrefab;
     [SerializeField] private float wallsVerticalOffset;
     [Space]
     [Min(1)]
@@ -27,9 +28,7 @@ public class LayOutRooms : MonoBehaviour
 
     private GameObject roomParent;
     private GameObject wallsParent;
-
-    private const int zWallKey = 1;
-    private const int xWallKey = 2;
+    private bool exitBuilt;
 
     public GameObject InitializeLayout(out (int, int) initialRoomIndex)
     {
@@ -106,6 +105,8 @@ public class LayOutRooms : MonoBehaviour
     {
         (float x, float z) roomCoordinates = (xIndex * roomSizes.x, zIndex * roomSizes.y);
         int roomTypeIndex = Random.Range(0, roomPrefabs.Length);
+        int angleMultiplier = Random.Range(0, 4);
+        var rotation = Quaternion.Euler(0, angleMultiplier * 90, 0);
         rooms[(xIndex, zIndex)] = Instantiate(roomPrefabs[roomTypeIndex], new Vector3(roomCoordinates.x, 0, roomCoordinates.z), Quaternion.identity, roomParent.transform);
         roomIndices.Add(rooms[(xIndex, zIndex)], roomIndex);
         roomIndex++;
@@ -118,17 +119,17 @@ public class LayOutRooms : MonoBehaviour
         var offsets = new Vector3(roomSizes.x / 2, 0, roomSizes.y / 2);
 
         BuildWall(() => zIndex < numRoomsPerDirection.y - 1, (() => xIndex, () => zIndex + 1), currentRoomIndex,
-            (xIndex, zIndex + 1), new Vector3(coordinates.x, 0, coordinates.z + offsets.z), Quaternion.Euler(0, 180, 0), zWallKey);
+            (xIndex, zIndex + 1), new Vector3(coordinates.x, 0, coordinates.z + offsets.z), Quaternion.Euler(0, 180, 0));
         BuildWall(() => zIndex > 0, (() => xIndex, () => zIndex - 1), currentRoomIndex, 
-            (xIndex, zIndex - 1), new Vector3(coordinates.x, 0, coordinates.z - offsets.z), Quaternion.Euler(0, 0, 0), zWallKey);
+            (xIndex, zIndex - 1), new Vector3(coordinates.x, 0, coordinates.z - offsets.z), Quaternion.Euler(0, 0, 0));
         BuildWall(() => xIndex < numRoomsPerDirection.x - 1, (() => xIndex + 1, () => zIndex), currentRoomIndex,
-            (xIndex + 1, zIndex), new Vector3(coordinates.x + offsets.x, 0, coordinates.z), Quaternion.Euler(0, 270, 0), xWallKey);
+            (xIndex + 1, zIndex), new Vector3(coordinates.x + offsets.x, 0, coordinates.z), Quaternion.Euler(0, 270, 0));
         BuildWall(() => xIndex > 0, (() => xIndex - 1, () => zIndex), currentRoomIndex, 
-            (xIndex - 1, zIndex), new Vector3(coordinates.x - offsets.x, 0, coordinates.z), Quaternion.Euler(0, 90, 0), xWallKey);
+            (xIndex - 1, zIndex), new Vector3(coordinates.x - offsets.x, 0, coordinates.z), Quaternion.Euler(0, 90, 0));
     }
 
     private void BuildWall(Func<bool> isRoomOnEdge, (Func<int> xIndex, Func<int> zIndex) pathway,
-        int roomIndex, (int, int) roomsIndex, Vector3 wallPosition, Quaternion wallRotation, int wallKey)
+        int roomIndex, (int, int) roomsIndex, Vector3 wallPosition, Quaternion wallRotation)
     {
         if (usedWallPositions.Contains(wallPosition))
             return;
@@ -137,7 +138,8 @@ public class LayOutRooms : MonoBehaviour
             buildPathway = roomLayout[pathway.xIndex(), pathway.zIndex()];
         int index = rooms.ContainsKey(roomsIndex) ? roomIndices[rooms[roomsIndex]] : -1;
         ReduceToHamiltonianPath(ref buildPathway, roomIndex, index);
-        var wall = Instantiate(buildPathway ? doorwayPrefab : wallPrefab, wallPosition, wallRotation, wallsParent.transform);
+        var wall = Instantiate(!exitBuilt ? exitPrefab : buildPathway ? doorwayPrefab : wallPrefab, wallPosition, wallRotation, wallsParent.transform);
+        exitBuilt = true;
         usedWallPositions.Add(wallPosition);
     }
 

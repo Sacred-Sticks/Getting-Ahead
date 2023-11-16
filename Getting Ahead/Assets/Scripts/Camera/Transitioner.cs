@@ -1,15 +1,16 @@
-using Kickstarter.Events;
 using Kickstarter.Categorization;
 using UnityEngine;
 using System.Linq;
-using System;
 using Cinemachine;
+using UnityEngine.Events;
 
 public class Transitioner : MonoBehaviour
 {
-    [SerializeField] Direction direction;
+    [SerializeField] private Direction direction;
     [SerializeField] private CategoryType playerType;
     [SerializeField] private CinemachineVirtualCamera roomCamera;
+    [SerializeField] private UnityEvent onRoomExit;
+    
     private int playerCount;
     private int currentPlayerNum = 0;
     public enum Direction
@@ -44,7 +45,18 @@ public class Transitioner : MonoBehaviour
             currentPlayerNum++;
         }
         if (currentPlayerNum < playerCount) return;
+        onRoomExit.Invoke();
+    }
+
+    public void TransitionRoom()
+    {
         CameraManager.MoveCamera(moveDirection, roomCamera);
+    }
+
+    public void ExitLevel()
+    {
+        Debug.Log($"Level Exit Triggered");
+        Application.Quit();
     }
 
     private void OnTriggerExit(Collider collide)
