@@ -58,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy(out GameObject head, out GameObject body)
     {
-        var enemyInfo = enemies[Random.Range(0, enemies.Length - 1)];
+        var enemyInfo = enemies[Random.Range(0, enemies.Length)];
         enemyPoints -= enemyInfo.PointValue;
         float spawnSizeX = spawnRange.size.x * spawnRange.transform.localScale.x / 2;
         float spawnSizeZ = spawnRange.size.z * spawnRange.transform.localScale.z / 2;

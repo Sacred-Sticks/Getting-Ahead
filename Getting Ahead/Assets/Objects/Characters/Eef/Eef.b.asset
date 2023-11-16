@@ -15,4 +15,4 @@ MonoBehaviour:
   moveSpeed: 2
   attackRate: 1
   maxHealth: 10
-  iframes: 1
+  iframes: 0.5

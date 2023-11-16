@@ -274,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputTolerance: 0.5
   weapon: {fileID: 11400000, guid: aa0b93a2729929b4aa05d5b7f0967d4f, type: 2}
-  targetCategory: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
+  targetCategory: {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}
 --- !u!114 &5024531804804636463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categories:
-  - {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
+  - {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}
 --- !u!114 &5027742623919100629
 MonoBehaviour:
   m_ObjectHideFlags: 0
