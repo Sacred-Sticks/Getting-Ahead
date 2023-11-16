@@ -10,7 +10,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1996343137042603267, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
       propertyPath: m_Name
-      value: Level Base (3) Variant
+      value: Env_L1M4_PROTO_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemyPoints
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemies.Array.data[0].body
+      value: 
+      objectReference: {fileID: 1169628929388744634, guid: 3035f2bf0ccc7354f99d7992e86b0a5c, type: 3}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemies.Array.data[0].head
+      value: 
+      objectReference: {fileID: 376308217298724823, guid: 2eb51af361cd8c84fb83c836818a993d, type: 3}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemies.Array.data[1].body
+      value: 
+      objectReference: {fileID: 2964549742055387568, guid: 796941c496ab83c4ba5dbb48286dd1fa, type: 3}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemies.Array.data[1].head
+      value: 
+      objectReference: {fileID: 6862795724486806018, guid: 14a95fbafefcbf24fa973555692e6c59, type: 3}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemies.Array.data[0].pointValue
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemies.Array.data[1].pointValue
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9077567932659168327, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
       propertyPath: m_LocalPosition.x
