@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file, including fixes, additions, changes, and removals.
 
+## [0.3.0] 2023-11-16
+
+### Added
+- Proper multiplayer camera transitions
+- Textures and models for level 1
+- Variable player count
+- Enemy Spawner
+- Enemy AI/Brains
+- Invulnerability frames and attack speed implemented
+
+### Changed
+- Reworked Audio Systems
+- Head model is considered the player for transition purposes (allows fallen players to still transition between rooms)
+
 ## [0.2.0] - 2023-10-26
 
 ### Added
