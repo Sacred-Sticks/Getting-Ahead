@@ -39,7 +39,10 @@ public class Transitioner : MonoBehaviour
     private void OnTriggerEnter(Collider collide)
     {
         var category = collide.gameObject.GetComponent<ObjectCategories>();
-        if (category == null) return;
+        if (category == null && collide.transform.parent)
+            category = collide.transform.parent.GetComponent<ObjectCategories>();
+        if (category == null)
+            return;
         if (category.Categories.Contains(playerType))
         {
             currentPlayerNum++;
