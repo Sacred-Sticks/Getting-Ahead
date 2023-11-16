@@ -121,8 +121,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPlayers(IReadOnlyList<PlayerCharacterPairing> playerCharacters)
     {
-        Players = new PlayerCharacterPairing[playerCharacters.Count];
-        for (int i = 0; i < playerCharacters.Count; i++)
+        Players = new PlayerCharacterPairing[PlayerCount];
+        for (int i = 0; i < PlayerCount; i++)
         {
             var playerCharacter = playerCharacters[i];
             if (!playerCharacter.Body || !playerCharacter.Head)
