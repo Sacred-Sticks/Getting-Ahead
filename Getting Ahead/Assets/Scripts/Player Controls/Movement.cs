@@ -13,7 +13,7 @@ public class Movement : Observable, IInputReceiver
 
     [SerializeField] private Service onAudioTrigger;
     [SerializeField] private string movementSound;
-    [SerializeField] [Range(0, 1)] private float deadzone;
+    [SerializeField] [Range(0, 1)] private float deadzone = 0.1f;
     
     public float MoveSpeed { private get; set; }
     
@@ -35,11 +35,12 @@ public class Movement : Observable, IInputReceiver
             if (movementDirection != Vector3.zero)
             {
                 NotifyObservers(PlayerActions.Moving);
-                NotifyObservers(rb.velocity);
             }
         }
         else
             NotifyObservers(PlayerActions.STOP);
+
+        NotifyObservers(rb.velocity);
     }
 
     public void ReceiveInput(Vector2 input)
