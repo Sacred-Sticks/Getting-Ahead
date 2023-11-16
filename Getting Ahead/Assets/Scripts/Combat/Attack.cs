@@ -5,8 +5,8 @@ public abstract class Attack : MonoBehaviour
 {
     [Range(0, 1)]
     [SerializeField] private float inputTolerance;
-
     [SerializeField] protected Weapon weapon;
+    public float AttackRate { protected get; set; }
     private bool isAttacking;
     private Coroutine firingRoutine;
     private float rawInput;

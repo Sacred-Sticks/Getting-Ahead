@@ -14,8 +14,8 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ee21450c34f30ee458df2008786b873c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 687746770}
   m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: d3984cc89ef81f54e90379848c812b02, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -260,11 +260,11 @@ PrefabInstance:
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: players.Array.data[0].body
       value: 
-      objectReference: {fileID: 6867023890320996260, guid: a484f7ac52cd1d345892b95389c8bce8, type: 3}
+      objectReference: {fileID: 7541120352517200274, guid: 108958c7760049440b711e1769c65bee, type: 3}
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: players.Array.data[0].head
       value: 
-      objectReference: {fileID: 376308217298724823, guid: 2eb51af361cd8c84fb83c836818a993d, type: 3}
+      objectReference: {fileID: 9027209823025319596, guid: 713fe6fcd76a48d4f8c67b0d4313924a, type: 3}
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: players.Array.data[1].body
       value: 
