@@ -52,6 +52,8 @@ public class Rotation : MonoBehaviour, IInputReceiver
 
     private void RotatePlayer(Vector2 input)
     {
+        if (input.sqrMagnitude < deadzone * deadzone)
+            return;
         float desiredAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, desiredAngle, 0), slerpRate);
     }

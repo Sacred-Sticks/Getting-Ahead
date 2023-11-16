@@ -31,6 +31,7 @@ public class EnemyAttacker : MonoBehaviour, IObserver<EnemyBrain.TriggerAttack>,
     
     public void OnNotify(EnemyBrain.TriggerDeath argument)
     {
+        attack.SetAttackingInput(0);
         Destroy(this);
     }
 }

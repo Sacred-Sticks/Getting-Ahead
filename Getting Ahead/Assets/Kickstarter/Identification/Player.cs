@@ -30,12 +30,10 @@ namespace Kickstarter.Identification
             set
             {
                 foreach (var inputReceiver in inputReceivers)
-                    if (inputReceiver is not SkeletonController)
-                        inputReceiver.UnsubscribeToInputs(this);
+                    inputReceiver.UnsubscribeToInputs(this);
                 playerID = value;
                 foreach (var inputReceiver in inputReceivers)
-                    if (inputReceiver is not SkeletonController)
-                        inputReceiver.SubscribeToInputs(this);
+                    inputReceiver.SubscribeToInputs(this);
             }
         }
 
