@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="MainMenu" style="flex-grow: 1; flex-direction: row; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="LeftScreen" style="flex-grow: 1;" />
+        <ui:VisualElement name="MiddleScreen" style="flex-grow: 1;">
+            <ui:VisualElement name="TopGap" style="flex-grow: 1; height: 15%;" />
+            <ui:Label tabindex="-1" text="GETTING AHEAD" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" style="font-size: 90px; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-align: upper-center;" />
+            <ui:Label tabindex="-1" text="A game of head-rolling fun!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" style="font-size: 50px; color: rgb(255, 255, 255); -unity-font-style: normal; -unity-text-align: upper-center; align-self: center;" />
+            <ui:VisualElement name="ButtonSpace" style="flex-grow: 0; width: 70%; height: 100%; align-self: center;">
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 0; width: 70%; height: 10%; align-self: center;" />
+                <ui:VisualElement name="PlaySpace" style="flex-grow: 0; width: 75%; height: 25%; align-self: center;">
+                    <ui:Button text="Play!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayButton" class="button" style="font-size: 90%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 0; width: 70%; height: 9%; align-self: center;" />
+                <ui:VisualElement name="QuitSpace" style="flex-grow: 0; width: 50%; height: 15%; align-self: center;">
+                    <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="button" style="font-size: 45%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 1; width: 70%; height: auto; align-self: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="RightScreen" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

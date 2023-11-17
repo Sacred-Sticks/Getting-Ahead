@@ -40,9 +40,6 @@ namespace MyUILibrary
         EllipseMesh m_TrackMesh;
         EllipseMesh m_ProgressMesh;
 
-        // This is the label that displays the percentage.
-        Label m_Label;
-
         // This is the number of outer vertices to generate the circle.
         const int k_NumSteps = 200;
 
@@ -60,7 +57,6 @@ namespace MyUILibrary
                 // Whenever the progress property changes, MarkDirtyRepaint() is named. This causes a call to the
                 // generateVisualContents callback.
                 m_Progress = value;
-                m_Label.text = Mathf.Clamp(Mathf.Round(value), 0, 100) + "%";
                 MarkDirtyRepaint();
             }
         }
@@ -68,10 +64,7 @@ namespace MyUILibrary
         // This default constructor is RadialProgress's only constructor.
         public RadialProgress()
         {
-            // Create a Label, add a USS class name, and add it to this visual tree.
-            m_Label = new Label();
-            m_Label.AddToClassList(ussLabelClassName);
-            Add(m_Label);
+
 
             // Create meshes for the track and the progress.
             m_ProgressMesh = new EllipseMesh(k_NumSteps);

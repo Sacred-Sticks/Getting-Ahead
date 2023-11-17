@@ -1,0 +1,27 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/RadialProgress.uss?fileID=7433441132597879392&amp;guid=60dfe8a5bf38ce44fbf6659e0292b56c&amp;type=3#RadialProgress" />
+    <ui:VisualElement name="TopHalf" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="TopLeft" style="flex-grow: 1;">
+            <ui:VisualElement name="P1HealthBox" style="flex-grow: 0; height: 53%; width: 30%;">
+                <MyUILibrary.RadialProgress name="RadialProgress" progress="0" style="flex-grow: 1; height: auto;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="TopRight" style="flex-grow: 1;">
+            <ui:VisualElement name="P2HealthBox" style="flex-grow: 0; height: 53%; width: 30%; align-self: flex-end;">
+                <MyUILibrary.RadialProgress name="RadialProgress" progress="0" style="flex-grow: 1; height: auto;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="BottomHalf" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="BottomLeft" style="flex-grow: 1; flex-direction: column-reverse;">
+            <ui:VisualElement name="P3HealthBox" style="flex-grow: 0; height: 53%; width: 30%; align-self: flex-start; justify-content: flex-start;">
+                <MyUILibrary.RadialProgress name="RadialProgress" progress="0" style="flex-grow: 1; height: auto;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomRight" style="flex-grow: 1; flex-direction: column-reverse;">
+            <ui:VisualElement name="P4HealthBox" style="flex-grow: 0; height: 53%; width: 30%; align-self: flex-end;">
+                <MyUILibrary.RadialProgress name="RadialProgress" progress="0" style="flex-grow: 1; height: auto;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
