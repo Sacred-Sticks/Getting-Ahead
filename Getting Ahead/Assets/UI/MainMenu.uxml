@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/button.uss?fileID=7433441132597879392&amp;guid=1faa8d7b27d752c418fff70e6fa7cd6b&amp;type=3#button" />
     <ui:VisualElement name="MainMenu" style="flex-grow: 1; flex-direction: row; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement name="LeftScreen" style="flex-grow: 1;" />
         <ui:VisualElement name="MiddleScreen" style="flex-grow: 1;">
@@ -14,7 +15,9 @@
                 <ui:VisualElement name="QuitSpace" style="flex-grow: 0; width: 50%; height: 15%; align-self: center;">
                     <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="button" style="font-size: 45%;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="EmptySpace" style="flex-grow: 1; width: 70%; height: auto; align-self: center;" />
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 1; width: 70%; height: auto; align-self: center;">
+                    <ui:Label tabindex="-1" text="A game made by students from &#10;UW-Whitewater&apos;s MAGD 488 Class!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Credits" style="color: rgb(255, 255, 255); font-size: 30px; -unity-text-align: upper-center; flex-direction: column; align-self: center; justify-content: flex-start; align-items: center; flex-grow: 0;" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="RightScreen" style="flex-grow: 1;" />
