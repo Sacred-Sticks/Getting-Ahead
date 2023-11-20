@@ -36,7 +36,10 @@ public class CameraManager : MonoBehaviour
 
     public static void MoveCamera(Vector2 input, CinemachineVirtualCamera roomCamera)
     {
-        if (roomCamera == currentCamera) return;
+        if (roomCamera == currentCamera) 
+            return;
+        if (currentCamera.GetComponent<EnemySpawner>().EnemyCount > 0)
+            return;
         var tempVector3 = currentCamera.transform.position;
         switch (input.x)
         {
