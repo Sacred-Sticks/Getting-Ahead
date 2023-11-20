@@ -204,9 +204,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onRoomChange: {fileID: 11400000, guid: 575476aad6b7a1641aa11adc3442bb21, type: 2}
   enemies:
-  - pointValue: 2
+  - pointValue: 1
     body: {fileID: 5872326008469042166, guid: 679abbbffb6bcb9428e06447821c72ef, type: 3}
-    head: {fileID: 262114471033644837, guid: c75b0fa19a1ac8e4588967f0f8061589, type: 3}
+    head: {fileID: 0}
   spawnRange: {fileID: 6953945223046074195}
   enemyPoints: 5
 --- !u!1 &2087978727269787439
