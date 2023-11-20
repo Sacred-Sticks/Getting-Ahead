@@ -74,8 +74,10 @@ public class EnemySpawner : MonoBehaviour
     {
         head.GetComponent<Player>().PlayerID = Player.PlayerIdentifier.None;
         var players = GameManager.instance.Players;
-        players = players.Where(p => p.Body).ToArray();
+        players = players.Where(p => p.Body != null).ToArray();
         head.GetComponent<SkeletonController>().Recapitate(body);
+        if (players.Length == 0)
+            return;
         body.GetComponent<EnemyBrain>().Target = players[Random.Range(0, players.Length)].Body.transform;
     }
 
