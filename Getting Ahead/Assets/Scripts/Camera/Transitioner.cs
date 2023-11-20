@@ -13,8 +13,7 @@ public class Transitioner : MonoBehaviour
     [SerializeField] private UnityEvent onRoomExit;
     
     private int playerCount;
-    private int currentPlayerNum = 0;
-    private List<GameObject> playerObjects = new List<GameObject>();
+    private readonly List<GameObject> playerObjects = new List<GameObject>();
     public enum Direction
     {
         Up,
@@ -40,18 +39,32 @@ public class Transitioner : MonoBehaviour
 
     private void OnTriggerEnter(Collider collide)
     {
-        if (!collide.transform.parent)
+        var parent = collide.transform.parent;
+        if (!parent)
             return;
-        var category = collide.transform.parent.GetComponent<ObjectCategories>();
+        var category = parent.GetComponent<ObjectCategories>();
         if (category == null)
-            return;
+            return; 
         if (category.Categories.Contains(playerType))
         {
-            if (!playerObjects.Contains(collide.gameObject))
-                playerObjects.Add(collide.gameObject);
+            if (!playerObjects.Contains(parent.gameObject))
+                playerObjects.Add(parent.gameObject);
         }
         if (playerObjects.Count < playerCount) return;
         onRoomExit.Invoke();
+    }
+
+    private void OnTriggerExit(Collider collide)
+    {
+        var parent = collide.transform.parent;
+        if (!parent)
+            return;
+        var category = parent.GetComponent<ObjectCategories>();
+        if (category == null) return;
+        if (!category.Categories.Contains(playerType))
+            return;
+        if (playerObjects.Contains(parent.gameObject))
+            playerObjects.Remove(parent.gameObject);
     }
 
     public void TransitionRoom()
@@ -63,16 +76,5 @@ public class Transitioner : MonoBehaviour
     {
         Debug.Log($"Level Exit Triggered");
         Application.Quit();
-    }
-
-    private void OnTriggerExit(Collider collide)
-    {
-        var category = collide.gameObject.GetComponent<ObjectCategories>();
-        if (category == null) return;
-        if (category.Categories.Contains(playerType))
-        {
-            if (playerObjects.Contains(collide.gameObject))
-                playerObjects.Remove(collide.gameObject);
-        }
     }
 }

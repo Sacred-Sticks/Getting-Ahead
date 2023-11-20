@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde82b69d2b1d35459e6c077f413a532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
+  direction: 0
   playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   roomCamera: {fileID: 4511809402014808839}
   onRoomExit:
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde82b69d2b1d35459e6c077f413a532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
+  direction: 1
   playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   roomCamera: {fileID: 4511809402014808839}
   onRoomExit:
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde82b69d2b1d35459e6c077f413a532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 3
+  direction: 2
   playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   roomCamera: {fileID: 4511809402014808839}
   onRoomExit:
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde82b69d2b1d35459e6c077f413a532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 2
+  direction: 3
   playerType: {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   roomCamera: {fileID: 4511809402014808839}
   onRoomExit:
