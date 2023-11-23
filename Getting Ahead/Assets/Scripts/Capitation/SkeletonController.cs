@@ -29,7 +29,6 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
     private const float recapitationRange = 1;
 
     private Player player;
-    private Player.PlayerIdentifier playerID;
     private SkinnedMeshRenderer[] meshes;
     private Transform[] initialBones;
     private Rigidbody body;
@@ -172,7 +171,7 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
         const float witherPlayer = 1;
         const float witherEnemy = 0.75f;
 
-        switch (playerID)
+        switch (player.PlayerID)
         {
             case Player.PlayerIdentifier.None:
                 WitherBody(dyingBody, witherEnemy);
