@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Tooltip("Purely for testing, the Game Manager is a singleton so don't worry, you don't need to remove your Game Manager"
+    [Tooltip("Purely for testing, the Game Manager is a singleton so don't worry, you don't need to remove your Game Manager "
            + "just set it appropriately to whichever game state you are testing.")]
     [SerializeField] private GameState initialGameState;
     [Space]
@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Service onRoomChange;
     [Space]
     [SerializeField] private PlayerCharacterPairing[] players;
+
+    [Header("In Engine Debugging")]
+    [SerializeField] private bool useKeyboardMouse;
 
     public PlayerCharacterPairing[] Players { get; private set; }
     public int PlayerCount { get; private set; }
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
             .Build();
 
         inputManager.Initialize(out int numPlayers);
-        PlayerCount = numPlayers;
+        PlayerCount = useKeyboardMouse ? numPlayers : numPlayers - 1;
 
         roomLayoutGenerator = GetComponent<LayOutRooms>();
         cameraManager = GetComponent<CameraManager>();
@@ -122,7 +125,7 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayers(IReadOnlyList<PlayerCharacterPairing> playerCharacters)
     {
         Players = new PlayerCharacterPairing[PlayerCount];
-        for (int i = 0; i < PlayerCount; i++)
+        for (int i = useKeyboardMouse ? 0 : 1; i < PlayerCount; i++)
         {
             var playerCharacter = playerCharacters[i];
             if (!playerCharacter.Body || !playerCharacter.Head)

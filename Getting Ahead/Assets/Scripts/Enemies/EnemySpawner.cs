@@ -18,7 +18,6 @@ public class EnemySpawner : MonoBehaviour, IObserver<Health.DamageTaken>
     
     private CinemachineVirtualCamera virtualCamera;
     private CameraManager cameraManager;
-    private readonly List<GameObject> deadEnemies = new List<GameObject>();
 
     public int EnemyCount { get; private set; }
     
@@ -78,22 +77,25 @@ public class EnemySpawner : MonoBehaviour, IObserver<Health.DamageTaken>
     private void InitializeEnemy(GameObject head, GameObject body)
     {
         head.GetComponent<Player>().PlayerID = Player.PlayerIdentifier.None;
+        head.GetComponent<SkeletonController>().Recapitate(body);
+        body.GetComponent<Health>().AddObserver(this);
+        SetEnemyInitialTarget(body);
+    }
+
+    private static void SetEnemyInitialTarget(GameObject body)
+    {
         var players = GameManager.instance.Players;
         players = players.Where(p => p.Body != null).ToArray();
-        head.GetComponent<SkeletonController>().Recapitate(body);
         if (players.Length == 0)
             return;
         body.GetComponent<EnemyBrain>().Target = players[Random.Range(0, players.Length)].Body.transform;
-        body.GetComponent<Health>().AddObserver(this);
     }
-    
+
     public void OnNotify(Health.DamageTaken argument)
     {
         if (argument.Health > 0)
-            return;
-        if (deadEnemies.Contains(argument.Sender))
-            return;
-        deadEnemies.Add(argument.Sender);
+            return; 
+        argument.Sender.GetComponent<Health>().RemoveObserver(this);
         EnemyCount--;
     }
 

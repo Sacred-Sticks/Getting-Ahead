@@ -38,7 +38,8 @@ public class CameraManager : MonoBehaviour
     {
         if (roomCamera == currentCamera) 
             return;
-        if (currentCamera.GetComponent<EnemySpawner>().EnemyCount > 0)
+        var spawner = currentCamera.GetComponent<EnemySpawner>();
+        if (spawner.EnemyCount > 0)
             return;
         var tempVector3 = currentCamera.transform.position;
         switch (input.x)
