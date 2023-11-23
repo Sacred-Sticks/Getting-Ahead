@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Kickstarter.Events;
 using Kickstarter.Observer;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Health : Observable
@@ -41,7 +40,7 @@ public class Health : Observable
         if (!vulnerable)
             return;
         CurrentHealth -= damage;
-        NotifyObservers(new DamageTaken(CurrentHealth, attacker));
+        NotifyObservers(new DamageTaken(CurrentHealth, attacker, gameObject));
     }
 
     private IEnumerator Invunerability()
@@ -63,13 +62,15 @@ public class Health : Observable
 
     public class DamageTaken
     {
-        public DamageTaken(float health, GameObject attacker)
+        public DamageTaken(float health, GameObject attacker, GameObject sender)
         {
             Health = health;
             Attacker = attacker;
+            Sender = sender;
         }
         
         public float Health { get; }
         public GameObject Attacker { get; }
+        public GameObject Sender { get; }
     }
 }

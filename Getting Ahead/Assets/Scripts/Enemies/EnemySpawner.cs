@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using Kickstarter.Events;
@@ -8,15 +9,18 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(CinemachineVirtualCamera))]
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, IObserver<Health.DamageTaken>
 {
-    [SerializeField] Service onRoomChange;
+    [SerializeField] private Service onRoomChange;
     [SerializeField] private EnemyDetails[] enemies;
     [SerializeField] private BoxCollider spawnRange;
     [SerializeField] private int enemyPoints;
     
     private CinemachineVirtualCamera virtualCamera;
     private CameraManager cameraManager;
+    private readonly List<GameObject> deadEnemies = new List<GameObject>();
+
+    public int EnemyCount { get; private set; }
     
     #region Unity Events
     private void OnEnable()
@@ -68,19 +72,33 @@ public class EnemySpawner : MonoBehaviour
         var spawnPosition = spawnRange.transform.position + offset;
         head = Instantiate(enemyInfo.Head, spawnPosition, quaternion.identity);
         body = Instantiate(enemyInfo.Body, spawnPosition, quaternion.identity);
+        EnemyCount++;
     }
 
     private void InitializeEnemy(GameObject head, GameObject body)
     {
         head.GetComponent<Player>().PlayerID = Player.PlayerIdentifier.None;
         var players = GameManager.instance.Players;
-        players = players.Where(p => p.Body).ToArray();
+        players = players.Where(p => p.Body != null).ToArray();
         head.GetComponent<SkeletonController>().Recapitate(body);
+        if (players.Length == 0)
+            return;
         body.GetComponent<EnemyBrain>().Target = players[Random.Range(0, players.Length)].Body.transform;
+        body.GetComponent<Health>().AddObserver(this);
+    }
+    
+    public void OnNotify(Health.DamageTaken argument)
+    {
+        if (argument.Health > 0)
+            return;
+        if (deadEnemies.Contains(argument.Sender))
+            return;
+        deadEnemies.Add(argument.Sender);
+        EnemyCount--;
     }
 
     #region Sub-Classes
-    [System.Serializable]
+    [Serializable]
     private class EnemyDetails
     {
         [SerializeField, Min(1),] private int pointValue = 1;
