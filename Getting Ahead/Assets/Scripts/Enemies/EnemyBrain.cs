@@ -141,6 +141,8 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
 
     public void OnNotify(Health.DamageTaken argument)
     {
+        if (!argument.Attacker)
+            return;
         Target = argument.Attacker.transform;
         if (stateMachine.CurrentState == EnemyStatus.Idle)
             stateMachine.CurrentState = EnemyStatus.Chasing;

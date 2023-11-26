@@ -254,6 +254,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
+      propertyPath: useKeyboardMouse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: gameplayStartIndex
       value: 0
       objectReference: {fileID: 0}

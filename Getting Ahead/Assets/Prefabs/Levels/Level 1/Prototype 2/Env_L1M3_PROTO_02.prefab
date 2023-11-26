@@ -25,6 +25,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4039762028834083547, guid: 074daf3c3e0f0ee4bac3eba3ea3dad03, type: 3}
     - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
+      propertyPath: enemies.Array.data[0].head
+      value: 
+      objectReference: {fileID: 262114471033644837, guid: c75b0fa19a1ac8e4588967f0f8061589, type: 3}
+    - target: {fileID: 4814336508289635803, guid: 8c5e1bb509627294b9566c56c37f5fcf, type: 3}
       propertyPath: enemies.Array.data[1].body
       value: 
       objectReference: {fileID: 8827553449917428255, guid: 6a58344a0dd64974aa3323eaeb7c8aff, type: 3}
