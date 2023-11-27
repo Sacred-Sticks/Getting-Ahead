@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
             return;
         } // Game End Scene
     }
-
+   
     private void InitializeLevel()
     {
         var initialRoom = roomLayoutGenerator.InitializeLayout(out var initialRoomIndex);
@@ -154,7 +154,23 @@ public class GameManager : MonoBehaviour
             playerCharacterPairing.Body = @new;
         }
     }
-    
+    public void ChangeScene(string sceneName)
+    {
+        int sceneIndex = 0;
+        switch (sceneName)
+        {
+            case "mainmenu":
+                sceneIndex = mainMenuIndex; break;
+            case "play":
+                sceneIndex = gameplayStartIndex; break;
+            case "end":
+                sceneIndex = endGameIndex; break;
+            default:
+                sceneIndex = mainMenuIndex; break;
+        }
+        SceneManager.LoadScene(sceneIndex);
+    }
+
     #region Sub Classes
     [Serializable]
     public class PlayerCharacterPairing
