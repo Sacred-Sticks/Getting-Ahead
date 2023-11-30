@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 5394176043290733019}
   - component: {fileID: 4658240941968908926}
   - component: {fileID: 5027742623919100629}
+  - component: {fileID: -7175449181672557281}
   m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
@@ -218,6 +219,7 @@ MonoBehaviour:
   movementInput: {fileID: 11400000, guid: 9d3a0b5b9ca59ff47866b40cefe13050, type: 2}
   onAudioTrigger: {fileID: 11400000, guid: 82a9d009561262645952372dbc4bdcc2, type: 2}
   movementSound: step
+  deadzone: 0
 --- !u!114 &2467726329185520937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,3 +333,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headRoot: {fileID: 0}
+--- !u!114 &-7175449181672557281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3960124833596460365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc2cc5172a725245a5064f603105a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementSubject: {fileID: 0}
+  movementInput: {fileID: 11400000, guid: 9d3a0b5b9ca59ff47866b40cefe13050, type: 2}
