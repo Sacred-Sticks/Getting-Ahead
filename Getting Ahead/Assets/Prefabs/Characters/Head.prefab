@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54b61d327355064b85dd1471cd11d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 1
+  playerID: 0
 --- !u!114 &7539153299205033098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   headStatistics: {fileID: 11400000, guid: 691d038454da1a042bc6ea33a8d16551, type: 2}
   headSpeed: 2
   headBone: {fileID: 0}
-  colliderTransform: {fileID: 0}
+  colliderTransform: {fileID: 5385684208514285861}
 --- !u!114 &1641035561409442652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,5 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categories:
-  - {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
   - {fileID: 11400000, guid: ba9f9857936d44b489196dbaf29fd01f, type: 2}
+  - {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}
+  - {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}

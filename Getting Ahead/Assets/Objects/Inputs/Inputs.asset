@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9757701d48367974193359b6398c112d, type: 3}
   m_Name: Inputs
   m_EditorClassIdentifier: 
-  maxPlayerCount: 1
+  maxPlayerCount: 4
   inputObjects:
   - {fileID: 11400000, guid: 9d3a0b5b9ca59ff47866b40cefe13050, type: 2}
   - {fileID: 11400000, guid: ea2d4ab0af933ab46a211011e85a7fbb, type: 2}

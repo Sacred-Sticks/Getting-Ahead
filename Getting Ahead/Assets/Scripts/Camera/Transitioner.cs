@@ -1,17 +1,20 @@
-using Kickstarter.Events;
+using System.Collections.Generic;
 using Kickstarter.Categorization;
 using UnityEngine;
 using System.Linq;
-using System;
 using Cinemachine;
+using UnityEngine.Events;
 
 public class Transitioner : MonoBehaviour
 {
-    [SerializeField] Direction direction;
+    [SerializeField] private Direction direction;
     [SerializeField] private CategoryType playerType;
     [SerializeField] private CinemachineVirtualCamera roomCamera;
+    [SerializeField] private UnityEvent onRoomExit;
+    
     private int playerCount;
     private int currentPlayerNum = 0;
+    private List<GameObject> playerObjects = new List<GameObject>();
     public enum Direction
     {
         Up,
@@ -37,14 +40,29 @@ public class Transitioner : MonoBehaviour
 
     private void OnTriggerEnter(Collider collide)
     {
-        var category = collide.gameObject.GetComponent<ObjectCategories>();
-        if (category == null) return;
+        if (!collide.transform.parent)
+            return;
+        var category = collide.transform.parent.GetComponent<ObjectCategories>();
+        if (category == null)
+            return;
         if (category.Categories.Contains(playerType))
         {
-            currentPlayerNum++;
+            if (!playerObjects.Contains(collide.gameObject))
+                playerObjects.Add(collide.gameObject);
         }
-        if (currentPlayerNum < playerCount) return;
+        if (playerObjects.Count < playerCount) return;
+        onRoomExit.Invoke();
+    }
+
+    public void TransitionRoom()
+    {
         CameraManager.MoveCamera(moveDirection, roomCamera);
+    }
+
+    public void ExitLevel()
+    {
+        Debug.Log($"Level Exit Triggered");
+        Application.Quit();
     }
 
     private void OnTriggerExit(Collider collide)
@@ -53,7 +71,8 @@ public class Transitioner : MonoBehaviour
         if (category == null) return;
         if (category.Categories.Contains(playerType))
         {
-            currentPlayerNum--;
+            if (playerObjects.Contains(collide.gameObject))
+                playerObjects.Remove(collide.gameObject);
         }
     }
 }
