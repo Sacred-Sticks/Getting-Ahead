@@ -648,6 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eac91e580306584dbe2b24df93c4fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onRecapitation: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

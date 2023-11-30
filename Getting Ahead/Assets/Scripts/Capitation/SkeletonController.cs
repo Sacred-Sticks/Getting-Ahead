@@ -215,11 +215,13 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
 
     public class RecapitationArgs : EventArgs
     {
-        public RecapitationArgs(GameObject chosenBody)
+        public RecapitationArgs(GameObject sender, GameObject chosenBody)
         {
+            Sender = sender;
             ChosenBody = chosenBody;
         }
 
         public GameObject ChosenBody { get; }
+        public GameObject Sender { get; }
     }
 }
