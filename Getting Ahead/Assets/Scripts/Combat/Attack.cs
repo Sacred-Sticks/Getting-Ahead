@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using Kickstarter.Events;
+using Kickstarter.Observer;
 
-public abstract class Attack : MonoBehaviour
+public abstract class Attack : Observable
 {
     [Range(0, 1)]
     [SerializeField] private float inputTolerance;
@@ -26,9 +28,11 @@ public abstract class Attack : MonoBehaviour
         if (!canAttack)
             return;
         isAttacking = !isAttacking;
+        NotifyObservers(isAttacking);
         switch (isAttacking)
         {
             case true:
+                NotifyObservers(isAttacking);
                 firingRoutine = StartCoroutine(Attacking());
                 break;
             case false:

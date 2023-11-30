@@ -1,52 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Kickstarter.Identification;
-using Kickstarter.Inputs;
-using Kickstarter.Events;
-using Kickstarter.Observer;
 
 
 public class AnimationStateController2Dim : MonoBehaviour, IObserver<Vector3>, IObserver<bool>
 {
-    [SerializeField] private Movement _movementSubject;
-    [SerializeField] private Vector2Input movementInput;
+    private Movement movementSubject;
+    private Attack attackSubject;
     private Animator animator;
 
-    private int velocityXHash = Animator.StringToHash("VelocityX");
-    private int velocityZHash = Animator.StringToHash("VelocityZ");
-    private int isAttackingHash = Animator.StringToHash("isAttacking");
+    private readonly int velocityX = Animator.StringToHash("VelocityX");
+    private readonly int velocityZ = Animator.StringToHash("VelocityZ");
 
     private Vector2 rawInput;
-    private float velocityZ = 0.0f;
-    private float velocityX = 0.0f;
-    void Awake()
+    
+    private void Awake()
     {
-        animator = gameObject.transform.GetChild(0).GetChild(1).GetComponent<Animator>();
-        _movementSubject = GetComponent<Movement>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void OnNotify(Vector3 velocity)
     {
+        velocity = velocity.normalized;
         velocity = transform.InverseTransformDirection(velocity);
-        velocityX = velocity.x;
-        velocityZ = velocity.z;
-        animator.SetFloat(velocityXHash, velocityX);
-        animator.SetFloat(velocityZHash, velocityZ);
+        animator.SetFloat(velocityX, velocity.x);
+        animator.SetFloat(velocityZ, velocity.z);
+        Debug.Log("X = " +velocity.x+ ", Z = " +velocity.z);
+
     }
 
     public void OnNotify(bool isAttacking)
     {
-        animator.SetBool(isAttackingHash, isAttacking);
+        if (isAttacking)
+        {
+            animator.Play("Attack Animation");
+        }
     }
 
     private void OnEnable()
     {
-        _movementSubject.AddObserver(this);
+        movementSubject = GetComponent<Movement>();
+        attackSubject = GetComponent<Attack>();
+        movementSubject.AddObserver(this);
+        attackSubject.AddObserver(this);
     }
     private void OnDisable()
     {
-        _movementSubject.RemoveObserver(this);
+        movementSubject.RemoveObserver(this);
+        attackSubject.RemoveObserver(this);
     }
     
 }
