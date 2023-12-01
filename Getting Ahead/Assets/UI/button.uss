@@ -21,3 +21,8 @@
     overflow: visible;
     display: flex;
 }
+
+button:focus {
+    color: rgb(150, 255, 30);
+    background-color: rgb(150, 255, 30);
+}
