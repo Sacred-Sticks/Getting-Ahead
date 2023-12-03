@@ -48,20 +48,9 @@ public class HealthUI : MonoBehaviour, IObserver<Health.DamageTaken>
             healthBars[i].progress = 100;
         }
 
-        switch (players.Length)
+        for (int i = 0; i < 4 - players.Length; i++)
         {
-            case 1:
-                RemoveRadialProgress(healthBars[1], healthBars);
-                RemoveRadialProgress(healthBars[1], healthBars);
-                RemoveRadialProgress(healthBars[1], healthBars);
-                break;
-            case 2:
-                RemoveRadialProgress(healthBars[1], healthBars);
-                RemoveRadialProgress(healthBars[1], healthBars);
-                break;
-            case 3:
-                RemoveRadialProgress(healthBars[1], healthBars);
-                break;
+            RemoveRadialProgress(healthBars[3 - i], healthBars);
         }
     }
 

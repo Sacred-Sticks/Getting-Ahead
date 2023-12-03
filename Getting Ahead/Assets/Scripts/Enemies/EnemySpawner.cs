@@ -79,16 +79,6 @@ public class EnemySpawner : MonoBehaviour, IObserver<Health.DamageTaken>
         head.GetComponent<Player>().PlayerID = Player.PlayerIdentifier.None;
         head.GetComponent<SkeletonController>().Recapitate(body);
         body.GetComponent<Health>().AddObserver(this);
-        SetEnemyInitialTarget(body);
-    }
-
-    private static void SetEnemyInitialTarget(GameObject body)
-    {
-        var players = GameManager.instance.Players;
-        players = players.Where(p => p.Body != null).ToArray();
-        if (players.Length == 0)
-            return;
-        body.GetComponent<EnemyBrain>().Target = players[Random.Range(0, players.Length)].Body.transform;
     }
 
     public void OnNotify(Health.DamageTaken argument)
