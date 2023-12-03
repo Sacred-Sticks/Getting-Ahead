@@ -7,7 +7,7 @@
     <ui:VisualElement name="MainMenu" style="flex-grow: 1; flex-direction: row; background-color: rgba(0, 0, 0, 0);">
         <ui:VisualElement name="LeftScreen" style="flex-grow: 1;" />
         <ui:VisualElement name="MiddleScreen" style="flex-grow: 1; flex-direction: column; flex-shrink: 1;">
-            <ui:VisualElement name="TopGap" style="flex-grow: 1; height: 15%; flex-shrink: 1;" />
+            <ui:VisualElement name="TopGap" style="flex-grow: 1; height: 10%; flex-shrink: 1;" />
             <ui:VisualElement name="MenuLogo" style="flex-grow: 0; background-image: none; height: 100%;" />
             <ui:Label tabindex="-1" text="A game of head-rolling fun!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" style="font-size: 50px; color: rgb(255, 255, 255); -unity-font-style: normal; -unity-text-align: upper-center; align-self: center;" />
             <ui:VisualElement name="ButtonSpace" style="flex-grow: 0; width: 70%; height: 100%; align-self: center;">
@@ -16,12 +16,17 @@
                     <ui:Button text="Play!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayButton" class="button" style="font-size: 90%;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="EmptySpace" style="flex-grow: 0; width: 70%; height: 9%; align-self: center;" />
+                <ui:VisualElement name="ControlSpace" style="flex-grow: 0; width: 70%; height: 9%; align-self: center;">
+                    <ui:Button text="Controls" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ControlsButton" class="button" />
+                </ui:VisualElement>
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 0; width: 70%; height: 9%; align-self: center;" />
                 <ui:VisualElement name="QuitSpace" style="flex-grow: 0; width: 50%; height: 15%; align-self: center;">
                     <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="button" style="font-size: 45%;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="EmptySpace" style="flex-grow: 1; width: 70%; height: auto; align-self: center;">
                     <ui:Label tabindex="-1" text="A game made by students from &#10;UW-Whitewater&apos;s MAGD 488 Class!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Credits" style="color: rgb(255, 255, 255); font-size: 30px; -unity-text-align: upper-center; flex-direction: column; align-self: center; justify-content: flex-start; align-items: center; flex-grow: 0;" />
                 </ui:VisualElement>
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 0; width: 70%; height: 9%; align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="RightScreen" style="flex-grow: 1;" />

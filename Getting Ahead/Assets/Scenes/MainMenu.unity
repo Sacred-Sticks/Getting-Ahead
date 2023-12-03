@@ -259,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: useKeyboardMouse
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1059558292900411038, guid: 0e91ddb76b1598c4285e2272904f98f7, type: 3}
       propertyPath: gameplayStartIndex
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: e4183ca1299b7f14591e6c46d0610d93, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 267caf30f06ab654a86812eff49d14fd, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 3d05c7add1ff0d141945511653bac572, type: 3}
   m_SortingOrder: 0
 --- !u!4 &2111072359
 Transform:
