@@ -276,6 +276,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 125199773453343083}
     - target: {fileID: 7539153299205033098, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+      propertyPath: headStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 77bd782b1df398f4398e639c7d2a1745, type: 2}
+    - target: {fileID: 7539153299205033098, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
       propertyPath: colliderTransform
       value: 
       objectReference: {fileID: 127526650418050494}

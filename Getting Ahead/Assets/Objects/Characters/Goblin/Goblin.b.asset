@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff2cf5aeff62c754ba3a704ce7a0a545, type: 3}
-  m_Name: Eef.b
+  m_Name: Goblin.b
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  attackRate: 3
-  maxHealth: 20
+  moveSpeed: 6
+  attackRate: 4
+  maxHealth: 8
   iframes: 0.25

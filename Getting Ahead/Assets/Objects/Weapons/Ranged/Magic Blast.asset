@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689b911fa4d44b04aa394faa92c0c9ca, type: 3}
   m_Name: Magic Blast
   m_EditorClassIdentifier: 
-  attackRate: 0.5
-  burstAmount: 3
-  burstFireRate: 3
-  bulletPrefab: {fileID: 2658952792605532179, guid: 9032a7e27e734b24c9d911ea99676a92, type: 3}
+  attackRate: 1
+  burstAmount: 1
+  burstFireRate: 1
+  bulletPrefab: {fileID: 2658952792605532179, guid: c1784c57853736347a716651a05f33ea, type: 3}
   bulletOffset: {x: 0, y: 1, z: 1}

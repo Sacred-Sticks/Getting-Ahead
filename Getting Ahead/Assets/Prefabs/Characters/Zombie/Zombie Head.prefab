@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie Head
       objectReference: {fileID: 0}
+    - target: {fileID: 7539153299205033098, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+      propertyPath: headStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d2c6acca26fce04eaadddd6706d69e6, type: 2}
     - target: {fileID: 7942116938635802638, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
