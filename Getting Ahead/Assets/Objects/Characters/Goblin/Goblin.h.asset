@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 811e4a4026e1b0b45bb88b7547a558d5, type: 3}
   m_Name: Goblin.h
   m_EditorClassIdentifier: 
-  moveSpeedMultiplier: 1
+  moveSpeedMultiplier: 1.25
   attackRateMultiplier: 1
   maxHealthMultiplier: 1
   iframesMultiplier: 1

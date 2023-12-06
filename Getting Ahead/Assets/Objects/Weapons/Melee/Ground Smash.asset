@@ -15,6 +15,6 @@ MonoBehaviour:
   attackRate: 0.5
   burstAmount: 1
   burstFireRate: 1
-  attackDamage: 10
+  attackDamage: 7.5
   attackRadius: 5
   attackAngle: 180

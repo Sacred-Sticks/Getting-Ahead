@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2cf5aeff62c754ba3a704ce7a0a545, type: 3}
   m_Name: Goblin.b
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 4
   attackRate: 4
   maxHealth: 8
   iframes: 0.25

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedMultiplier: 1
   attackRateMultiplier: 1
-  maxHealthMultiplier: 2
+  maxHealthMultiplier: 1.5
   iframesMultiplier: 1

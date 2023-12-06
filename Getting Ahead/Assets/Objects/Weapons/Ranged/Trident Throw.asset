@@ -15,5 +15,6 @@ MonoBehaviour:
   attackRate: 0.5
   burstAmount: 2
   burstFireRate: 2
-  bulletPrefab: {fileID: 2658952792605532179, guid: 9032a7e27e734b24c9d911ea99676a92, type: 3}
+  bulletPrefab: {fileID: 2658952792605532179, guid: 9335bd4f1c16a0e49baa9b244a60a7c5, type: 3}
   bulletOffset: {x: 0, y: 1, z: 1}
+  attackRange: 3

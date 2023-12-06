@@ -17,3 +17,4 @@ MonoBehaviour:
   burstFireRate: 1
   bulletPrefab: {fileID: 2658952792605532179, guid: c1784c57853736347a716651a05f33ea, type: 3}
   bulletOffset: {x: 0, y: 1, z: 1}
+  attackRange: 1
