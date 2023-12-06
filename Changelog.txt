@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file, including fixes, additions, changes, and removals.
 
+## [0.5.0] 2023-12-07
+
+### Added
+- Main menu and Health UI
+- Character variations (new stats)
+- Locked rooms with living enemies
+
+### Fixed
+- Decapitation / Recapitation Bugs
+- Faulty room transitions
+- Enemy spawn after losing body
+
+### Changed
+- Updated prefabs for enemy spawns
+
+### TODO
+- Add blocks to prevent players from exiting room early or from going too far in
+- Random character selection
+- Game Over
+- Pause screen
+- Final art deadline
+- Audio
+
 ## [0.3.0] 2023-11-16
 
 ### Added
