@@ -14,7 +14,7 @@ public class Movement : Observable, IInputReceiver
     [SerializeField] private Service onAudioTrigger;
     [SerializeField] private string movementSound;
     
-    public float MoveSpeed { private get; set; }
+    public float MoveSpeed { get; set; }
     
     private Vector2 rawInput;
     private Rigidbody rb;

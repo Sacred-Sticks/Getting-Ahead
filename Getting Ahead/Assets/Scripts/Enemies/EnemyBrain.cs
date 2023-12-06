@@ -7,7 +7,6 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Health))]
 public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
 {
-    [SerializeField] private float attackingRange;
     [SerializeField] private float angularSpeed;
 
     private enum EnemyStatus
@@ -27,6 +26,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     private Coroutine movementRoutine;
     private Coroutine attackingRoutine;
     private PlayerAttacker playerAttacker;
+    private float attackingRange;
 
     #region Unity Events
     private void OnEnable()
@@ -38,6 +38,11 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     private void OnDisable()
     {
         health.RemoveObserver(this);
+    }
+
+    private void OnDestroy()
+    {
+        GetComponent<Attack>().SetAttackingInput(0);
     }
 
     private void Awake()
@@ -52,7 +57,9 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     private void Start()
     {
         playerAttacker.enabled = false;
+        attackingRange = GetComponent<Attack>().AttackRange;
         agent.stoppingDistance = attackingRange;
+        agent.speed = GetComponent<Movement>().MoveSpeed;
         agent.angularSpeed = angularSpeed;
         
         stateMachine = new StateMachine<EnemyStatus>.Builder()
@@ -95,6 +102,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     #region State Changes
     private void StartChasing()
     {
+        agent.enabled = true;
         movementRoutine ??= StartCoroutine(ChaseTarget());
     }
 
@@ -102,6 +110,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     {
         if (movementRoutine == null)
             return;
+        agent.enabled = false;
         StopCoroutine(movementRoutine);
         movementRoutine = null;
     }
