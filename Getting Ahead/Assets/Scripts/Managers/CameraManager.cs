@@ -38,8 +38,7 @@ public class CameraManager : MonoBehaviour
     {
         if (roomCamera == currentCamera) 
             return;
-        var spawner = currentCamera.GetComponent<EnemySpawner>();
-        if (spawner.EnemyCount > 0)
+        if (!IsRoomEmpty())
             return;
         var tempVector3 = currentCamera.transform.position;
         switch (input.x)
@@ -72,6 +71,12 @@ public class CameraManager : MonoBehaviour
         {
             SwapCamera(virtualCameras[tempVector3]);
         };
+    }
+
+    public static bool IsRoomEmpty()
+    {
+        var spawner = currentCamera.GetComponent<EnemySpawner>();
+        return spawner.EnemyCount <= 0;
     }
 }
 
