@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Eef.h
   m_EditorClassIdentifier: 
   moveSpeedMultiplier: 1
-  attackRateMultiplier: 3
-  maxHealthMultiplier: 2
-  iframesMultiplier: 0.5
+  attackRateMultiplier: 1
+  maxHealthMultiplier: 1
+  iframesMultiplier: 1

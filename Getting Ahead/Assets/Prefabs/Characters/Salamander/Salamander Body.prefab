@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1340737685363370527, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: f15411bfb6b773c4fb3fd8a1f3eb7a0a, type: 2}
     - target: {fileID: 1999176581422014317, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: m_Name
       value: Salamander Body

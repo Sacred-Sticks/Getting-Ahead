@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689b911fa4d44b04aa394faa92c0c9ca, type: 3}
-  m_Name: BurstFire
+  m_Script: {fileID: 11500000, guid: ff2cf5aeff62c754ba3a704ce7a0a545, type: 3}
+  m_Name: Golem.b
   m_EditorClassIdentifier: 
+  moveSpeed: 1.5
   attackRate: 0.5
-  burstAmount: 3
-  burstFireRate: 3
-  bulletPrefab: {fileID: 2658952792605532179, guid: 9032a7e27e734b24c9d911ea99676a92, type: 3}
-  bulletOffset: {x: 0, y: 1, z: 1}
+  maxHealth: 20
+  iframes: 1.5

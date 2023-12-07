@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4598441153440266303, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: d94f70a1737b0d843bf7210a8ca7919f, type: 2}
     - target: {fileID: 5027742623919100629, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
       propertyPath: headRoot
       value: 

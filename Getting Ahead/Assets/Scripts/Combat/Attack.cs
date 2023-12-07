@@ -1,16 +1,28 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public abstract class Attack : MonoBehaviour
 {
     [Range(0, 1)]
     [SerializeField] private float inputTolerance;
     [SerializeField] protected Weapon weapon;
-    public float AttackRate { protected get; set; }
+    public float AttackRate { get; set; }
+    public float AttackRange { get; private set; }
     private bool isAttacking;
     private Coroutine firingRoutine;
     private float rawInput;
     private bool canAttack = true;
+
+    private void Start()
+    {
+        AttackRange = weapon switch
+        {
+            MeleeWeapon meleeWeapon => meleeWeapon.AttackRadius,
+            RangedWeapon rangedWeapon => rangedWeapon.AttackRange,
+            _ => AttackRange,
+        };
+    }
 
     public void SetAttackingInput(float input)
     {
