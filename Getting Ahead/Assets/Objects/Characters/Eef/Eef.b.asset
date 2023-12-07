@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Eef.b
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  attackRate: 1
-  maxHealth: 10
-  iframes: 0.5
+  attackRate: 3
+  maxHealth: 20
+  iframes: 0.25

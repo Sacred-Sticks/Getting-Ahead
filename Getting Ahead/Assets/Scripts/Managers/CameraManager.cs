@@ -36,16 +36,19 @@ public class CameraManager : MonoBehaviour
 
     public static void MoveCamera(Vector2 input, CinemachineVirtualCamera roomCamera)
     {
-        if (roomCamera == currentCamera) return;
+        if (roomCamera == currentCamera) 
+            return;
+        if (!IsRoomEmpty())
+            return;
         var tempVector3 = currentCamera.transform.position;
         switch (input.x)
         {
-            case 1:
+            case -1:
                 { // go left
                     tempVector3.x -= 15;
                     break;
                 }
-            case -1: // go right
+            case 1: // go right
                 {
                     tempVector3.x += 15;
                     break;
@@ -53,12 +56,12 @@ public class CameraManager : MonoBehaviour
         }
         switch (input.y)
         {
-            case 1:
+            case -1:
                 { // go up
                     tempVector3.z -= 15;
                     break;
                 }
-            case -1: // go down
+            case 1: // go down
                 {
                     tempVector3.z += 15;
                     break;
@@ -68,6 +71,12 @@ public class CameraManager : MonoBehaviour
         {
             SwapCamera(virtualCameras[tempVector3]);
         };
+    }
+
+    public static bool IsRoomEmpty()
+    {
+        var spawner = currentCamera.GetComponent<EnemySpawner>();
+        return spawner.EnemyCount <= 0;
     }
 }
 

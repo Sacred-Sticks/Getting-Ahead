@@ -15,7 +15,7 @@ public class Movement : Observable, IInputReceiver
     [SerializeField] private string movementSound;
     [SerializeField] [Range(0, 1)] private float deadzone = 0.1f;
     
-    public float MoveSpeed { private get; set; }
+    public float MoveSpeed { get; set; }
     
     private Vector2 rawInput;
     private Rigidbody rb;

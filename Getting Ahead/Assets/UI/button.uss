@@ -1,0 +1,42 @@
+
+.button {
+    color: rgb(255, 0, 0);
+    -unity-font-style: normal;
+    border-top-left-radius: 35px;
+    border-left-color: rgb(255, 0, 13);
+    border-right-color: rgb(255, 0, 13);
+    border-top-color: rgb(255, 0, 13);
+    border-bottom-color: rgb(255, 0, 13);
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    background-color: rgba(151, 92, 202, 0.53);
+    -unity-background-scale-mode: stretch-to-fill;
+    transform-origin: center;
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+    display: flex;
+    flex-grow: 0;
+    font-size: 400%;
+    -unity-text-align: middle-center;
+    height: 100%;
+}
+
+.unity-toggle:focus .unity-toggle__label {
+    color: rgb(0, 255, 0);
+    background-color: rgb(150, 255, 30);
+}
+
+.button:focus{
+    color: rgb(255, 255, 255);
+    background-color: rgba(151, 92, 202, 0.75);
+}
+
+.BlankButtonSpace {
+    flex-grow: 0.25;
+}

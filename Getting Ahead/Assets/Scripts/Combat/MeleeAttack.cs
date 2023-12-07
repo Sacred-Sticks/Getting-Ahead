@@ -18,11 +18,9 @@ public class MeleeAttack : Attack
         for (int i = 0; i < weapon.BurstAmount; i++)
         {
             var enemies = CollectEnemyHealth(Physics.OverlapSphere(transform.position, meleeWeapon.AttackRadius), meleeWeapon);
-            yield return new WaitForSeconds(1 / meleeWeapon.BurstFireRate);
             foreach (var enemyHealth in enemies)
-            {
                 enemyHealth.TakeDamage(meleeWeapon.AttackDamage, gameObject);
-            }
+            yield return new WaitForSeconds(1 / meleeWeapon.BurstFireRate);
         }
     }
 
@@ -43,7 +41,7 @@ public class MeleeAttack : Attack
 
         foreach (var target in transforms) {
             var direction = target.transform.position - transform.position;
-            direction = transform.InverseTransformDirection(direction);
+            direction = transform.InverseTransformDirection(direction).normalized;
             float angle = Vector3.Angle(forward, direction);
 
             if (angle <= meleeWeapon.AttackAngle && angle >= -meleeWeapon.AttackAngle) {

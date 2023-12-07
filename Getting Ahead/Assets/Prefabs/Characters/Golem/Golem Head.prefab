@@ -255,6 +255,10 @@ PrefabInstance:
       propertyPath: playerID
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3458000375071261365, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+      propertyPath: categories.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5250049454975734718, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
       propertyPath: m_Name
       value: Golem Head
@@ -263,6 +267,10 @@ PrefabInstance:
       propertyPath: headBone
       value: 
       objectReference: {fileID: 2397101500997514592}
+    - target: {fileID: 7539153299205033098, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
+      propertyPath: headStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: a7d4b562a2b5c6448af964169ead7780, type: 2}
     - target: {fileID: 7539153299205033098, guid: a212e65cb4c6f0e4a800d3e569df87eb, type: 3}
       propertyPath: colliderTransform
       value: 

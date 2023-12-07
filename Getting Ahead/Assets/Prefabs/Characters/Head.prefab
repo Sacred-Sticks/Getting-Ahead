@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 1641035561409442652}
   - component: {fileID: 7945308233497155104}
   - component: {fileID: 3458000375071261365}
+  - component: {fileID: -5322343026383247785}
   m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recapitateInput: {fileID: 11400000, guid: 1fe76e247003f1443ae8bc3755b9ae81, type: 2}
   decapitateInput: {fileID: 11400000, guid: a243949b83cfdfc4baf595ec4c74db81, type: 2}
+  onDeath: {fileID: 11400000, guid: 5acc8b91dfbdb9648aede88fdc40a1d4, type: 2}
   onDecapitation: {fileID: 11400000, guid: e00a285c416844e498fc372e3b916711, type: 2}
   onRecapitation: {fileID: 11400000, guid: 17b16a65ed1449940a6a7ee675f93c56, type: 2}
   headStatistics: {fileID: 11400000, guid: 691d038454da1a042bc6ea33a8d16551, type: 2}
@@ -200,3 +202,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ba9f9857936d44b489196dbaf29fd01f, type: 2}
   - {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}
   - {fileID: 11400000, guid: f6ab8bbd34a36bf49be22faf5e90b088, type: 2}
+--- !u!114 &-5322343026383247785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250049454975734718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc7e44a5be3bab1429865aa2d31e79af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onRecapitation: {fileID: 11400000, guid: 17b16a65ed1449940a6a7ee675f93c56, type: 2}
+  onDecapitation: {fileID: 11400000, guid: e00a285c416844e498fc372e3b916711, type: 2}

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Golem Body
       objectReference: {fileID: 0}
+    - target: {fileID: 4188374510270824323, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: bodyStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c9f484553e0676498446c4c31c9c319, type: 2}
     - target: {fileID: 5845203630624808889, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -52,18 +56,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6975502019118474172, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: attackingRange
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7533837492475248885, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: headRoot
       value: 
       objectReference: {fileID: 6384414966794677490}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1340737685363370527, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5845203630624808889, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4034791908926486071}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1999176581422014317, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      insertIndex: 10
+      addedObject: {fileID: 6216255241553926803}
   m_SourcePrefab: {fileID: 100100000, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+--- !u!1 &1169628929388744634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1999176581422014317, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+  m_PrefabInstance: {fileID: 830311402614608087}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6216255241553926803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169628929388744634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97305c88550c4141b9e6e644fb64733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputTolerance: 0
+  weapon: {fileID: 11400000, guid: 22975f126a5b81a41a6eeca7f8eb0f08, type: 2}
+  enemyCategory: {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}
 --- !u!4 &6528968670033203054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5845203630624808889, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
