@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerCharacterPairing[] Players { get; private set; }
     public int PlayerCount { get; private set; }
-    
+
     private StateMachine<GameState> stateMachine;
     private LayOutRooms roomLayoutGenerator;
     private CameraManager cameraManager;
@@ -90,11 +90,14 @@ public class GameManager : MonoBehaviour
     private void InitializeSingleton()
     {
         if (instance != null)
+        {
             Destroy(gameObject);
+            return;
+        }
         instance = this;
         DontDestroyOnLoad(this);
     }
-    
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
         if (scene == SceneManager.GetSceneByBuildIndex(mainMenuIndex))
@@ -125,7 +128,7 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayers(IReadOnlyList<PlayerCharacterPairing> playerCharacters)
     {
         Players = new PlayerCharacterPairing[PlayerCount];
-        for (int i = useKeyboardMouse ? 0 : 1; i < PlayerCount; i++)
+        for (int i = useKeyboardMouse ? 0 : 1; i < (useKeyboardMouse ? PlayerCount : PlayerCount + 1); i++)
         {
             var playerCharacter = playerCharacters[i];
             if (!playerCharacter.Body || !playerCharacter.Head)
@@ -154,7 +157,28 @@ public class GameManager : MonoBehaviour
             playerCharacterPairing.Body = @new;
         }
     }
-    
+
+    public void ChangeScene(string sceneName)
+    {
+        int sceneIndex = 0;
+        switch (sceneName)
+        {
+            case "mainmenu":
+                sceneIndex = mainMenuIndex;
+                break;
+            case "play":
+                sceneIndex = gameplayStartIndex;
+                break;
+            case "end":
+                sceneIndex = endGameIndex;
+                break;
+            default:
+                sceneIndex = mainMenuIndex;
+                break;
+        }
+        SceneManager.LoadScene(sceneIndex);
+    }
+
     #region Sub Classes
     [Serializable]
     public class PlayerCharacterPairing
@@ -168,7 +192,7 @@ public class GameManager : MonoBehaviour
             Head = head;
             Body = body;
         }
-        
+
         public GameObject Body { get => body; set => body = value; }
         public GameObject Head { get => head; private set => head = value; }
         public Player.PlayerIdentifier PlayerID => playerID;

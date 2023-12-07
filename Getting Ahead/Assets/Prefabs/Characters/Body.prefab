@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c37f97d867ba349bc5043997636f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDeath: {fileID: 11400000, guid: e00a285c416844e498fc372e3b916711, type: 2}
+  onDeath: {fileID: 11400000, guid: 5acc8b91dfbdb9648aede88fdc40a1d4, type: 2}
 --- !u!114 &1687627627876461987
 MonoBehaviour:
   m_ObjectHideFlags: 0
