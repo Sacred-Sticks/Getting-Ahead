@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
                 return;
             headPlayer.PlayerID = playerCharacter.PlayerID;
             skeletonController.Recapitate(body);
-            Players[i] = new PlayerCharacterPairing(head, body);
+            Players[(useKeyboardMouse ? i : i - 1)] = new PlayerCharacterPairing(head, body);
         }
     }
 

@@ -598,6 +598,7 @@ GameObject:
   - component: {fileID: 2111072359}
   - component: {fileID: 2111072358}
   - component: {fileID: 2111072360}
+  - component: {fileID: 2111072361}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -648,7 +649,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eac91e580306584dbe2b24df93c4fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onRecapitation: {fileID: 0}
+  onRecapitation: {fileID: 11400000, guid: 17b16a65ed1449940a6a7ee675f93c56, type: 2}
+--- !u!114 &2111072361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111072357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
