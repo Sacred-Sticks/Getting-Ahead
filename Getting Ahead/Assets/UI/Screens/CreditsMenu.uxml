@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/UI%20Settings/button.uss?fileID=7433441132597879392&amp;guid=1faa8d7b27d752c418fff70e6fa7cd6b&amp;type=3#button" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); background-color: rgb(0, 0, 0);">
+        <ui:VisualElement name="BlankSpace" style="flex-grow: 1;" />
+        <ui:VisualElement name="CreditsSpace" style="flex-grow: 1;">
+            <ui:VisualElement name="BlankSpace" style="flex-grow: 0; height: 25%;" />
+            <ui:VisualElement name="TextSpace" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Project Leads&#10;Programming Lead- Pee pee &quot;CoolGuy&quot; poo poo&#10;Programming Lead- Griffin Clos&#10;Art Lead- Ethan Kirkpatrick&#10;Art Lead- Gary the Snail&#10;&#10;Programmer- Brandon&#10;Artist- Anastasia&#10;Artist- Nolan&#10;Artist- Mason Ring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreditText" enable-rich-text="true" style="color: rgb(255, 255, 255); font-size: 35%; -unity-font-style: bold; -unity-text-align: upper-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="BlankSpace" style="flex-grow: 0; height: 25%; flex-direction: column;">
+                <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ReturnButton" class="button" style="width: 50%; height: 30%; font-size: 50%; align-self: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BlankSpace" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>
