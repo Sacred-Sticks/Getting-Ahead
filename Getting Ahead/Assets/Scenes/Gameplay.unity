@@ -251,7 +251,6 @@ GameObject:
   m_Component:
   - component: {fileID: 795952799}
   - component: {fileID: 795952798}
-  - component: {fileID: 795952800}
   - component: {fileID: 795952797}
   - component: {fileID: 795952796}
   m_Layer: 5
@@ -273,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fbe71748149cb4c8fa857425d4f25a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseInput: {fileID: 11400000, guid: e0ed8adc8d5cc9443b9fc0af87bfecbd, type: 2}
+  onTriggerPause: {fileID: 11400000, guid: e41b0ac2c05c53a4e86a71efbabdbd38, type: 2}
 --- !u!114 &795952797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,19 +316,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &795952800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 795952795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f54b61d327355064b85dd1471cd11d43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerID: 0
 --- !u!1001 &1091830142
 PrefabInstance:
   m_ObjectHideFlags: 0
