@@ -38,7 +38,10 @@ public class Movement : Observable, IInputReceiver
             }
         }
         else
+        {
             NotifyObservers(PlayerActions.STOP);
+            rb.velocity = Vector3.zero;
+        }
 
         NotifyObservers(rb.velocity);
     }

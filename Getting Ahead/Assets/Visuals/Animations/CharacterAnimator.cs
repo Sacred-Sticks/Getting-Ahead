@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AnimationStateController2Dim : MonoBehaviour, IObserver<Vector3>, IObserver<bool>
+public class CharacterAnimator : MonoBehaviour, IObserver<Vector3>, IObserver<bool>
 {
     private Movement movementSubject;
     private Attack attackSubject;
@@ -28,11 +28,7 @@ public class AnimationStateController2Dim : MonoBehaviour, IObserver<Vector3>, I
     public void OnNotify(bool argument)
     {
         if (!argument)
-        {
-            animator.SetLayerWeight(1, 0);
             return;
-        }
-        animator.SetLayerWeight(1, 1);
         animator.SetTrigger(isAttacking);
     }
 

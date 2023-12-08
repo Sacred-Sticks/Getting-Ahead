@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5840480297852372333
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2452109083315460422}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_Name
+      value: Char_Wizard_Body_WIP_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c3c2d97ef89d79c498ae47b34107f276, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+--- !u!4 &6235010068796269190 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
+  m_PrefabInstance: {fileID: 5840480297852372333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6796566859236365535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70,6 +136,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8959319596414733721, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6402969383587575834}
+    - targetCorrespondingSourceObject: {fileID: 8959319596414733721, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6235010068796269190}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
 --- !u!4 &2452109083315460422 stripped
@@ -235,7 +304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 97cdec177a23fb847ad2c3f977263204, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1630296613003094882, guid: 97cdec177a23fb847ad2c3f977263204, type: 3}
       propertyPath: m_Layer
@@ -332,7 +401,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640508555989686526}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 97cdec177a23fb847ad2c3f977263204, type: 3}
   m_Controller: {fileID: 9100000, guid: c3c2d97ef89d79c498ae47b34107f276, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
