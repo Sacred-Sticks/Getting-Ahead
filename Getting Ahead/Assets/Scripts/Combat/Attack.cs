@@ -38,11 +38,9 @@ public abstract class Attack : Observable
         if (!canAttack)
             return;
         isAttacking = !isAttacking;
-        NotifyObservers(isAttacking);
         switch (isAttacking)
         {
             case true:
-                NotifyObservers(isAttacking);
                 firingRoutine = StartCoroutine(Attacking());
                 break;
             case false:

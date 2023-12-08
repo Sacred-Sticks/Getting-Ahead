@@ -20,6 +20,7 @@ public class MeleeAttack : Attack
             var enemies = CollectEnemyHealth(Physics.OverlapSphere(transform.position, meleeWeapon.AttackRadius), meleeWeapon);
             foreach (var enemyHealth in enemies)
                 enemyHealth.TakeDamage(meleeWeapon.AttackDamage, gameObject);
+            NotifyObservers(true);
             yield return new WaitForSeconds(1 / meleeWeapon.BurstFireRate);
         }
     }
