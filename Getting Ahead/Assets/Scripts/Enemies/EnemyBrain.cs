@@ -104,7 +104,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     {
         agent.enabled = true;
         movementRoutine ??= StartCoroutine(ChaseTarget());
-        NotifyObservers(Vector3.forward);
+        NotifyObservers(agent.velocity);
     }
 
     private void StopChasing()
