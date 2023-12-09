@@ -370,6 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97305c88550c4141b9e6e644fb64733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputTolerance: 0
+  inputTolerance: 0.5
   weapon: {fileID: 11400000, guid: ba0111e74b968784397bfa9c440dbc23, type: 2}
   enemyCategory: {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}

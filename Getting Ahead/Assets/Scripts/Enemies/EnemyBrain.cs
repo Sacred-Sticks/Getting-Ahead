@@ -129,6 +129,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
 
     private void Die()
     {
+        StopAllCoroutines();
         StopAttacking();
         Destroy(agent);
         Destroy(this);
@@ -161,9 +162,9 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
 
         if (!(argument.Health <= 0))
             return;
+        stateMachine.CurrentState = EnemyStatus.Dead;
         GetComponent<PlayerAttacker>().enabled = true;
         NotifyObservers(new TriggerDeath());
-        stateMachine.CurrentState = EnemyStatus.Dead;
     }
 
     #region Event Types

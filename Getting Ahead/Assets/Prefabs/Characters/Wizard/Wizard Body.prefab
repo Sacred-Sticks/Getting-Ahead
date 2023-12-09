@@ -255,6 +255,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1687627627876461987, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: bodyStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 94337534938aad040b3417211ca9e1f9, type: 2}
     - target: {fileID: 3960124833596460365, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
       propertyPath: m_Name
       value: Wizard Body
