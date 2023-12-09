@@ -191,6 +191,9 @@ public class SkeletonController : MonoBehaviour, IInputReceiver, IServiceProvide
         chosenBody.TryGetComponent(out CharacterStatistics characterStatistics);
         characterStatistics.ApplyValues(headStatistics);
         chosenBody.GetComponent<Player>().PlayerID = player.PlayerID;
+        chosenBody.TryGetComponent(out Movement movement);
+        if (player.PlayerID != Player.PlayerIdentifier.None)
+            movement.enabled = true;
         onRecapitation.Trigger(new RecapitationArgs(gameObject, chosenBody));
     }
 

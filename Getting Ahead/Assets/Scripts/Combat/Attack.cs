@@ -26,6 +26,8 @@ public abstract class Attack : Observable
 
     public void SetAttackingInput(float input)
     {
+        if (!gameObject)
+            return;
         rawInput = input;
         if (input < inputTolerance && isAttacking)
             ToggleAttack();

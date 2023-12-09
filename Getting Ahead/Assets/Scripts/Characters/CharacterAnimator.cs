@@ -38,6 +38,11 @@ public class CharacterAnimator : MonoBehaviour, IObserver<Vector3>, IObserver<bo
         attackSubject = GetComponent<Attack>();
         movementSubject.AddObserver(this);
         attackSubject.AddObserver(this);
+        
+        
+        TryGetComponent(out EnemyBrain brain);
+        if (brain)
+            brain.AddObserver(this);
     }
 
     private void OnDisable()
