@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CreditsUI : MonoBehaviour
+public class ControlsUI : MonoBehaviour
 {
     [SerializeField] private GameObject MainMenu;
     Button buttonReturn;
@@ -17,7 +17,6 @@ public class CreditsUI : MonoBehaviour
             MainMenu.SetActive(true);
             gameObject.SetActive(false);
         });
-
         buttonReturn.Focus();
     }
     

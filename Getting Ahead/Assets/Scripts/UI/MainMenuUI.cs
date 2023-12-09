@@ -67,21 +67,23 @@ public class MainMenuUI : MonoBehaviour
             }
             evt.PreventDefault();
         });
-
+        buttonPlay.Focus();
     }
 
     private void OnDisable()
     {
-        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-
-        buttonPlay.UnregisterCallback<ClickEvent>((evt) => GameManager.instance.ChangeScene("play"));
-        buttonQuit.UnregisterCallback<ClickEvent>((evt) => Application.Quit());
-
         buttonPlay.UnregisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("play"));
         buttonQuit.UnregisterCallback<NavigationSubmitEvent>((evt) => Application.Quit());
-
-        buttonCredits.UnregisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("credits"));
-        buttonControls.UnregisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("controls"));
+        buttonCredits.UnregisterCallback<NavigationSubmitEvent>((evt) =>
+        {
+            CreditsMenu.SetActive(true);
+            gameObject.SetActive(false);
+        });
+        buttonControls.UnregisterCallback<NavigationSubmitEvent>((evt) =>
+        {
+            ControlsMenu.SetActive(true);
+            gameObject.SetActive(false);
+        });
 
         buttonPlay.UnregisterCallback<NavigationMoveEvent>((evt) =>
         {
@@ -119,10 +121,9 @@ public class MainMenuUI : MonoBehaviour
             }
             evt.PreventDefault();
         });
-
     }
     private void Start()
     {
-        GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("PlayButton").Focus();
+        buttonPlay.Focus();
     }
 }

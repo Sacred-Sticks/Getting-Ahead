@@ -5,7 +5,7 @@
         <ui:VisualElement name="CreditsSpace" style="flex-grow: 1;">
             <ui:VisualElement name="BlankSpace" style="flex-grow: 0; height: 25%;" />
             <ui:VisualElement name="TextSpace" style="flex-grow: 1;">
-                <ui:Label tabindex="-1" text="Credits&#10;Programming Lead- Lucas Ackman&#10;Programming Lead- Griffin Clos&#10;Art Lead- Ethan Kirkpatrick&#10;Art Lead- Gary Boege&#10;&#10;Programmer- Brandon&#10;Artist- Anastasia&#10;Artist- Nolan Davis&#10;Artist- Mason Ring" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreditText" enable-rich-text="true" style="color: rgb(255, 255, 255); font-size: 35%; -unity-font-style: bold; -unity-text-align: upper-center;" />
+                <ui:Label tabindex="-1" text="You need a controller to play this game!&#10;Controls:&#10;Left Joystick- Move&#10;Right Joystick- Aim&#10;Start Button- Pause&#10;Right Trigger- Attack&#10;West Button- Decapitate&#10;North Button- Capitate" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreditText" enable-rich-text="true" style="color: rgb(255, 255, 255); font-size: 35%; -unity-font-style: bold; -unity-text-align: upper-center;" />
             </ui:VisualElement>
             <ui:VisualElement name="BlankSpace" style="flex-grow: 0; height: 25%; flex-direction: column;">
                 <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ReturnButton" class="button" style="width: 50%; height: 30%; font-size: 50%; align-self: center;" />
