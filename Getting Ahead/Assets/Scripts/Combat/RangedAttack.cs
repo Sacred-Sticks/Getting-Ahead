@@ -24,6 +24,7 @@ public class RangedAttack : Attack
             bullet.SourceBody = gameObject;
             bullet.SourceHead = gameObject.GetComponent<HeadPair>().Head;
             bullet.TargetCategory = targetCategory;
+            NotifyObservers(true);
             yield return new WaitForSeconds(1 / AttackRate);
         }
     }

@@ -104,6 +104,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
     {
         agent.enabled = true;
         movementRoutine ??= StartCoroutine(ChaseTarget());
+        NotifyObservers(Vector3.forward);
     }
 
     private void StopChasing()
@@ -113,6 +114,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
         agent.enabled = false;
         StopCoroutine(movementRoutine);
         movementRoutine = null;
+        NotifyObservers(Vector3.zero);
     }
 
     private void StartAttacking()
@@ -127,6 +129,8 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
 
     private void Die()
     {
+        StopAllCoroutines();
+        StopAttacking();
         Destroy(agent);
         Destroy(this);
     }
@@ -158,9 +162,9 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
 
         if (!(argument.Health <= 0))
             return;
+        stateMachine.CurrentState = EnemyStatus.Dead;
         GetComponent<PlayerAttacker>().enabled = true;
         NotifyObservers(new TriggerDeath());
-        stateMachine.CurrentState = EnemyStatus.Dead;
     }
 
     #region Event Types
@@ -170,7 +174,7 @@ public class EnemyBrain : Observable, IObserver<Health.DamageTaken>
         {
             AttackActive = attackActive;
         }
-        
+
         public bool AttackActive { get; }
     }
 
