@@ -129,7 +129,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -299,6 +299,7 @@ MonoBehaviour:
   inputTolerance: 0.5
   weapon: {fileID: 11400000, guid: aa0b93a2729929b4aa05d5b7f0967d4f, type: 2}
   targetCategory: {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}
+  onAudioTrigger: {fileID: 11400000, guid: 82a9d009561262645952372dbc4bdcc2, type: 2}
 --- !u!114 &5024531804804636463
 MonoBehaviour:
   m_ObjectHideFlags: 0

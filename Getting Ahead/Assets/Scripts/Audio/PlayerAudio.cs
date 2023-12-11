@@ -17,11 +17,15 @@ public class PlayerAudio : MonoBehaviour, IObserver<PlayerActions>
     private void OnEnable()
     {
         GetComponent<Movement>().AddObserver(this);
+        GetComponent<Attack>().AddObserver(this);
+        GetComponent<Health>().AddObserver(this);
     }
 
     private void OnDisable()
     {
         GetComponent<Movement>().RemoveObserver(this);
+        GetComponent<Attack>().RemoveObserver(this);
+        GetComponent<Health>().RemoveObserver(this);
     }
 
     public void OnNotify(PlayerActions argument)
