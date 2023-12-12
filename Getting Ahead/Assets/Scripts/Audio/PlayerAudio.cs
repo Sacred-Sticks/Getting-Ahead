@@ -3,16 +3,17 @@ using UnityEngine;
 using System.Linq;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerAudio : MonoBehaviour, IObserver<PlayerActions>
 {
     [SerializeField] private AudioPairing<PlayerActions>[] audioPairs;
-    private AudioSource audioSource;
-    private bool audioPlaying;
-
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    [SerializeField] private AudioSource walkAudioSource;
+    [SerializeField] private AudioSource shootAudioSource;
+    [SerializeField] private AudioSource damageAudioSource;
+    [SerializeField] private AudioSource capAudioSource;
+    private AudioSource currentAudioSource = null;
 
     private void OnEnable()
     {
@@ -33,22 +34,27 @@ public class PlayerAudio : MonoBehaviour, IObserver<PlayerActions>
         if (argument == PlayerActions.STOP)
         {
             StopAllCoroutines();
-            audioPlaying = false;
             return;
         }
-            if (audioPlaying)
-            return;
+        switch (argument)
+        {
+            case PlayerActions.Moving: currentAudioSource = walkAudioSource; break;
+            case PlayerActions.Shooting: currentAudioSource = shootAudioSource; break;
+            case PlayerActions.DamageTaken: currentAudioSource = damageAudioSource; break;
+            case PlayerActions.DeReCap: currentAudioSource = capAudioSource; break;
+            default: currentAudioSource = null; break;
+        }
+        if (currentAudioSource == null || currentAudioSource.isPlaying) return;
         var audioPair = audioPairs.Where(a => a.State == argument).FirstOrDefault();
-        audioSource.clip = audioPair.Clip;
+        currentAudioSource.clip = audioPair.Clip;
         StartCoroutine(PlayAudio(audioPair.Delay));
     }
 
     private IEnumerator PlayAudio(float delay)
     {
-        audioPlaying = true;
         while (true)
         {
-            audioSource.Play();
+            currentAudioSource.Play();
             yield return new WaitForSeconds(delay);
         }
     }
