@@ -1,21 +1,25 @@
+using Kickstarter.Events;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UIElements;
+using static PauseTrigger;
+using UnityEngine.Windows;
 
 public class PauseUI : MonoBehaviour
 {
-    Button buttonSafety;
+    Button buttonResume;
     Button buttonQuit;
+    [SerializeField] private Service onTriggerPause;
     private void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
-        buttonSafety = root.Q<Button>("SafetyButton");
+        buttonResume = root.Q<Button>("ResumeButton");
         buttonQuit = root.Q<Button>("QuitButton");
 
         buttonQuit.RegisterCallback<NavigationSubmitEvent>((evt) => Application.Quit());
 
-        buttonSafety.RegisterCallback<NavigationMoveEvent>((evt) =>
+        buttonResume.RegisterCallback<NavigationMoveEvent>((evt) =>
         {
             switch (evt.direction)
             {
@@ -27,19 +31,23 @@ public class PauseUI : MonoBehaviour
         {
             switch (evt.direction)
             {
-                case NavigationMoveEvent.Direction.Up: buttonSafety.Focus(); break;
+                case NavigationMoveEvent.Direction.Up: buttonResume.Focus(); break;
             }
             evt.PreventDefault();
         });
+        buttonResume.RegisterCallback<NavigationSubmitEvent>((evt) =>
+        {
+            onTriggerPause.Trigger(new OnPauseTrigger(1));
+        });
 
-        buttonSafety.Focus();
+        buttonResume.Focus();
     }
 
     private void OnDisable()
     {
         buttonQuit.UnregisterCallback<NavigationSubmitEvent>((evt) => Application.Quit());
 
-        buttonSafety.UnregisterCallback<NavigationMoveEvent>((evt) =>
+        buttonResume.UnregisterCallback<NavigationMoveEvent>((evt) =>
         {
             switch (evt.direction)
             {
@@ -51,7 +59,7 @@ public class PauseUI : MonoBehaviour
         {
             switch (evt.direction)
             {
-                case NavigationMoveEvent.Direction.Up: buttonSafety.Focus(); break;
+                case NavigationMoveEvent.Direction.Up: buttonResume.Focus(); break;
             }
             evt.PreventDefault();
         });

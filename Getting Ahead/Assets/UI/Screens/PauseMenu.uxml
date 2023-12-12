@@ -11,7 +11,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="Buttons" style="flex-grow: 1;">
                     <ui:VisualElement name="BlankSpace" style="flex-grow: 0.5;" />
-                    <ui:Button text="Safety Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SafetyButton" class="button" style="height: 25%; width: 60%; align-items: auto; align-self: center; font-size: 100%;" />
+                    <ui:Button text="Resume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResumeButton" focusable="true" class="button" style="height: 25%; width: 60%; align-items: auto; align-self: center; font-size: 100%;" />
                     <ui:VisualElement name="BlankSpace" style="flex-grow: 0.5;" />
                     <ui:Button text="Quit Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="button" style="font-size: 100px; width: 60%; height: 25%; align-self: center;" />
                     <ui:VisualElement name="BlankSpace" style="flex-grow: 0.5;" />

@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab205020bb041ef4e9c134862f511a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onTriggerPause: {fileID: 11400000, guid: e41b0ac2c05c53a4e86a71efbabdbd38, type: 2}
 --- !u!114 &795952798
 MonoBehaviour:
   m_ObjectHideFlags: 0
