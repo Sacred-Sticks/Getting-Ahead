@@ -49,10 +49,10 @@ public class PauseUIManager : MonoBehaviour, IServiceProvider
 
     public void ImplementService(EventArgs args)
     {
-        // Not proud of this, turns out my inputs register twice for some reason, and then double that (two for the head and two for the body).
+        // Not proud of this, turns out my inputs register twice for some reason
         // Game jam solution because I don't have time to look for and solve the problem so instead we're doing this because it is functional.
         inputCount++;
-        if (inputCount % 4 != 0)
+        if (inputCount % 2 != 0)
             return;
         switch (args)
         {
