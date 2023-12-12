@@ -1,9 +1,7 @@
 using Kickstarter.Events;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 using UnityEngine.UIElements;
 using static PauseTrigger;
-using UnityEngine.Windows;
 
 public class PauseUI : MonoBehaviour
 {
@@ -37,6 +35,7 @@ public class PauseUI : MonoBehaviour
         });
         buttonResume.RegisterCallback<NavigationSubmitEvent>((evt) =>
         {
+            Debug.Log("Test!");
             onTriggerPause.Trigger(new OnPauseTrigger(1));
         });
 
@@ -62,6 +61,10 @@ public class PauseUI : MonoBehaviour
                 case NavigationMoveEvent.Direction.Up: buttonResume.Focus(); break;
             }
             evt.PreventDefault();
+        });
+        buttonResume.UnregisterCallback<NavigationSubmitEvent>((evt) =>
+        {
+            onTriggerPause.Trigger(new OnPauseTrigger(1));
         });
     }
 }
