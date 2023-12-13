@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3014103406907390730, guid: 66265000519f19b49997bfe3dc1fbe62, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9303a27bf649dec4d9e38721af0138c1, type: 2}
     - target: {fileID: 919132149155446097, guid: 66265000519f19b49997bfe3dc1fbe62, type: 3}
       propertyPath: m_Name
       value: Char_Golem_Head_WIP_04
