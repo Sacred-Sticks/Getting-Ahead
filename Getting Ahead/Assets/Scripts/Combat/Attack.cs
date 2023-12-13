@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
+using Kickstarter.Observer;
 
-public abstract class Attack : MonoBehaviour
+public abstract class Attack : Observable
 {
     [Range(0, 1)]
     [SerializeField] private float inputTolerance;
@@ -26,6 +26,8 @@ public abstract class Attack : MonoBehaviour
 
     public void SetAttackingInput(float input)
     {
+        if (gameObject == null)
+            return;
         rawInput = input;
         if (input < inputTolerance && isAttacking)
             ToggleAttack();
