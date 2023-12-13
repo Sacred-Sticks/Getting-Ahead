@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/button.uss?fileID=7433441132597879392&amp;guid=1faa8d7b27d752c418fff70e6fa7cd6b&amp;type=3#button" />
+    <Style src="project://database/Assets/UI/UI%20Settings/button.uss?fileID=7433441132597879392&amp;guid=1faa8d7b27d752c418fff70e6fa7cd6b&amp;type=3#button" />
+    <ui:VisualElement name="PauseOverlay" style="flex-grow: 1; position: absolute; background-color: rgba(185, 185, 185, 0.51); width: 100%; height: 100%;" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement name="LeftSpace" style="flex-grow: 0; width: 20%;" />
         <ui:VisualElement name="MiddleSpace" style="flex-grow: 1;">
@@ -9,11 +10,7 @@
                     <ui:Label tabindex="-1" text="PAUSED!" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 100%; -unity-text-align: upper-center; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 4px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="Buttons" style="flex-grow: 1;">
-                    <ui:VisualElement name="BlankSpace" style="flex-grow: 0.5;" />
-                    <ui:Button text="Resume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Resume" class="button" style="height: 25%; width: 60%; align-items: auto; align-self: center; font-size: 100%;" />
-                    <ui:VisualElement name="BlankSpace" style="flex-grow: 0.5;" />
-                    <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quit" class="button" style="font-size: 100px; width: 60%; height: 25%; align-self: center;" />
-                    <ui:VisualElement name="BlankSpace" style="flex-grow: 0.5;" />
+                    <ui:Label tabindex="-1" text="Want to quit? Lose your head!&#10;5 second rule!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitText" style="font-size: 70%; color: rgb(255, 255, 255); -unity-text-align: upper-center; text-overflow: clip; white-space: normal; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 1px; flex-shrink: 1; align-self: center;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="BottomEmpty" style="flex-grow: 0; height: 15%;" />

@@ -1,12 +1,11 @@
-
 .button {
-    color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
     -unity-font-style: normal;
     border-top-left-radius: 35px;
-    border-left-color: rgb(255, 0, 13);
-    border-right-color: rgb(255, 0, 13);
-    border-top-color: rgb(255, 0, 13);
-    border-bottom-color: rgb(255, 0, 13);
+    border-left-color: rgb(202, 202, 202);
+    border-right-color: rgb(202, 202, 202);
+    border-top-color: rgb(202, 202, 202);
+    border-bottom-color: rgb(202, 202, 202);
     border-top-right-radius: 35px;
     border-bottom-right-radius: 35px;
     border-bottom-left-radius: 35px;
@@ -14,7 +13,7 @@
     border-right-width: 3px;
     border-bottom-width: 3px;
     border-left-width: 3px;
-    background-color: rgba(151, 92, 202, 0.53);
+    background-color: rgba(164, 164, 164, 0.69);
     -unity-background-scale-mode: stretch-to-fill;
     transform-origin: center;
     opacity: 1;
@@ -32,9 +31,9 @@
     background-color: rgb(150, 255, 30);
 }
 
-.button:focus{
+.button:focus {
     color: rgb(255, 255, 255);
-    background-color: rgba(151, 92, 202, 0.75);
+    background-color: rgba(248, 247, 247, 0.71);
 }
 
 .BlankButtonSpace {

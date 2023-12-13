@@ -1,23 +1,23 @@
-using Kickstarter.Events;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static PauseTrigger;
 
-public class PauseUI : MonoBehaviour
+public class GameOverUI : MonoBehaviour
 {
-    Button buttonResume;
+    Button buttonMenu;
     Button buttonQuit;
-    [SerializeField] private Service onTriggerPause;
+
     private void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
-        buttonResume = root.Q<Button>("ResumeButton");
+        buttonMenu = root.Q<Button>("MenuButton");
         buttonQuit = root.Q<Button>("QuitButton");
 
+
+        buttonMenu.RegisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("mainmenu"));
         buttonQuit.RegisterCallback<NavigationSubmitEvent>((evt) => Application.Quit());
 
-        buttonResume.RegisterCallback<NavigationMoveEvent>((evt) =>
+        buttonMenu.RegisterCallback<NavigationMoveEvent>((evt) =>
         {
             switch (evt.direction)
             {
@@ -29,24 +29,20 @@ public class PauseUI : MonoBehaviour
         {
             switch (evt.direction)
             {
-                case NavigationMoveEvent.Direction.Up: buttonResume.Focus(); break;
+                case NavigationMoveEvent.Direction.Up: buttonMenu.Focus(); break;
             }
             evt.PreventDefault();
         });
-        buttonResume.RegisterCallback<NavigationSubmitEvent>((evt) =>
-        {
-            Debug.Log("Test!");
-            onTriggerPause.Trigger(new OnPauseTrigger(1));
-        });
-
-        buttonResume.Focus();
+        
+        buttonMenu.Focus();
     }
 
     private void OnDisable()
     {
+        buttonMenu.UnregisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("mainmenu"));
         buttonQuit.UnregisterCallback<NavigationSubmitEvent>((evt) => Application.Quit());
 
-        buttonResume.UnregisterCallback<NavigationMoveEvent>((evt) =>
+        buttonMenu.UnregisterCallback<NavigationMoveEvent>((evt) =>
         {
             switch (evt.direction)
             {
@@ -58,13 +54,14 @@ public class PauseUI : MonoBehaviour
         {
             switch (evt.direction)
             {
-                case NavigationMoveEvent.Direction.Up: buttonResume.Focus(); break;
+                case NavigationMoveEvent.Direction.Up: buttonMenu.Focus(); break;
             }
             evt.PreventDefault();
         });
-        buttonResume.UnregisterCallback<NavigationSubmitEvent>((evt) =>
-        {
-            onTriggerPause.Trigger(new OnPauseTrigger(1));
-        });
+
+    }
+    private void Start()
+    {
+        buttonMenu.Focus();
     }
 }

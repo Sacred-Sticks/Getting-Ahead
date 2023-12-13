@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int gameplayStartIndex;
     [SerializeField] private int gameplayEndIndex;
     [SerializeField] private int endGameIndex;
+    [SerializeField] private int winGameIndex;
     [Space]
     [SerializeField] private Service onRoomChange;
     [Space]
@@ -171,6 +172,9 @@ public class GameManager : MonoBehaviour
                 break;
             case "end":
                 sceneIndex = endGameIndex;
+                break;
+            case "win":
+                sceneIndex = winGameIndex;
                 break;
             default:
                 sceneIndex = mainMenuIndex;

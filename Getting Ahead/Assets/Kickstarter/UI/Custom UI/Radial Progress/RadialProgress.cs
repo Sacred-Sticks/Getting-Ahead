@@ -35,6 +35,7 @@ namespace MyUILibrary
         // These objects allow C# code to access custom USS properties.
         static CustomStyleProperty<Color> s_TrackColor = new CustomStyleProperty<Color>("--track-color");
         static CustomStyleProperty<Color> s_ProgressColor = new CustomStyleProperty<Color>("--progress-color");
+        private static CustomStyleProperty<float> s_BorderSize = new CustomStyleProperty<float>("--border-size");
 
         // These are the meshes this control uses.
         EllipseMesh m_TrackMesh;
@@ -102,6 +103,12 @@ namespace MyUILibrary
                 m_TrackMesh.color = trackColor;
             }
 
+            if (customStyle.TryGetValue(s_BorderSize, out float borderSize))
+            {
+                m_ProgressMesh.borderSize = borderSize;
+                m_TrackMesh.borderSize = borderSize;
+            }
+
             if (m_ProgressMesh.isDirty || m_TrackMesh.isDirty)
                 MarkDirtyRepaint();
         }
@@ -127,12 +134,10 @@ namespace MyUILibrary
 
             m_ProgressMesh.width = halfWidth;
             m_ProgressMesh.height = halfHeight;
-            m_ProgressMesh.borderSize = 10;
             m_ProgressMesh.UpdateMesh();
 
             m_TrackMesh.width = halfWidth;
             m_TrackMesh.height = halfHeight;
-            m_TrackMesh.borderSize = 10;
             m_TrackMesh.UpdateMesh();
 
             // Draw track mesh first
