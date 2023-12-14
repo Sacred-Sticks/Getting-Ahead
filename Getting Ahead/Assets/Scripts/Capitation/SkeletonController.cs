@@ -163,6 +163,8 @@ public class SkeletonController : Observable, IInputReceiver, IServiceProvider
         onDecapitation.Trigger(new DecapitationArgs(dyingBody));
         Skeleton = null;
         NotifyObservers<GameObject>(null);
+        NotifyObservers<PlayerActions>(PlayerActions.Decap);
+        NotifyObservers<PlayerActions>(PlayerActions.STOP);
         var dyingPlayer = dyingBody.GetComponent<Player>();
         player.PlayerID = dyingPlayer.PlayerID;
         dyingPlayer.PlayerID = Player.PlayerIdentifier.None;
@@ -198,6 +200,8 @@ public class SkeletonController : Observable, IInputReceiver, IServiceProvider
         if (player.PlayerID != Player.PlayerIdentifier.None)
             movement.enabled = true;
         onRecapitation.Trigger(new RecapitationArgs(gameObject, chosenBody));
+        NotifyObservers<PlayerActions>(PlayerActions.Recap);
+        NotifyObservers<PlayerActions>(PlayerActions.STOP);
     }
 
     private void WitherBody(Object body, float percentage)

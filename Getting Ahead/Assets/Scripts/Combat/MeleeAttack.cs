@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Kickstarter.Categorization;
+using Kickstarter.Events;
 using UnityEngine;
 
 public class MeleeAttack : Attack
 {
     [SerializeField] private CategoryType enemyCategory;
-    
+    [SerializeField] private Service onAudioTrigger;
+
     protected override IEnumerator FireBurst()
     {
         if (weapon is not MeleeWeapon meleeWeapon)
@@ -21,6 +23,8 @@ public class MeleeAttack : Attack
             foreach (var enemyHealth in enemies.Where(enemyHealth => enemyHealth.gameObject != gameObject))
                 enemyHealth.TakeDamage(meleeWeapon.AttackDamage, gameObject);
             NotifyObservers(true);
+            NotifyObservers(PlayerActions.Shooting);
+            NotifyObservers(PlayerActions.STOP);
             yield return new WaitForSeconds(1 / meleeWeapon.BurstFireRate);
         }
     }
