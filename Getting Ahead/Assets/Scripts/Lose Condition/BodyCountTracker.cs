@@ -12,6 +12,7 @@ public class BodyCountTracker : MonoBehaviour, IObserver<GameObject>
     
     private void Start()
     {
+        count = 0;
         if (GetComponent<Player>().PlayerID != Player.PlayerIdentifier.None)
             GetComponent<SkeletonController>().AddObserver(this);
     }
