@@ -12,6 +12,7 @@ public class CameraManager : MonoBehaviour
 
     public static void SetupCameraDictionary(GameObject initialRoom)
     {
+        virtualCameras.Clear();
         currentCamera = initialRoom.GetComponentInChildren<CinemachineVirtualCamera>();
 
         CameraObjects = FindObjectsOfType<CinemachineVirtualCamera>();

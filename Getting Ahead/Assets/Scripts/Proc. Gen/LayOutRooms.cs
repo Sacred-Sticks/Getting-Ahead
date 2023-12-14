@@ -32,6 +32,7 @@ public class LayOutRooms : MonoBehaviour
 
     public GameObject InitializeLayout(out (int, int) initialRoomIndex)
     {
+        ResetValues();
         CreateRoomPlacements();
         roomParent = new GameObject("Rooms");
         wallsParent = new GameObject("Walls");
@@ -61,6 +62,17 @@ public class LayOutRooms : MonoBehaviour
         }
         wallsParent.transform.position += wallsVerticalOffset * Vector3.up;
         return rooms[initialRoomIndex];
+    }
+
+    private void ResetValues()
+    {
+
+        exitBuilt = false;
+        roomIndex = 0;
+        potentialRooms.Clear();
+        roomIndices.Clear();
+        rooms.Clear();
+        usedWallPositions.Clear();
     }
 
     private void CreateRoomPlacements()
