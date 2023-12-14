@@ -34,6 +34,6 @@ public class BodyCountTracker : MonoBehaviour, IObserver<GameObject>
     private IEnumerator EndGameTimer()
     {
         yield return new WaitForSeconds(gameLoseTimer);
-        GameManager.instance.ChangeScene("MainMenu");
+        GameManager.instance.ChangeScene("GameOver");
     }
 }
