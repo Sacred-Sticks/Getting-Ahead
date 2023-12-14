@@ -7,6 +7,7 @@ using Kickstarter.StateControllers;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -131,7 +132,8 @@ public class GameManager : MonoBehaviour
         Players = new PlayerCharacterPairing[PlayerCount];
         for (int i = useKeyboardMouse ? 0 : 1; i < (useKeyboardMouse ? PlayerCount : PlayerCount + 1); i++)
         {
-            var playerCharacter = playerCharacters[i];
+            var playerCharacter = playerCharacters[Random.Range(0, playerCharacters.Count)];
+            var playerID = playerCharacters[i].PlayerID;
             if (!playerCharacter.Body || !playerCharacter.Head)
                 return;
             var spawnOrigin = new Vector3(roomIndex.x * 15, 0, roomIndex.y * 15);
@@ -143,7 +145,7 @@ public class GameManager : MonoBehaviour
             head.TryGetComponent(out SkeletonController skeletonController);
             if (!headPlayer || !skeletonController)
                 return;
-            headPlayer.PlayerID = playerCharacter.PlayerID;
+            headPlayer.PlayerID = playerID;
             skeletonController.Recapitate(body);
             Players[(useKeyboardMouse ? i : i - 1)] = new PlayerCharacterPairing(head, body);
         }
