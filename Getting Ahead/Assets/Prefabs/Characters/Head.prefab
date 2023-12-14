@@ -71,6 +71,8 @@ GameObject:
   - component: {fileID: 7945308233497155104}
   - component: {fileID: 3458000375071261365}
   - component: {fileID: -5322343026383247785}
+  - component: {fileID: 4251859624189128946}
+  - component: {fileID: -4117650221453746546}
   m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
@@ -170,6 +172,7 @@ MonoBehaviour:
   movementInput: {fileID: 11400000, guid: 9d3a0b5b9ca59ff47866b40cefe13050, type: 2}
   onAudioTrigger: {fileID: 11400000, guid: 82a9d009561262645952372dbc4bdcc2, type: 2}
   movementSound: step
+  deadzone: 0.1
 --- !u!114 &7945308233497155104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,3 +219,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onRecapitation: {fileID: 11400000, guid: 17b16a65ed1449940a6a7ee675f93c56, type: 2}
   onDecapitation: {fileID: 11400000, guid: e00a285c416844e498fc372e3b916711, type: 2}
+--- !u!114 &4251859624189128946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250049454975734718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62fd0e2e79fb477a94ee59be981e1b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseInput: {fileID: 11400000, guid: e0ed8adc8d5cc9443b9fc0af87bfecbd, type: 2}
+  onTriggerPause: {fileID: 11400000, guid: e41b0ac2c05c53a4e86a71efbabdbd38, type: 2}
+--- !u!114 &-4117650221453746546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250049454975734718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba810deaa79cf34bb6c870cf396abab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameLoseTimer: 5

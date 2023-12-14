@@ -4,6 +4,7 @@ using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
+using Kickstarter.Observer;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 using Object = UnityEngine.Object;
@@ -12,7 +13,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Rigidbody))]
-public class SkeletonController : MonoBehaviour, IInputReceiver, IServiceProvider
+public class SkeletonController : Observable, IInputReceiver, IServiceProvider
 {
     [SerializeField] private FloatInput recapitateInput;
     [SerializeField] private FloatInput decapitateInput;
@@ -161,6 +162,7 @@ public class SkeletonController : MonoBehaviour, IInputReceiver, IServiceProvide
         body.useGravity = true;
         onDecapitation.Trigger(new DecapitationArgs(dyingBody));
         Skeleton = null;
+        NotifyObservers<GameObject>(null);
         var dyingPlayer = dyingBody.GetComponent<Player>();
         player.PlayerID = dyingPlayer.PlayerID;
         dyingPlayer.PlayerID = Player.PlayerIdentifier.None;
@@ -188,6 +190,7 @@ public class SkeletonController : MonoBehaviour, IInputReceiver, IServiceProvide
             return;
         body.useGravity = false;
         Skeleton = chosenBody.GetComponentInChildren<SkinnedMeshRenderer>();
+        NotifyObservers(chosenBody);
         chosenBody.TryGetComponent(out CharacterStatistics characterStatistics);
         characterStatistics.ApplyValues(headStatistics);
         chosenBody.GetComponent<Player>().PlayerID = player.PlayerID;

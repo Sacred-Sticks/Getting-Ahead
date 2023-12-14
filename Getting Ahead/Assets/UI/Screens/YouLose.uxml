@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/UI%20Settings/button.uss?fileID=7433441132597879392&amp;guid=1faa8d7b27d752c418fff70e6fa7cd6b&amp;type=3#button" />
+    <Style src="project://database/Assets/UI/UI%20Settings/video-player.uss?fileID=7433441132597879392&amp;guid=316131d43a29b8e469d538e20b73f8c7&amp;type=3#video-player" />
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; position: absolute; bottom: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="MenuLogo" class="video-player" style="flex-grow: 0; background-image: url(&apos;project://database/Assets/UI/Main%20Menu%20Renders/Main%20Menu%20Logo.renderTexture?fileID=8400000&amp;guid=8a3f5c39372762442b9f4695bbff4c15&amp;type=2#Main Menu Logo&apos;); height: 100%; background-color: rgb(0, 0, 0);" />
+    </ui:VisualElement>
+    <ui:VisualElement name="MainMenu" style="flex-grow: 1; flex-direction: row; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="LeftScreen" style="flex-grow: 1; width: 30%;" />
+        <ui:VisualElement name="MiddleScreen" style="flex-grow: 1; flex-direction: column; flex-shrink: 1;">
+            <ui:VisualElement name="TopGap" style="flex-grow: 1; height: 15%; flex-shrink: 1;" />
+            <ui:VisualElement name="GameOverText" style="flex-grow: 1; flex-shrink: 0;">
+                <ui:Label tabindex="-1" text="GAME OVER&#10;Next time, try using your head!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" style="font-size: 100%; color: rgb(255, 255, 255); -unity-font-style: normal; -unity-text-align: upper-center; align-self: center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ButtonSpace" style="flex-grow: 0; width: 70%; height: 100%; align-self: center; flex-direction: column;">
+                <ui:VisualElement name="BlankSpace" class="BlankButtonSpace" style="max-height: 10%; flex-grow: 1;" />
+                <ui:VisualElement name="TopHalf" style="flex-grow: 1;">
+                    <ui:VisualElement name="MenuButtonSpace" style="flex-grow: 1;">
+                        <ui:Button text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MenuButton" class="button" style="font-size: 80%;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="BlankSpace" class="BlankButtonSpace" style="height: 10%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="RightHalf" style="flex-grow: 1;">
+                    <ui:VisualElement name="BlankSpace" class="BlankButtonSpace" style="height: 10%;" />
+                    <ui:VisualElement name="QuitSpace" style="flex-grow: 1;">
+                        <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitButton" class="button" style="font-size: 80%;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="BlankSpace" class="BlankButtonSpace" />
+            </ui:VisualElement>
+            <ui:VisualElement name="BottomGap" style="flex-grow: 1; height: 15%; flex-shrink: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RightScreen" style="flex-grow: 1; width: 30%;" />
+    </ui:VisualElement>
+</ui:UXML>
