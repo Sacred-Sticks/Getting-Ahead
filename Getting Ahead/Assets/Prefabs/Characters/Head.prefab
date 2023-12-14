@@ -357,7 +357,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.751
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -456,9 +456,9 @@ MonoBehaviour:
   audioPairs:
   - state: 3
     delay: 0
-    clip: {fileID: 8300000, guid: f3e4a9388c08798439e8057644282fe6, type: 3}
+    clip: {fileID: 8300000, guid: 08e5464b23f05b24a80039a60ef64d04, type: 3}
   - state: 4
     delay: 0
-    clip: {fileID: 8300000, guid: 08e5464b23f05b24a80039a60ef64d04, type: 3}
+    clip: {fileID: 8300000, guid: f3e4a9388c08798439e8057644282fe6, type: 3}
   recapAudioSource: {fileID: 5967841180380302424}
   decapAudioSource: {fileID: 593885317330522535}

@@ -1511,7 +1511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: audioPairs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: audioPairs.Array.data[0].clip
@@ -1524,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: audioPairs.Array.data[2].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 08e5464b23f05b24a80039a60ef64d04, type: 3}
+      objectReference: {fileID: 8300000, guid: de5ec0ee4d428ca4ab16182e44865968, type: 3}
     - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: audioPairs.Array.data[0].delay
       value: 0.5
