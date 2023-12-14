@@ -6,19 +6,9 @@ public class RangedWeapon : Weapon
     [Space]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Vector3 bulletOffset;
+    [SerializeField] private float attackRange;
     
-    public GameObject BulletPrefab
-    {
-        get
-        {
-            return bulletPrefab;
-        }
-    }
-    public Vector3 BulletOffset
-    {
-        get
-        {
-            return bulletOffset;
-        }
-    }
+    public GameObject BulletPrefab => bulletPrefab;
+    public Vector3 BulletOffset => bulletOffset;
+    public float AttackRange => attackRange;
 }

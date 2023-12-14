@@ -4,6 +4,7 @@ using System.Linq;
 using Kickstarter.Events;
 using Kickstarter.Identification;
 using Kickstarter.Inputs;
+using Kickstarter.Observer;
 using UnityEngine;
 using IServiceProvider = Kickstarter.Events.IServiceProvider;
 using Object = UnityEngine.Object;
@@ -12,10 +13,12 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Rigidbody))]
-public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceiver
+public class SkeletonController : Observable, IInputReceiver, IServiceProvider
 {
     [SerializeField] private FloatInput recapitateInput;
     [SerializeField] private FloatInput decapitateInput;
+    [Space]
+    [SerializeField] private Service onDeath;
     [Space]
     [SerializeField] private Service onDecapitation;
     [SerializeField] private Service onRecapitation;
@@ -79,14 +82,12 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
     #region Unity Events
     private void OnEnable()
     {
-        onDecapitation.Event += ImplementService;
-        onRecapitation.Event += ImplementService;
+        onDeath.Event += ImplementService;
     }
 
     private void OnDisable()
     {
-        onDecapitation.Event -= ImplementService;
-        onRecapitation.Event -= ImplementService;
+        onDeath.Event -= ImplementService;
     }
 
     private void Awake()
@@ -147,11 +148,8 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
             case Health.DeathArgs deathArgs:
                 Decapitate(deathArgs.DyingCharacterGameObject);
                 break;
-            case RecapitationArgs recapitationArgs:
-                Recapitate(recapitationArgs.ChosenBody);
-                break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new Exception("Invalid Service Used");
         }
     }
 
@@ -162,12 +160,17 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
         if (dyingBody != activeBodyRoot)
             return;
         body.useGravity = true;
+        onDecapitation.Trigger(new DecapitationArgs(dyingBody));
         Skeleton = null;
+        NotifyObservers<GameObject>(null);
+        NotifyObservers<PlayerActions>(PlayerActions.Decap);
+        NotifyObservers<PlayerActions>(PlayerActions.STOP);
         var dyingPlayer = dyingBody.GetComponent<Player>();
         player.PlayerID = dyingPlayer.PlayerID;
         dyingPlayer.PlayerID = Player.PlayerIdentifier.None;
         // does not yet disable any AI on enemies
 
+        
         const float witherPlayer = 1;
         const float witherEnemy = 0.75f;
 
@@ -189,9 +192,16 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
             return;
         body.useGravity = false;
         Skeleton = chosenBody.GetComponentInChildren<SkinnedMeshRenderer>();
+        NotifyObservers(chosenBody);
         chosenBody.TryGetComponent(out CharacterStatistics characterStatistics);
         characterStatistics.ApplyValues(headStatistics);
         chosenBody.GetComponent<Player>().PlayerID = player.PlayerID;
+        chosenBody.TryGetComponent(out Movement movement);
+        if (player.PlayerID != Player.PlayerIdentifier.None)
+            movement.enabled = true;
+        onRecapitation.Trigger(new RecapitationArgs(gameObject, chosenBody));
+        NotifyObservers<PlayerActions>(PlayerActions.Recap);
+        NotifyObservers<PlayerActions>(PlayerActions.STOP);
     }
 
     private void WitherBody(Object body, float percentage)
@@ -215,11 +225,23 @@ public class SkeletonController : MonoBehaviour, IServiceProvider, IInputReceive
 
     public class RecapitationArgs : EventArgs
     {
-        public RecapitationArgs(GameObject chosenBody)
+        public RecapitationArgs(GameObject sender, GameObject chosenBody)
         {
+            Sender = sender;
             ChosenBody = chosenBody;
         }
 
         public GameObject ChosenBody { get; }
+        public GameObject Sender { get; }
+    }
+
+    public class DecapitationArgs : EventArgs
+    {
+        public DecapitationArgs(GameObject dyingbody)
+        {
+            DyingBody = dyingbody;
+        }
+        
+        public GameObject DyingBody { get; }
     }
 }

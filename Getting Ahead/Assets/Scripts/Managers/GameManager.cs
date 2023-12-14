@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int gameplayStartIndex;
     [SerializeField] private int gameplayEndIndex;
     [SerializeField] private int endGameIndex;
+    [SerializeField] private int winGameIndex;
     [Space]
     [SerializeField] private Service onRoomChange;
     [Space]
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerCharacterPairing[] Players { get; private set; }
     public int PlayerCount { get; private set; }
-    
+
     private StateMachine<GameState> stateMachine;
     private LayOutRooms roomLayoutGenerator;
     private CameraManager cameraManager;
@@ -90,11 +91,14 @@ public class GameManager : MonoBehaviour
     private void InitializeSingleton()
     {
         if (instance != null)
+        {
             Destroy(gameObject);
+            return;
+        }
         instance = this;
         DontDestroyOnLoad(this);
     }
-    
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
         if (scene == SceneManager.GetSceneByBuildIndex(mainMenuIndex))
@@ -125,7 +129,7 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayers(IReadOnlyList<PlayerCharacterPairing> playerCharacters)
     {
         Players = new PlayerCharacterPairing[PlayerCount];
-        for (int i = useKeyboardMouse ? 0 : 1; i < PlayerCount; i++)
+        for (int i = useKeyboardMouse ? 0 : 1; i < (useKeyboardMouse ? PlayerCount : PlayerCount + 1); i++)
         {
             var playerCharacter = playerCharacters[i];
             if (!playerCharacter.Body || !playerCharacter.Head)
@@ -141,7 +145,7 @@ public class GameManager : MonoBehaviour
                 return;
             headPlayer.PlayerID = playerCharacter.PlayerID;
             skeletonController.Recapitate(body);
-            Players[i] = new PlayerCharacterPairing(head, body);
+            Players[(useKeyboardMouse ? i : i - 1)] = new PlayerCharacterPairing(head, body);
         }
     }
 
@@ -154,7 +158,20 @@ public class GameManager : MonoBehaviour
             playerCharacterPairing.Body = @new;
         }
     }
-    
+
+    public void ChangeScene(string sceneName)
+    {
+        int sceneIndex = sceneName switch
+        {
+            "MainMenu" => mainMenuIndex,
+            "Gameplay" => gameplayStartIndex,
+            "GameOver" => endGameIndex,
+            "GoodEnding" => winGameIndex,
+            _ => mainMenuIndex
+        };
+        SceneManager.LoadScene(sceneIndex);
+    }
+
     #region Sub Classes
     [Serializable]
     public class PlayerCharacterPairing
@@ -168,7 +185,7 @@ public class GameManager : MonoBehaviour
             Head = head;
             Body = body;
         }
-        
+
         public GameObject Body { get => body; set => body = value; }
         public GameObject Head { get => head; private set => head = value; }
         public Player.PlayerIdentifier PlayerID => playerID;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : ScriptableObject
@@ -9,25 +7,7 @@ public class Weapon : ScriptableObject
     [SerializeField] private int burstAmount;
     [SerializeField] private float burstFireRate;
 
-    public float AttackRate
-    {
-        get
-        {
-            return attackRate;
-        }
-    }
-    public float BurstAmount
-    {
-        get
-        {
-            return burstAmount;
-        }
-    }
-    public float BurstFireRate
-    {
-        get
-        {
-            return burstFireRate;
-        }
-    }
+    public float AttackRate => attackRate;
+    public float BurstAmount => burstAmount;
+    public float BurstFireRate => burstFireRate;
 }

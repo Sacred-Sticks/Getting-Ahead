@@ -35,13 +35,11 @@ namespace MyUILibrary
         // These objects allow C# code to access custom USS properties.
         static CustomStyleProperty<Color> s_TrackColor = new CustomStyleProperty<Color>("--track-color");
         static CustomStyleProperty<Color> s_ProgressColor = new CustomStyleProperty<Color>("--progress-color");
+        private static CustomStyleProperty<float> s_BorderSize = new CustomStyleProperty<float>("--border-size");
 
         // These are the meshes this control uses.
         EllipseMesh m_TrackMesh;
         EllipseMesh m_ProgressMesh;
-
-        // This is the label that displays the percentage.
-        Label m_Label;
 
         // This is the number of outer vertices to generate the circle.
         const int k_NumSteps = 200;
@@ -60,7 +58,6 @@ namespace MyUILibrary
                 // Whenever the progress property changes, MarkDirtyRepaint() is named. This causes a call to the
                 // generateVisualContents callback.
                 m_Progress = value;
-                m_Label.text = Mathf.Clamp(Mathf.Round(value), 0, 100) + "%";
                 MarkDirtyRepaint();
             }
         }
@@ -68,10 +65,7 @@ namespace MyUILibrary
         // This default constructor is RadialProgress's only constructor.
         public RadialProgress()
         {
-            // Create a Label, add a USS class name, and add it to this visual tree.
-            m_Label = new Label();
-            m_Label.AddToClassList(ussLabelClassName);
-            Add(m_Label);
+
 
             // Create meshes for the track and the progress.
             m_ProgressMesh = new EllipseMesh(k_NumSteps);
@@ -109,6 +103,12 @@ namespace MyUILibrary
                 m_TrackMesh.color = trackColor;
             }
 
+            if (customStyle.TryGetValue(s_BorderSize, out float borderSize))
+            {
+                m_ProgressMesh.borderSize = borderSize;
+                m_TrackMesh.borderSize = borderSize;
+            }
+
             if (m_ProgressMesh.isDirty || m_TrackMesh.isDirty)
                 MarkDirtyRepaint();
         }
@@ -134,12 +134,10 @@ namespace MyUILibrary
 
             m_ProgressMesh.width = halfWidth;
             m_ProgressMesh.height = halfHeight;
-            m_ProgressMesh.borderSize = 10;
             m_ProgressMesh.UpdateMesh();
 
             m_TrackMesh.width = halfWidth;
             m_TrackMesh.height = halfHeight;
-            m_TrackMesh.borderSize = 10;
             m_TrackMesh.UpdateMesh();
 
             // Draw track mesh first

@@ -1,12 +1,13 @@
 using System.Collections;
 using Kickstarter.Categorization;
+using Kickstarter.Events;
 using UnityEngine;
 
 [RequireComponent(typeof(HeadPair))]
 public class RangedAttack : Attack
 {
     [SerializeField] private CategoryType targetCategory;
-
+    [SerializeField] private Service onAudioTrigger;
     private Coroutine firingRoutine;
 
     protected override IEnumerator FireBurst()
@@ -24,6 +25,9 @@ public class RangedAttack : Attack
             bullet.SourceBody = gameObject;
             bullet.SourceHead = gameObject.GetComponent<HeadPair>().Head;
             bullet.TargetCategory = targetCategory;
+            NotifyObservers(true);
+            NotifyObservers(PlayerActions.Shooting);
+            NotifyObservers(PlayerActions.STOP);
             yield return new WaitForSeconds(1 / AttackRate);
         }
     }
