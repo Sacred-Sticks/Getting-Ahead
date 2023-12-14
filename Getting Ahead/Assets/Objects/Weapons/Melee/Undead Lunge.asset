@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Undead Lunge
   m_EditorClassIdentifier: 
   attackRate: 1
-  burstAmount: 2
-  burstFireRate: 0.5
+  burstAmount: 1
+  burstFireRate: 1
   attackDamage: 6
   attackRadius: 1
   attackAngle: 45
