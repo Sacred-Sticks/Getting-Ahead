@@ -256,7 +256,7 @@ Animator:
   m_GameObject: {fileID: 3046995766568360402}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0daaadfc6ea82f94cb6a13cc5d9d1dc5, type: 3}
-  m_Controller: {fileID: 9100000, guid: c3c2d97ef89d79c498ae47b34107f276, type: 2}
+  m_Controller: {fileID: 9100000, guid: aa0e531487c69e145859f066d92769d4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie Body
       objectReference: {fileID: 0}
+    - target: {fileID: 4188374510270824323, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: bodyStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 41649cc9878798b4793720af97535781, type: 2}
     - target: {fileID: 5845203630624808889, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

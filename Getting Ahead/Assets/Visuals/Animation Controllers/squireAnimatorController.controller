@@ -187,7 +187,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: playerAnimatorController
+  m_Name: squireAnimatorController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isWalking
@@ -446,7 +446,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 907c70b2ffc3f8b42ba665ed0721b315, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5d6600e21dc211745bff99479c436a39, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
