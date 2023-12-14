@@ -74,7 +74,6 @@ public class Transitioner : MonoBehaviour
 
     public void ExitLevel()
     {
-        Debug.Log($"Level Exit Triggered");
-        Application.Quit();
+        GameManager.instance.ChangeScene("GoodEnding");
     }
 }
