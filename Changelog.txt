@@ -2,12 +2,33 @@
 
 All notable changes to this project will be documented in this file, including fixes, additions, changes, and removals.
 
+## [0.9.0] 2023-12-13
+
+### Added
+- Game Over condition
+- Pause Screen functionality
+- Several Audio assets and functionality
+- Controls and Credits UI
+- A new starting character, the Squire
+- Random character assignment
+
+### Fixed
+- Green Screen bug
+- Animations
+
+### Changed
+- Multiple UI elements
+- Updated model textures
+- Backend code relating to scene changes
+- Winning the game no longer crashes it
+
 ## [0.5.0] 2023-12-07
 
 ### Added
 - Main menu and Health UI
 - Character variations (new stats)
 - Locked rooms with living enemies
+- Broken animations
 
 ### Fixed
 - Decapitation / Recapitation Bugs
