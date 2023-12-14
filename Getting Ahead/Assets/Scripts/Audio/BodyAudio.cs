@@ -1,18 +1,15 @@
 using System.Collections;
 using UnityEngine;
 using System.Linq;
+using Kickstarter.Events;
 
 [RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(AudioSource))]
-public class PlayerAudio : MonoBehaviour, IObserver<PlayerActions>
+public class BodyAudio : MonoBehaviour, IObserver<PlayerActions>
 {
     [SerializeField] private AudioPairing<PlayerActions>[] audioPairs;
     [SerializeField] private AudioSource walkAudioSource;
     [SerializeField] private AudioSource shootAudioSource;
     [SerializeField] private AudioSource damageAudioSource;
-    [SerializeField] private AudioSource capAudioSource;
     private AudioSource currentAudioSource = null;
 
     private void OnEnable()
@@ -41,7 +38,6 @@ public class PlayerAudio : MonoBehaviour, IObserver<PlayerActions>
             case PlayerActions.Moving: currentAudioSource = walkAudioSource; break;
             case PlayerActions.Shooting: currentAudioSource = shootAudioSource; break;
             case PlayerActions.DamageTaken: currentAudioSource = damageAudioSource; break;
-            case PlayerActions.DeReCap: currentAudioSource = capAudioSource; break;
             default: currentAudioSource = null; break;
         }
         if (currentAudioSource == null || currentAudioSource.isPlaying) return;
