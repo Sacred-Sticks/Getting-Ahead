@@ -18,7 +18,7 @@ public class MainMenuUI : MonoBehaviour
         buttonCredits = root.Q<Button>("CreditButton");
         buttonControls = root.Q<Button>("ControlButton");
 
-        buttonPlay.RegisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("play"));
+        buttonPlay.RegisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("Gameplay"));
         buttonQuit.RegisterCallback<NavigationSubmitEvent>((evt) => Application.Quit());
         buttonCredits.RegisterCallback<NavigationSubmitEvent>((evt) =>
         {
