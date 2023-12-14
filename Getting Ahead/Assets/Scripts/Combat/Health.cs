@@ -42,6 +42,8 @@ public class Health : Observable
             return;
         CurrentHealth -= damage;
         NotifyObservers(new DamageTaken(MaxHealth, CurrentHealth, attacker, gameObject));
+        NotifyObservers(PlayerActions.DamageTaken);
+        NotifyObservers(PlayerActions.STOP);
     }
 
     private IEnumerator Invunerability()

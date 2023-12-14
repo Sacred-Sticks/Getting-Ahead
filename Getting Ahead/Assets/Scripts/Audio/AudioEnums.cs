@@ -5,6 +5,8 @@ public enum PlayerActions
     Moving,
     Shooting,
     DamageTaken,
+    Recap,
+    Decap,
     STOP,
 }
 

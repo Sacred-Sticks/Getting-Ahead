@@ -60,6 +60,42 @@ PrefabInstance:
       propertyPath: attackingRange
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d3d6ec81152366942a92a3cfd495dfc8, type: 3}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b7d56e88fcbd47a4491591d9695896f9, type: 3}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: de5ec0ee4d428ca4ab16182e44865968, type: 3}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.data[0].delay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.data[1].delay
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.data[1].state
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.data[2].delay
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462542132114111483, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: audioPairs.Array.data[2].state
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7533837492475248885, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: headRoot
       value: 
@@ -96,6 +132,7 @@ MonoBehaviour:
   inputTolerance: 0.5
   weapon: {fileID: 11400000, guid: 22975f126a5b81a41a6eeca7f8eb0f08, type: 2}
   enemyCategory: {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}
+  onAudioTrigger: {fileID: 11400000, guid: 82a9d009561262645952372dbc4bdcc2, type: 2}
 --- !u!4 &6528968670033203054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5845203630624808889, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
