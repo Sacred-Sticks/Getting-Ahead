@@ -45,7 +45,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: 
+    path: root
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -70,7 +70,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine
+    path: root/spine
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -95,7 +95,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001
+    path: root/spine/spine.001
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -129,7 +129,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002
+    path: root/spine/spine.001/spine.002
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -163,7 +163,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003
+    path: root/spine/spine.001/spine.002/spine.003
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -197,7 +197,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/spine.004
+    path: root/spine/spine.001/spine.002/spine.003/spine.004
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -231,7 +231,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/spine.004/spine.005
+    path: root/spine/spine.001/spine.002/spine.003/spine.004/spine.005
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -265,7 +265,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/spine.004/spine.005/spine.006
+    path: root/spine/spine.001/spine.002/spine.003/spine.004/spine.005/spine.006
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -317,7 +317,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/shoulder.L
+    path: root/spine/spine.001/spine.002/spine.003/shoulder.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -378,7 +378,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L
+    path: root/spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -457,7 +457,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L
+    path: root/spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -545,7 +545,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L
+    path: root/spine/spine.001/spine.002/spine.003/shoulder.L/upper_arm.L/forearm.L/hand.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -588,7 +588,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/shoulder.R
+    path: root/spine/spine.001/spine.002/spine.003/shoulder.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -649,7 +649,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R
+    path: root/spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -710,7 +710,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R
+    path: root/spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -771,7 +771,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R/hand.R
+    path: root/spine/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R/hand.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -796,7 +796,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/breast.L
+    path: root/spine/spine.001/spine.002/spine.003/breast.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -821,7 +821,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/spine.001/spine.002/spine.003/breast.R
+    path: root/spine/spine.001/spine.002/spine.003/breast.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -846,7 +846,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/pelvis.L
+    path: root/spine/pelvis.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -871,7 +871,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/pelvis.R
+    path: root/spine/pelvis.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -914,7 +914,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.L
+    path: root/spine/thigh.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -957,7 +957,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.L/shin.L
+    path: root/spine/thigh.L/shin.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1000,7 +1000,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.L/shin.L/foot.L
+    path: root/spine/thigh.L/shin.L/foot.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1043,7 +1043,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.L/shin.L/foot.L/toe.L
+    path: root/spine/thigh.L/shin.L/foot.L/toe.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1068,7 +1068,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.L/shin.L/foot.L/heel.02.L
+    path: root/spine/thigh.L/shin.L/foot.L/heel.02.L
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1111,7 +1111,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.R
+    path: root/spine/thigh.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1163,7 +1163,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.R/shin.R
+    path: root/spine/thigh.R/shin.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1224,7 +1224,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.R/shin.R/foot.R
+    path: root/spine/thigh.R/shin.R/foot.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1276,7 +1276,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.R/shin.R/foot.R/toe.R
+    path: root/spine/thigh.R/shin.R/foot.R/toe.R
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1301,7 +1301,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: spine/thigh.R/shin.R/foot.R/heel.02.R
+    path: root/spine/thigh.R/shin.R/foot.R/heel.02.R
   m_CompressedRotationCurves: []
   m_EulerCurves: []
   m_PositionCurves:
@@ -1410,7 +1410,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: 
+    path: root
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -1444,6 +1444,6 @@ AnimationClip:
     m_Mirror: 0
   m_EditorCurves: []
   m_EulerEditorCurves: []
-  m_HasGenericRootTransform: 1
+  m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events: []
