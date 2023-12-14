@@ -3,7 +3,8 @@ using UnityEngine.UIElements;
 
 public class MainMenuUI : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private GameObject CreditsMenu;
+    [SerializeField] private GameObject ControlsMenu;
     Button buttonPlay;
     Button buttonQuit;
     Button buttonCredits;
@@ -17,20 +18,18 @@ public class MainMenuUI : MonoBehaviour
         buttonCredits = root.Q<Button>("CreditButton");
         buttonControls = root.Q<Button>("ControlButton");
 
-        buttonPlay.RegisterCallback<ClickEvent>((evt) => gameManager.ChangeScene("play"));
-        buttonQuit.RegisterCallback<ClickEvent>((evt) => Application.Quit());
-
-        buttonPlay.RegisterCallback<NavigationSubmitEvent>((evt) => gameManager.ChangeScene("play"));
+        buttonPlay.RegisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("Gameplay"));
         buttonQuit.RegisterCallback<NavigationSubmitEvent>((evt) => Application.Quit());
-
-        buttonPlay.RegisterCallback<FocusInEvent>(OnFocusIn);
-        buttonPlay.RegisterCallback<FocusOutEvent>(OnFocusOut);
-        buttonQuit.RegisterCallback<FocusInEvent>(OnFocusIn);
-        buttonQuit.RegisterCallback<FocusOutEvent>(OnFocusOut);
-        buttonControls.RegisterCallback<FocusInEvent>(OnFocusIn);
-        buttonControls.RegisterCallback<FocusOutEvent>(OnFocusOut);
-        buttonCredits.RegisterCallback<FocusInEvent>(OnFocusIn);
-        buttonCredits.RegisterCallback<FocusOutEvent>(OnFocusOut);
+        buttonCredits.RegisterCallback<NavigationSubmitEvent>((evt) =>
+        {
+            CreditsMenu.SetActive(true);
+            gameObject.SetActive(false);
+        });
+        buttonControls.RegisterCallback<NavigationSubmitEvent>((evt) =>
+        {
+            ControlsMenu.SetActive(true);
+            gameObject.SetActive(false);
+        });
 
         buttonPlay.RegisterCallback<NavigationMoveEvent>((evt) =>
         {
@@ -68,20 +67,63 @@ public class MainMenuUI : MonoBehaviour
             }
             evt.PreventDefault();
         });
+        buttonPlay.Focus();
     }
 
-    private void OnFocusOut(FocusOutEvent evt)
+    private void OnDisable()
     {
-        Debug.Log(evt.currentTarget + "lost focus.");
-    }
+        buttonPlay.UnregisterCallback<NavigationSubmitEvent>((evt) => GameManager.instance.ChangeScene("play"));
+        buttonQuit.UnregisterCallback<NavigationSubmitEvent>((evt) => Application.Quit());
+        buttonCredits.UnregisterCallback<NavigationSubmitEvent>((evt) =>
+        {
+            CreditsMenu.SetActive(true);
+            gameObject.SetActive(false);
+        });
+        buttonControls.UnregisterCallback<NavigationSubmitEvent>((evt) =>
+        {
+            ControlsMenu.SetActive(true);
+            gameObject.SetActive(false);
+        });
 
-    private void OnFocusIn(FocusInEvent evt)
-    {
-        Debug.Log(evt.currentTarget + "is focused.");
+        buttonPlay.UnregisterCallback<NavigationMoveEvent>((evt) =>
+        {
+            switch (evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down: buttonCredits.Focus(); break;
+                case NavigationMoveEvent.Direction.Right: buttonControls.Focus(); break;
+            }
+            evt.PreventDefault();
+        });
+        buttonQuit.UnregisterCallback<NavigationMoveEvent>((evt) =>
+        {
+            switch (evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Up: buttonControls.Focus(); break;
+                case NavigationMoveEvent.Direction.Left: buttonCredits.Focus(); break;
+            }
+            evt.PreventDefault();
+        });
+        buttonControls.UnregisterCallback<NavigationMoveEvent>((evt) =>
+        {
+            switch (evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down: buttonQuit.Focus(); break;
+                case NavigationMoveEvent.Direction.Left: buttonPlay.Focus(); break;
+            }
+            evt.PreventDefault();
+        });
+        buttonCredits.UnregisterCallback<NavigationMoveEvent>((evt) =>
+        {
+            switch (evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Up: buttonPlay.Focus(); break;
+                case NavigationMoveEvent.Direction.Right: buttonQuit.Focus(); break;
+            }
+            evt.PreventDefault();
+        });
     }
-
     private void Start()
     {
-        GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("PlayButton").Focus();
+        buttonPlay.Focus();
     }
 }

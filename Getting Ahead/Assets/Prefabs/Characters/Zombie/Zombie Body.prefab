@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie Body
       objectReference: {fileID: 0}
+    - target: {fileID: 4188374510270824323, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
+      propertyPath: bodyStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 41649cc9878798b4793720af97535781, type: 2}
     - target: {fileID: 5845203630624808889, guid: 8b745c97cd25301458380093bfa290c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

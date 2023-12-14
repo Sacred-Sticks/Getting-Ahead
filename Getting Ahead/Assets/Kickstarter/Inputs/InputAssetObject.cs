@@ -24,6 +24,7 @@ namespace Kickstarter.Inputs
         protected readonly Dictionary<InputDevice, Action<TType>> actionMap = new Dictionary<InputDevice, Action<TType>>();
         private InputDevice[] devices;
         protected InputAction inputAction;
+        private List<Action<TType>> subscriptions = new List<Action<TType>>();
 
         private bool actionsRegistered;
 
@@ -111,8 +112,11 @@ namespace Kickstarter.Inputs
                 return;
             if (playerIndex > devices.Length - 1)
                 return;
+            if (subscriptions.Contains(action))
+                return;
             if (devices[playerIndex] != null)
                 actionMap[devices[playerIndex]] += action;
+            subscriptions.Add(action);
         }
 
         public void UnsubscribeToInputAction(Action<TType> action, Player.PlayerIdentifier playerRegister)
@@ -134,8 +138,11 @@ namespace Kickstarter.Inputs
                 return;
             if (playerIndex > devices.Length - 1)
                 return;
+            if (!subscriptions.Contains(action))
+                return;
             if (devices[playerIndex] != null)
                 actionMap[devices[playerIndex]] -= action;
+            subscriptions.Remove(action);
         }
 
         public override void AddDevice(InputDevice device)

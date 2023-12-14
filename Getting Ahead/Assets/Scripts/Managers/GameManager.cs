@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int gameplayStartIndex;
     [SerializeField] private int gameplayEndIndex;
     [SerializeField] private int endGameIndex;
+    [SerializeField] private int winGameIndex;
     [Space]
     [SerializeField] private Service onRoomChange;
     [Space]
@@ -160,22 +161,14 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        int sceneIndex = 0;
-        switch (sceneName)
+        int sceneIndex = sceneName switch
         {
-            case "mainmenu":
-                sceneIndex = mainMenuIndex;
-                break;
-            case "play":
-                sceneIndex = gameplayStartIndex;
-                break;
-            case "end":
-                sceneIndex = endGameIndex;
-                break;
-            default:
-                sceneIndex = mainMenuIndex;
-                break;
-        }
+            "MainMenu" => mainMenuIndex,
+            "Gameplay" => gameplayStartIndex,
+            "GameOver" => endGameIndex,
+            "GoodEnding" => winGameIndex,
+            _ => mainMenuIndex
+        };
         SceneManager.LoadScene(sceneIndex);
     }
 
