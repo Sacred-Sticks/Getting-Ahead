@@ -476,6 +476,42 @@ PrefabInstance:
       propertyPath: headRoot
       value: 
       objectReference: {fileID: 6992122625817736519}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 52432f56ec0c48846912adc9bbdbeeb0, type: 3}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b7d56e88fcbd47a4491591d9695896f9, type: 3}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ac6b558d19eeb046b3b9172eb74cb2a, type: 3}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.data[0].delay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.data[1].delay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.data[1].state
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.data[2].delay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394176043290733019, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
+      propertyPath: audioPairs.Array.data[2].state
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8959319596414733721, guid: 5c553949a80388f4d90152552d5fd5b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -553,3 +589,4 @@ MonoBehaviour:
   inputTolerance: 0.5
   weapon: {fileID: 11400000, guid: ba0111e74b968784397bfa9c440dbc23, type: 2}
   enemyCategory: {fileID: 11400000, guid: f1f107b119aeb1b4cb39b99355542796, type: 2}
+  onAudioTrigger: {fileID: 11400000, guid: 82a9d009561262645952372dbc4bdcc2, type: 2}
